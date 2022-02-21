@@ -1,8 +1,3 @@
-<!--
-p4 = padding 4. Spacing
-
--->
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,7 +5,7 @@ p4 = padding 4. Spacing
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-      <link rel="stylesheet" href="Style_MainPage.css">
+      <link rel="stylesheet" href="MainPage.css">
         <title>Main Page</title>
     </head>
     <body>
@@ -22,10 +17,10 @@ p4 = padding 4. Spacing
                 <small>Blue&GO!</small>
             </a>
             <ul class="navbar-nav ml-auto">
-                <button type="button" class="btn btn-link">
+                <button onclick="login()" type="button" class="btn btn-link">
                     Login
                 </button>
-                <button type="button" class="btn btn-primary">
+                <button onclick="signup()" type="button" class="btn btn-primary">
                     Sign up
                 </button>
             </ul>
@@ -169,6 +164,8 @@ p4 = padding 4. Spacing
         <footer class="text-left text-black" style="background-color: #F6F7FB;">
           <div class="container-fluid p-4"> © 2022 Blue&GO! </div>
         </footer>
+
+        <script src="MainPage.js"></script>
     </body>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>

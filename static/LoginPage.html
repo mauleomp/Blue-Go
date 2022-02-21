@@ -1,0 +1,62 @@
+<html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <meta name="google-signin-client_id" content="538157396465-jbm93uov7k9aq7p99u8oje196nt3h2r1.apps.googleusercontent.com">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="LoginPage.css">
+      <title> Login & Sign Up Page</title>
+    </head>
+    <body>
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <div id="column1" class="col">
+                <div style="margin: 3rem;">
+                    <h3 class="text-center text-capitalize" style="color: white"> Improve class engagement <br> Sign up today.</h3>
+                </div>
+            </div>
+
+            <div class="col" style="background-color: white">
+                <div style="margin: 2rem;">
+                    <button onclick="close()" type="button" class="btn text-right close" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <br>
+                    <button onclick="close()" type="button" class="btn btn-link text-left"> <h3 style="color: darkslategray;"> Sign up </h3> </button> <button type="button" class="btn btn-link text-left"> <h3 style="color: darkslategray;"> Log in </h3> </button>
+                    <br>
+                    <br>
+                    <div class="g-signin2" data-onsuccess="onSignIn"> </div>
+
+                    <div class="divider d-flex align-items-center my-4">
+                        <p class="text-center fw-bold mx-3 mb-0"> Or email</p>
+                    </div>
+
+                    <div class="form-outline">
+                        <input type="email" class="form-control"
+                        placeholder="Email address" />
+                    </div>
+                    <br>
+                    <div class="form-outline">
+                        <input type="email" class="form-control"
+                        placeholder="Username" />
+                    </div>
+                    <br>
+                    <div class="form-outline">
+                        <input type="password" class="form-control"
+                        placeholder="Password" />
+                    </div>
+                    <br>
+                    <button type="button" class="btn btn-outline-primary btn-lg btn-block" style="font-weight: lighter"> Sign up </button>
+                    <button type="button" class="btn border btn-light border-secondary btn-lg btn-block" style="font-weight: lighter"> Already have an account? Log in</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+        <script src="LoginPage.js"></script>
+    </body>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</html>
