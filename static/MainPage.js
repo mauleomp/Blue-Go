@@ -6,3 +6,7 @@ function login(){
 function signup(){
     window.location.href = 'LoginPage.html';
 };
+
+function hover(){
+
+};

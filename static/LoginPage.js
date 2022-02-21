@@ -1,4 +1,4 @@
 
 function close(){
-    window.location.href ='MainPage.html';
+    window.location.href = 'MainPage.html';
 };
