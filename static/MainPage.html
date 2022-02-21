@@ -1,13 +1,171 @@
+<!--
+p4 = padding 4. Spacing
+
+-->
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1> Hello </h1>
-</body>
-<script>
-    //Aqui pones los links the bootstrap y lo que desees
-</script>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="Style_MainPage.css">
+        <title>Main Page</title>
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar fixed-top navbar-expand-sm p-2" style="background-color: white; border-bottom: 1px solid lightgrey;">
+            <!-- Add the reference to the page -->
+            <a class="navbar-brand" href="#">
+                <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height="20" alt="Blue&GO! Logo" loading="lazy"/>
+                <small>Blue&GO!</small>
+            </a>
+            <ul class="navbar-nav ml-auto">
+                <button type="button" class="btn btn-link">
+                    Login
+                </button>
+                <button type="button" class="btn btn-primary">
+                    Sign up
+                </button>
+            </ul>
+        </nav>
+
+        <div id="header_carousel" class="container-fluid p-5" style="margin-top: 50px;">
+            <!--
+            <div class="card bg-dark text-white">
+              <img src="https://cdn.pixabay.com/photo/2020/01/22/09/39/teacher-4784916_960_720.jpg" class="card-img" alt="First slid" style="max-height: 25em; max-width: fit-content">
+              <div class="card-img-overlay">
+                <h5 class="card-title"> Interactive Teaching. </h5>
+                <p class="card-text"> Blue&GO! brings interaction to the lessons with a button click, allowing students to learn while having fun.</p>
+              </div>
+            </div>
+            -->
+
+            <div class="carousel slide" data-ride="carousel" style="max-height: 35em;">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="https://cdn.pixabay.com/photo/2020/01/22/09/39/teacher-4784916_960_720.jpg" alt="First slide">
+                    <div class="carousel-caption trickcenter d-md-block" style="top: 2em; color: white">
+                        <h1> <b> Interactive Teaching. </b> </h1>
+                        Blue&GO! brings interaction to the lessons with a button click, allowing students to learn while having fun.
+                    </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+
+        <div id="website_content">
+
+        <div id="section1" class="text-center">
+            <br>
+            <br>
+            <p style="font-size: 2em"> How does Blue&GO! work? </p>
+        </div>
+            <div class="container">
+                <div class="row">
+                    <div class="card-deck text-center">
+                       <div class="card">
+                           <img src="https://sc04.alicdn.com/kf/HTB16k6iaDjxK1Rjy0Fnq6yBaFXaL.jpg" class="card-img-top" alt="Turn buzzer on">
+                           <div class="card-body">
+                               <h5 class="card-title">Turn on & syncronize our buzzers</h5>
+                               <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                               <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                           </div>
+                       </div>
+                        <div class="card">
+                            <img src="https://media.istockphoto.com/vectors/video-game-controller-icon-silhouette-vector-id942803814?k=20&m=942803814&s=612x612&w=0&h=9KQZx6Ba7z9mCU4VP0PY89s5FVKC5C0DCZid0PSb7UI=" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title"> Start a new game</h5>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="https://www.elegantthemes.com/blog/wp-content/uploads/2021/03/one-click-gmail-login-for-wordpress-featured-image.jpg" class="card-img-top" alt="Login">
+                            <div class="card-body">
+                                <h5 class="card-title"> Identify yourself</h5>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqDbqZCNOg7jfu5OeVimRDKfqMilEekfuGGQ&usqp=CAU" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title"> Start playing!</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+            </div>
+
+            <div id="section2" class="text-center">
+                <p style="font-size: 2em"> Game Modes </p>
+            </div>
+            <div class="container">
+                <div class="row" style="font-weight: lighter;">
+                    <div class="col border border-primary rounded">
+                        <br>
+                        <h5> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dice-1" viewBox="0 0 16 16">
+                            <circle cx="8" cy="8" r="1.5"/>
+                            <path d="M13 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h10zM3 0a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3H3z"/>
+                        </svg> Classic </h5>
+                        The fastest player to answer right wins the points.
+                        <br>
+                        <br>
+                    </div>
+                    <div class="col border border-warning rounded" style="margin-left: 26px; margin-right:26px;">
+                        <br>
+                        <h5> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dice-2" viewBox="0 0 16 16">
+                          <path d="M13 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h10zM3 0a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3H3z"/>
+                          <path d="M5.5 4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm8 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                        </svg> Random </h5>
+                        One student will be selected at random from all of the ones that pressed the buzzer.
+                        <br>
+                        <br>
+                    </div>
+                    <div class="col border border-primary rounded">
+                        <br>
+                        <h5> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dice-3" viewBox="0 0 16 16">
+                          <path d="M13 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h10zM3 0a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3H3z"/>
+                          <path d="M5.5 4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm8 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-4-4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                        </svg> LifeLines </h5>
+                        Your students will have a limited number of lifes. The winner will be the last-man standing.
+                        <br>
+                    </div>
+                </div>
+                 <br>
+                 <br>
+            </div>
+
+            <div id="section3" class="text-left">
+                <div class="row" style="font-weight: lighter; margin-left: 8rem; margin-right: 8rem;">
+                    <div class="col" style="margin: 2rem;">TEACHERS <br>
+                        <h5> Empower your students</h5> <br>
+                            <p>Help every student learn anything with confidence, no matter what they’re striving to achieve. Using Blue&GO!, you can motivate your students quickly. </p>
+                        </div>
+                    <div class="col" style="margin: 2rem;">
+                        <img src="https://www.graduateprogram.org/wp-content/uploads/2019/09/May-3-The-Importance-of-Building-the-Teacher-Student-Relationship_web.jpg" class="img-fluid rounded" alt="Responsive image">
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="section4" class="text-center">
+                <br>
+                <p style="font-size: 2em"> Get started with Blue&GO! </p>
+                Create your account today for better engagement during laboratories, lectures and practicals. <br> <br>
+                <button type="button" class="btn btn-primary">
+                    Buy it today!
+                </button>
+            </div>
+        </div>
+
+        <div class="container-fluid p-4" style="background-color:white;"></div>
+
+        <footer class="text-left text-black" style="background-color: #F6F7FB;">
+          <div class="container-fluid p-4"> © 2022 Blue&GO! </div>
+        </footer>
+    </body>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </html>

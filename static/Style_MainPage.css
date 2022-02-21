@@ -1,0 +1,38 @@
+body {
+  background-color: #F6F7FB;
+}
+
+#website_content{
+  background-color: white;
+}
+
+.carousel {
+  border-radius: 30px 30px 30px 30px;
+  overflow: hidden;
+}
+
+#header_carousel {
+  margin-top: 4rem;
+  background-image: url("https://i0.wp.com/ese224.seas.upenn.edu/wp-content/uploads/2018/11/background-website-light-blue-wallpapers-background-2.jpg?fit=1200%2C675&ssl=1&w=640");
+}
+
+#section1 {
+  background-color: white;
+}
+
+#section4 {
+  background-color: white;
+}
+
+#section2 {
+  background-color: white;
+}
+
+#section3 {
+  background-color: #e2eafc;
+}
+
+.container {
+    background-color: white;
+}
+
