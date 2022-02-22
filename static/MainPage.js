@@ -1,10 +1,10 @@
 
 function login(){
-    window.location.href = 'LoginPage.html';
+    window.location.href = 'Login.html';
 };
 
 function signup(){
-    window.location.href = 'LoginPage.html';
+    window.location.href = 'SignUp.html';
 };
 
 function hover(){
