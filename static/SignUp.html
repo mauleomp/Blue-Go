@@ -37,20 +37,20 @@
                     </div>
                     <form class="needs-validation" novalidate>
                         <div class="form-outline">
-                             <label for="email" style="color:lightgrey; font-size: x-small;">EMAIL</label>
+                             <label for="email" class="form-control-label" style="color:lightgrey; font-size: x-small;">EMAIL</label>
                             <input id="email" type="email" class="form-control" placeholder="user@blue&go.com" required="true"/>
                             <div class="valid-feedback">Looks good! </div>
                             <div class="invalid-feedback">Please provide a valid email address.</div>
                         </div>
 
                         <div class="form-outline" style="margin-top: 20px;">
-                            <label for="username" style="color:lightgrey; font-size: x-small;">USERNAME </label>
+                            <label for="username" class="form-control-label" style="color:lightgrey; font-size: x-small;">USERNAME </label>
                             <input id="username" type="email" class="form-control" placeholder="blue&go!123" required="true" />
                         </div>
 
-                        <label for="pass" style="color:lightgrey; font-size: x-small; margin-top: 20px;">PASSWORD </label>
+                        <label for="pass" class="form-control-label" style="color:lightgrey; font-size: x-small; margin-top: 20px;">PASSWORD </label>
                         <div class="input-group mb-3">
-                          <input id="pass" type="password" class="form-control" placeholder="*******" required="true" aria-label="password" aria-describedby="basic-addon1" />
+                          <input id="pass" type="password" class="form-control" placeholder="*******" required="true" aria-label="password" aria-describedby="basic-addon1" onkeyup='check();'/>
                             <div class="input-group-append">
                             <span class="input-group-text" onclick="show_password()">
                                     <i class="fas fa-eye" id="show"></i>
@@ -61,9 +61,9 @@
                         <div class="invalid-feedback"> Invalid password </div>
                         <!-- <small id="passwordHelpInline" class="text-muted"> Must be 8-20 characters long, and contain at least 1 capital letter. </small> -->
 
-                        <label for="pass2" style="color:lightgrey; font-size: x-small;">CONFIRM PASSWORD </label>
+                        <label for="pass2" class="form-control-label" style="color:lightgrey; font-size: x-small;">CONFIRM PASSWORD </label>
                         <div class="input-group mb-3">
-                            <input id="pass2" type="password" class="form-control" placeholder="*******" required="true" aria-label="password" aria-describedby="basic-addon1" />
+                            <input id="pass2" type="password" class="form-control" placeholder="*******" required="true" aria-label="password" aria-describedby="basic-addon1" onkeyup='check();' />
                             <div class="input-group-append">
                             <span class="input-group-text" onclick="show_password2()">
                                     <i class="fas fa-eye" id="show2"></i>
@@ -71,12 +71,12 @@
                             </span>
                           </div>
                         </div>
+                        <small style="margin-top: -100rem;"><span id='message'></span></small>
                         <div class="invalid-feedback"> Invalid password </div>
-
-
                         <br>
                     </form>
-                    <button type="button" class="btn btn-outline-primary btn-lg btn-block" style="font-weight: lighter;"> Sign up </button>
+
+                    <button id="submit" type="button" class="btn btn-outline-primary btn-lg btn-block" style="font-weight: lighter;"> Sign up </button>
                     <button type="button" class="btn border btn-light border-secondary btn-lg btn-block" style="font-weight: lighter;"> Already have an account? Log in</button>
                 </div>
             </div>
