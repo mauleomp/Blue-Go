@@ -1,0 +1,21 @@
+body {
+    background-color: dodgerblue;
+}
+
+#column1 {
+    height: 100vh;
+    background-image: url("https://images.unsplash.com/photo-1617695744007-68ef55752789?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=736&q=80");
+
+}
+
+#column2 {
+    height: 100vh;
+}
+
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}

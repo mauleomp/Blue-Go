@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <meta name="google-signin-client_id" content="538157396465-jbm93uov7k9aq7p99u8oje196nt3h2r1.apps.googleusercontent.com">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+      <link rel="stylesheet" href="SignUp.css">
+      <title> Login & Sign Up Page</title>
+    </head>
+    <body>
+    <div class="container-fluid">
+        <div class="row">
+            <div id="column1" class="col">
+                <div style="margin: 3rem;">
+                    <h3 class="text-center text-capitalize" style="color: white;"> Improve class engagement <br> Sign up today.</h3>
+                    <p class="text-left text-capitalize fixed-bottom" style="color: white; font-size: 1.5em; margin-left: 40px; color: royalblue;"> <b> Blue&GO!</b> </p>
+
+                </div>
+            </div>
+
+            <div id="column2" class="col" style="background-color: white;">
+                <div style="margin: 2rem;">
+                    <button id="close" type="button" class="btn text-right close" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <br>
+                    <button type="button" class="btn btn-link text-left"> <h3 style="color: darkslategray;"> Sign up </h3> </button> <button id="login" type="button" class="btn btn-link text-left"> <h3 style="color: darkslategray;"> Log in </h3> </button>
+                    <br>
+                    <br>
+                    <div class="g-signin2" data-onsuccess="onSignIn"> </div>
+
+                    <div class="divider d-flex align-items-center my-4">
+                        <p class="text-center fw-bold mx-3 mb-0"> Or email</p>
+                    </div>
+                    <form class="needs-validation" novalidate>
+                        <div class="form-outline">
+                             <label for="email" style="color:lightgrey; font-size: x-small;">EMAIL</label>
+                            <input id="email" type="email" class="form-control" placeholder="user@blue&go.com" required="true"/>
+                            <div class="valid-feedback">Looks good! </div>
+                            <div class="invalid-feedback">Please provide a valid email address.</div>
+                        </div>
+
+                        <div class="form-outline" style="margin-top: 20px;">
+                            <label for="username" style="color:lightgrey; font-size: x-small;">USERNAME </label>
+                            <input id="username" type="email" class="form-control" placeholder="blue&go!123" required="true" />
+                        </div>
+
+                        <label for="pass" style="color:lightgrey; font-size: x-small; margin-top: 20px;">PASSWORD </label>
+                        <div class="input-group mb-3">
+                          <input id="pass" type="password" class="form-control" placeholder="*******" required="true" aria-label="password" aria-describedby="basic-addon1" />
+                            <div class="input-group-append">
+                            <span class="input-group-text" onclick="show_password()">
+                                    <i class="fas fa-eye" id="show"></i>
+                                    <i class="fas fa-eye-slash d-none" id="hide"></i>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="invalid-feedback"> Invalid password </div>
+                        <!-- <small id="passwordHelpInline" class="text-muted"> Must be 8-20 characters long, and contain at least 1 capital letter. </small> -->
+
+                        <label for="pass2" style="color:lightgrey; font-size: x-small;">CONFIRM PASSWORD </label>
+                        <div class="input-group mb-3">
+                            <input id="pass2" type="password" class="form-control" placeholder="*******" required="true" aria-label="password" aria-describedby="basic-addon1" />
+                            <div class="input-group-append">
+                            <span class="input-group-text" onclick="show_password2()">
+                                    <i class="fas fa-eye" id="show2"></i>
+                                    <i class="fas fa-eye-slash d-none" id="hide2"></i>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="invalid-feedback"> Invalid password </div>
+
+
+                        <br>
+                    </form>
+                    <button type="button" class="btn btn-outline-primary btn-lg btn-block" style="font-weight: lighter;"> Sign up </button>
+                    <button type="button" class="btn border btn-light border-secondary btn-lg btn-block" style="font-weight: lighter;"> Already have an account? Log in</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+        <script src="SignUp.js"></script>
+    </body>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</html>
