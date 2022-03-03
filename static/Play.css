@@ -1,0 +1,15 @@
+body {
+  background-color: #F6F7FB;
+  font-family: 'Rubik', sans-serif;
+}
+
+#row1 {
+  height: 50vh;
+  background-color: navajowhite;
+}
+
+#row2 {
+  height: 50vh;
+  background-color: antiquewhite;
+}
+

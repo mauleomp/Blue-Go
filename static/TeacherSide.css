@@ -1,0 +1,24 @@
+body {
+  background-color: #F6F7FB;
+  font-family: 'Rubik', sans-serif;
+}
+
+#column1 {
+    height: 100vh;
+  background-color: white;
+}
+
+#column2 {
+    height: 100vh;
+    background-color: white;
+}
+
+#inside1 {
+  height: 80vh;
+  background-color: aliceblue;
+}
+
+#inside2{
+  height: 80vh;
+  background-color: aliceblue;
+}
