@@ -10,3 +10,7 @@ body {
 .carbutton {
     height: 100px;
 }
+
+.carousel-item {
+    margin-right: 0;
+ }
