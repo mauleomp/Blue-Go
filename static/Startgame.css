@@ -1,16 +1,24 @@
 body {
-    background-color: 	#00BFFF;
+    padding-top: 55px;
 }
 
 #section1 {
-    padding-top: 100px;
-    height: 50vh;
+  background-color: #48dbfb;
+  height: 400px;
+  display: flex;
+  align-items: center;
 }
 
-.carbutton {
-    height: 100px;
+.carouselOfCards {
+  width: 100%;
 }
 
-.carousel-item {
-    margin-right: 0;
- }
+.carouselIndic {
+
+}
+
+#section2 {
+  background-color: orange;
+  height: 400px;
+  padding: 50px;
+}
