@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="Groups.css">
+    <title>Groups</title>
+</head>
+<body>
+
+    <nav class="navbar fixed-top navbar-expand-sm p-2" style="background-color: white; border-bottom: 1px solid lightgrey;">
+        <!-- Add the reference to the page -->
+        <a class="navbar-brand" href="#">
+            <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height="20" alt="Blue&GO! Logo" loading="lazy"/>
+            <small onmouseover="hover()">Blue&GO!</small>
+        </a>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                   <button class="btn btn-link" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                          <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Help and feedback</a></li>
+                    <div class="dropdown-divider"></div>
+                    <li><a class="dropdown-item" href="#">Log out</a></li>
+                  </ul>
+
+                </li>
+                <li class="nav-item">
+                <button type="button" class="btn btn-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                      <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+                    </svg>
+                </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Maybe add a breadcrum. A Collapse button so that groups and favourites can be hidden.
+    <nav aria-label="breadcrumb" style="margin-top: 4rem; background-color: white;">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="TeacherSide.html">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Groups</li>
+      </ol>
+    </nav>
+    -->
+
+
+    <div style="margin-top: 4rem; margin-left: 1rem;">
+        <div class="row justify-content-end" style="margin-right: 2rem;">
+            <!-- Button Add Group trigger modal -->
+            <button type="button" class="btn btn-primary btn-sm" style="font-size: small; width: fit-content" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                NEW GROUP
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog  modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"> Create a new group</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Group name, Add to favourites (checkbox), Background picture (upload), Upload students (cvs) (upload) -->
+                            <div class="mb-3">
+                                <label for="formGroupExampleInput" class="form-label" style="color:darkgrey; font-size: x-small;"> GROUP NAME </label>
+                                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example group name">
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label" style="color:darkgrey; font-size: x-small; margin-bottom: 1rem;" for="flexRadioDefault1">
+                                  ADD TO FAVOURITES
+                                </label>
+                                <input class="form-check-input" type="checkbox" id="flexRadioDefault1">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" style="color:darkgrey; font-size: x-small;"> BACKGROUND PICTURE</label>
+                                <div class="input-group custom-file-button">
+                                    <label class="input-group-text" for="inputGroupFile1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                        </svg>
+                                    </label>
+                                    <input type="file" class="form-control" id="inputGroupFile1">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                              <label class="form-label" style="color:darkgrey; font-size: x-small;"> UPLOAD A CSC FILE WITH A LIST OF STUDENTS</label>
+                              <div class="input-group custom-file-button">
+                                <label class="input-group-text" for="inputGroupFile2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
+                                </label>
+                                <input type="file" class="form-control" id="inputGroupFile2">
+                              </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group input-group-sm mb-3" style="margin-bottom:2rem; width: fit-content";>
+                <input type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
+                <button class="btn btn-link btn-light btn-outline-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <h1 class="display-6" style="font-size: large;"> Favourites</h1>
+    </div>
+
+    <div class="container-fluid" style="margin-top: 1rem; margin-bottom: 4rem;">
+        <div id="row1" class="row" style="margin-left: 2rem; margin-right: 2rem;">
+
+            <div class="row row-cols-1 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-xs-1 g-4" style="margin-top: -1rem;">
+                <div class="col">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1629654858857-615c2c8be8a8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1194&q=80" class="card-img" alt="...">
+                        <div class="card-img-overlay text-end" style="margin-top: -1rem; margin-right: -1rem;">
+                            <button class="btn btn-link" style="color:black" data-bs-toggle="dropdown">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                  <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                </svg>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">Remove from favourites</a></li>
+                                <li><a class="dropdown-item" href="#">Rename</a></li>
+                                <div class="dropdown-divider"></div>
+                                 <li><a class="dropdown-item" href="#">Delete</a></li>
+                            </ul>
+                        </div>
+                        <div class="card-body" style="transform: rotate(0);">
+                            <a href="class.html" class="stretched-link text-decoration-none" style="color:black;"> <h5 class="card-title"> TCS Year 3</h5> </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+       </div>
+
+        <!-- Quizas estaria bien hacer con pop up en lugar de nueva pagina -->
+        <div>
+            <h1 class="display-6" style="font-size: large;margin-top: 2rem;"> All groups</h1>
+        </div>
+
+        <div id="row2" class="row" style="margin-left: 2rem; margin-right: 2rem;">
+
+            <div class="row row-cols-1 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-xs-1 g-4" style="margin-top: -1rem;">
+                <div class="col">
+                    <div class="card position-relative">
+                      <img src="https://images.unsplash.com/photo-1629654858857-615c2c8be8a8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1194&q=80" class="card-img" alt="...">
+                      <div class="card-img-overlay text-end" style="margin-top: -1rem; margin-right: -1rem;">
+                          <button class="btn btn-link" style="color:black" data-bs-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                              <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                            </svg>
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Add to favourites</a></li>
+                            <li><a class="dropdown-item" href="#">Rename</a></li>
+                            <div class="dropdown-divider"></div>
+                            <li><a class="dropdown-item" href="#">Delete</a></li>
+                          </ul>
+                      </div>
+                      <div class="card-body" style="transform: rotate(0);">
+                         <a href="class.html" class="stretched-link text-decoration-none" style="color:black;"><h5 class="card-title">TCS 1</h5></a>
+                      </div>
+                    </div>
+                </div>
+
+
+              <div class="col">
+                <div class="card">
+                  <img src="https://images.unsplash.com/photo-1642698166111-1e736132b0ee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" class="card-img-top" alt="...">
+                  <div class="card-img-overlay text-end" style="margin-top: -1rem; margin-right: -1rem;">
+                      <button class="btn btn-link" style="color:black" data-bs-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                              <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                            </svg>
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-end">
+                          <li><a class="dropdown-item" href="#">Add to favourites</a></li>
+                          <li><a class="dropdown-item" href="#">Rename</a></li>
+                          <div class="dropdown-divider"></div>
+                          <li><a class="dropdown-item" href="#">Delete</a></li>
+                      </ul>
+                  </div>
+                  <div class="card-body" style="transform: rotate(0);">
+                      <a href="class.html" class="stretched-link text-decoration-none" style="color:black;"> <h5 class="card-title"> TCS 2</h5> </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card">
+                  <img src="https://images.unsplash.com/photo-1639815189096-f75717eaecfe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" class="card-img-top" alt="...">
+                    <div class="card-img-overlay text-end" style="margin-top: -1rem; margin-right: -1rem;">
+                        <button class="btn btn-link" style="color:black" data-bs-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                              <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                            </svg>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Add to favourites</a></li>
+                            <li><a class="dropdown-item" href="#">Rename</a></li>
+                            <div class="dropdown-divider"></div>
+                            <li><a class="dropdown-item" href="#">Delete</a></li>
+                        </ul>
+                    </div>
+                  <div class="card-body" style="transform: rotate(0);">
+                      <a href="class.html" class="stretched-link text-decoration-none" style="color:black;"> <h5 class="card-title"> TCS 3</h5> </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card">
+                  <img src="https://images.unsplash.com/photo-1618489517022-5c31fa91d017?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="card-img-top" alt="...">
+                    <div class="card-img-overlay text-end" style="margin-top: -1rem; margin-right: -1rem;">
+                        <button class="btn btn-link" style="color:black" data-bs-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                              <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                            </svg>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Add to favourites</a></li>
+                            <li><a class="dropdown-item" href="#">Rename</a></li>
+                            <div class="dropdown-divider"></div>
+                            <li><a class="dropdown-item" href="#">Delete</a></li>
+                        </ul>
+                    </div>
+                  <div class="card-body" style="transform: rotate(0);">
+                      <a href="class.html" class="stretched-link text-decoration-none" style="color:black;"> <h5 class="card-title"> BIT 3</h5> </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1618556450994-a6a128ef0d9d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80" class="card-img-top" alt="...">
+                    <div class="card-img-overlay text-end" style="margin-top: -1rem; margin-right: -1rem;">
+                        <button class="btn btn-link" style="color:black" data-bs-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                              <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                            </svg>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Add to favourites</a></li>
+                            <li><a class="dropdown-item" href="#">Rename</a></li>
+                            <div class="dropdown-divider"></div>
+                            <li><a class="dropdown-item" href="#">Delete</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-body" style="transform: rotate(0);">
+                        <a href="class.html" class="stretched-link text-decoration-none" style="color:black;"> <h5 class="card-title"> ME 2</h5> </a>
+                    </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1627637819848-7074cb1565e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" class="card-img-top" alt="...">
+                    <div class="card-img-overlay text-end" style="margin-top: -1rem; margin-right: -1rem;">
+                        <button class="btn btn-link" style="color:black" data-bs-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                              <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                            </svg>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Add to favourites</a></li>
+                            <li><a class="dropdown-item" href="#">Rename</a></li>
+                            <div class="dropdown-divider"></div>
+                            <li><a class="dropdown-item" href="#">Delete</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-body" style="transform: rotate(0);">
+                        <a href="class.html" class="stretched-link text-decoration-none" style="color:black;"> <h5 class="card-title"> BIT 1</h5> </a>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+</div>
+
+
+    </div>
+
+
+</body>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</html>
