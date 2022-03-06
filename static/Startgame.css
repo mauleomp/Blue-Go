@@ -1,10 +1,10 @@
 body {
     padding-top: 55px;
+    background-image: url("https://images.unsplash.com/photo-1620121478247-ec786b9be2fa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80");
 }
 
 #section1 {
-  background-color: #48dbfb;
-  height: 400px;
+  height: 250px;
   display: flex;
   align-items: center;
 }
@@ -18,7 +18,7 @@ body {
 }
 
 #section2 {
-  background-color: orange;
-  height: 400px;
-  padding: 50px;
+  min-height: 200px;
+  padding: 100px;
+  background-color: rgba(255, 255, 255, 0.8);
 }

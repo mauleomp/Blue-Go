@@ -1,3 +1,4 @@
+<?php header("Access-Control-Allow-Origin: *"); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -152,39 +153,106 @@
     </div>
 
     <div class="container-fluid" id="section2">
-
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="gamemode1">
-          <label class="form-check-label" for="gamemode1">
-            Fastest Player
-          </label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="gamemode2" checked>
-          <label class="form-check-label" for="gamemode2">
-            Random Player
-          </label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="gamemode3" checked>
-          <label class="form-check-label" for="gamemode3">
-            Lifelines
-          </label>
+        <div class="row justify-content-center">
+          <div class="col text-end">
+            <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#fastestPlayer" aria-expanded="false" aria-controls="fastestPlayer">
+              Fastest Player
+            </button>
+          </div>
+          <div class="col text-center">
+            <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#randomPlayer" aria-expanded="false" aria-controls="randomPlayer">
+              Random Player
+            </button>
+          </div>
+          <div class="col text-start">
+            <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#lifelines" aria-expanded="false" aria-controls="lifelines">
+              Lifelines
+            </button>
+          </div>
         </div>
 
         <br>
 
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="gamemode3">
-          <label class="form-check-label" for="gamemode3">
-            Normal
-          </label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="gamemode4" checked>
-          <label class="form-check-label" for="gamemode4">
-            Lifelines
-          </label>
+        <!-- Contains game description and settings -->
+        <div class="row">
+
+          <!-- Popdown for fastest player -->
+          <div class="collapse" id="fastestPlayer">
+            <div class="card card-body">
+              <h3>First player to press the buttons gets first turn! Afterwards, turns are given in order of quickest button press</h1>
+              <br>
+              <div class="input-group input-group-lg">
+                <span class="input-group-text" id="inputGroup-sizing-lg">Points per correct answer:</span>
+                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
+              </div>
+              <br>
+              <div class="input-group input-group-lg">
+                <span class="input-group-text" id="inputGroup-sizing-lg">Deduction of points per incorrect answer:</span>
+                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
+              </div>
+              <br>
+              <br>
+              <button type="button" class="btn btn-warning btn-block btn-lg">Start!</button>
+            </div>
+          </div>
+
+          <!-- Popdown for rando player -->
+          <div class="collapse" id="randomPlayer">
+            <div class="card card-body">
+              <h3>After set amount of time a random player is chosen to answer. Afterwards, turns keep on being given in random order.</h3>
+              <br>
+              <div class="input-group input-group-lg">
+                <span class="input-group-text" id="inputGroup-sizing-lg">Points per correct answer:</span>
+                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
+              </div>
+              <br>
+              <div class="input-group input-group-lg">
+                <span class="input-group-text" id="inputGroup-sizing-lg">Deduction of points per incorrect answer:</span>
+                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
+              </div>
+              <br>
+              <div class="input-group input-group-lg">
+                <span class="input-group-text" id="inputGroup-sizing-lg">Time frame to press the button:</span>
+                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="10">
+                <span class="input-group-text">seconds</span>
+              </div>
+              <br>
+              <br>
+              <button type="button" class="btn btn-warning btn-block btn-lg">Start!</button>
+            </div>
+          </div>
+
+          <!-- Popdown for lifelines -->
+          <div class="collapse" id="lifelines">
+            <div class="card card-body">
+              <h3>Everyone starts with a set amount of lifes. Every unpressed round or wrong answer results in a deduction of points!
+                0 lifes remaining means you are out of the game.</h3>
+              <br>
+              <div class="input-group input-group-lg">
+                <span class="input-group-text" id="inputGroup-sizing-lg">Amount of lifes per player/team:</span>
+                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="10">
+              </div>
+              <br>
+              <div class="input-group input-group-lg">
+                <span class="input-group-text" id="inputGroup-sizing-lg">Deduction of lifes for an unpressed button:</span>
+                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
+              </div>
+              <br>
+              <div class="input-group input-group-lg">
+                <span class="input-group-text" id="inputGroup-sizing-lg">Deduction of lifes for an incorrect answer:</span>
+                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="3">
+              </div>
+              <br>
+              <div class="input-group input-group-lg">
+                <span class="input-group-text" id="inputGroup-sizing-lg">Time frame to press the button:</span>
+                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="10">
+                <span class="input-group-text">seconds</span>
+              </div>
+              <br>
+              <br>
+              <button type="button" class="btn btn-warning btn-block btn-lg">Start!</button>
+            </div>
+          </div>
         </div>
 
     </div>
