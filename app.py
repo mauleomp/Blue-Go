@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, url_for, redirect
 app = Flask(__name__)
 
 app.secret_key = "AFr_256897/@"
-
+## new changes
 @app.route('/')
 def homePage():  # put application's code here
     return render_template('MainPage.html')
