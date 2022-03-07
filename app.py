@@ -22,7 +22,7 @@ def loginPage():
     return render_template('login.html', error=error)
 
 
-@app.route('/signUp', methods = ['POST', 'GET'])
+@app.route('/signUp', methods=['POST', 'GET'])
 def signUp():
     error = None
     if request.method == 'POST':
@@ -59,15 +59,15 @@ def logTeacher():'''
 
 
 @app.route('/groups')
-def groupsPage(usr):
+def groupsPage(usr=None):
     return render_template('Groups.html')
 
 @app.route('/play')
-def playPage(usr):
+def playPage(usr=None):
     return render_template('Play.html')
 
 @app.route('/teacher')
-def teacherSide(usr):
+def teacherSide(usr=None):
     return render_template('TeacherSide.html')
 
 

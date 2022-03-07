@@ -7,7 +7,7 @@
       <meta name="google-signin-client_id" content="538157396465-jbm93uov7k9aq7p99u8oje196nt3h2r1.apps.googleusercontent.com">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
-      <link rel="stylesheet" href="../static/SignUp.css">
+      <link rel="stylesheet" href="{{ url_for('static', filename='SignUp.css') }}">
       <title> Login & Sign Up Page</title>
     </head>
     <body>
@@ -27,7 +27,8 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
                     <br>
-                    <button type="button" class="btn btn-link text-left"> <h3 style="color: darkslategray;"> Sign up </h3> </button> <button id="login" type="button" class="btn btn-link text-left"> <h3 style="color: darkslategray;"> Log in </h3> </button>
+                    <button type="button" class="btn btn-link text-left"> <h3 style="color: darkslategray;"> Sign up </h3> </button>
+                    <button id="login" type="button" class="btn btn-link text-left"> <h3 style="color: darkslategray;"> Log in </h3> </button>
                     <br>
                     <br>
                     <div class="g-signin2" data-onsuccess="onSignIn"> </div>
@@ -83,7 +84,7 @@
         </div>
 
     </div>
-        <script src="../static/SignUp.js"></script>
+        <script src="{{ url_for('static', filename='SignUp.js') }}"></script>
     </body>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
