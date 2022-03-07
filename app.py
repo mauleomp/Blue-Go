@@ -19,7 +19,6 @@ def loginPage():
             return redirect(url_for('logTeacher'))
         else:
             error = 'Invalid username / password '
-
     return render_template('login.html', error=error)
 
 
@@ -41,7 +40,7 @@ def signUp():
 ##def valid_login(email, password):
 
 #log the user in using the email.
-@app.route('/teacher', methods=['POST', 'GET'])
+@app.route('/login', methods=['POST', 'GET'])
 def logTeacher():
     if 'user' in session:
         usr = session['user']
@@ -55,8 +54,21 @@ def logTeacher():
 #register the user within the database
 #register(email, username, password)
 '''
-@app.route('/user', methods=['POST, GET'])
+@app.route('/teacher', methods=['POST, GET'])
 def logTeacher():'''
+
+
+@app.route('/groups')
+def groupsPage(usr):
+    return render_template('Groups.html')
+
+@app.route('/play')
+def playPage(usr):
+    return render_template('Play.html')
+
+@app.route('/teacher')
+def teacherSide(usr):
+    return render_template('TeacherSide.html')
 
 
 if __name__ == '__main__':
