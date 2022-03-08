@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
     <head>
       <meta charset="UTF-8">
@@ -17,12 +18,12 @@
                 <small onmouseover="hover()">Blue&GO!</small>
             </a>
             <ul class="navbar-nav ml-auto">
-                <button  type="button" class="btn btn-link" href="{{ url_for('login') }}" >
+                <a  type="button" class="btn btn-link" href="{{ url_for('login') }}" >
                     Login
-                </button>
-                <button  type="button" class="btn btn-primary" href="{{ url_for('signUp') }}">
+                </a>
+                <a type="button" class="btn btn-primary" href="{{ url_for('signUp') }}">
                     Sign up
-                </button>
+                </a>
             </ul>
         </nav>
 

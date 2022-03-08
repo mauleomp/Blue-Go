@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, url_for, redirect
 
+
+
 app = Flask(__name__)
 
 app.secret_key = "AFr_256897/@"
@@ -13,10 +15,12 @@ def homePage():  # put application's code here
 def login():
     error = None
     if request.method == 'POST':
+        #modify valid login within the db
         if valid_login(request.form['email'], request.form['pass']):
             usr = request.form['email']
-            session['user'] = user
-            return redirect(url_for('logTeacher'))
+            #session['user'] = usr
+            print(usr)
+            return redirect(url_for('teacher'))
         else:
             error = 'Invalid username / password '
     return render_template('login.html', error=error)
@@ -26,9 +30,10 @@ def login():
 def signUp():
     error = None
     if request.method == 'POST':
-        if matchPasswords(request.form['pass'], request.form['pass2']):
-            return register(request.form['email'], request.form['username'],
-                            request.form['pass'])
+        if matchPass(request.form['pass'], request.form['pass2']):
+            register(request.form['email'], request.form['username'],
+                     request.form['pass'])
+            return redirect(url_for('teacher'))
         else:
             error = 'Passwords do not match'
     elif request.method == 'GET':
@@ -37,7 +42,8 @@ def signUp():
 
 
 ## create it and validate with the user and passwword from the data base
-##def valid_login(email, password):
+def valid_login(email, password):
+    return True
 
 #log the user in using the email.
 @app.route('/login', methods=['POST', 'GET'])
@@ -49,17 +55,20 @@ def logTeacher():
         return redirect(url_for("loginPage"))
 
 #compare if the passwords match
-#matchPass(ps1, ps2):
+def matchPass(ps1, ps2):
+    return True
 
 #register the user within the database
-#register(email, username, password)
+def register(email, username, password):
+    print(email, username, password)
+
 '''
 @app.route('/teacher', methods=['POST, GET'])
 def logTeacher():'''
 
 
 @app.route('/groups')
-def groupsPage(usr=None):
+def groups(usr=None):
     return render_template('Groups.html')
 
 @app.route('/play')
@@ -67,7 +76,7 @@ def playPage(usr=None):
     return render_template('Play.html')
 
 @app.route('/teacher')
-def teacherSide(usr=None):
+def teacher(usr=None):
     return render_template('TeacherSide.html')
 
 

@@ -1,5 +1,5 @@
 
 
 document.getElementById("inside2").addEventListener("click", function() {
-    window.location.href = 'Groups.html';
+    window.location.href = "{{ url_for('groups') }}";
 });

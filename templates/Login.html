@@ -27,21 +27,22 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
                     <br>
-                    <button id="signup" type="button" class="btn btn-link text-left"> <h3 style="color: darkslategray;"> Sign up </h3> </button> <button type="button" class="btn btn-link text-left"> <h3 style="color: darkslategray;"> Log in </h3> </button>
+                    <a id="signup" type="button" class="btn btn-link text-left" href="{{ url_for('signUp') }}"> <h3 style="color: darkslategray;"> Sign up </h3> </a> <a type="button" class="btn btn-link text-left" href="{{ url_for('login') }}> <h3 style="color: darkslategray;"> Log in </h3> </a>
                     <br>
                     <br>
                     <div class="g-signin2" data-onsuccess="onSignIn"> </div>
                     <br>
-                    <div class="form-outline">
+                    <form method="POST">
+                        <div class="form-outline">
                              <label for="email" style="color:lightgrey; font-size: x-small;">USERNAME OR EMAIL</label>
-                            <input id="email" type="email" class="form-control" placeholder="user@blue&go.com" required="true"/>
+                            <input id="email" name="email" type="email" class="form-control" placeholder="user@blue&go.com" required="true"/>
                             <div class="valid-feedback">Looks good! </div>
                             <div class="invalid-feedback">Please provide a valid email address.</div>
                         </div>
 
                    <label for="pass" style="color:lightgrey; font-size: x-small; margin-top: 20px;">PASSWORD </label>
                    <div class="input-group mb-3">
-                       <input id="pass" type="password" class="form-control" placeholder="*******" required="true" aria-label="password" aria-describedby="basic-addon1" />
+                       <input id="pass" name="pass" type="password" class="form-control" placeholder="*******" required="true" aria-label="password" aria-describedby="basic-addon1" />
                        <div class="input-group-append">
                            <span class="input-group-text" onclick="show_password()">
                                <i class="fas fa-eye" id="show"></i>
@@ -51,8 +52,9 @@
                    </div>
                     <div class="invalid-feedback"> Invalid password </div>
                     <br>
-                    <button type="button" class="btn btn-outline-primary btn-lg btn-block" style="font-weight: lighter;"> Log in </button>
+                    <input type="submit" class="btn btn-outline-primary btn-lg btn-block" style="font-weight: lighter;" value="Login"/>
                     <br>
+                    </form>
                     <p> Forgot password? <a href="url">Reset your password</a></p>
                 </div>
             </div>

@@ -27,8 +27,8 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
                     <br>
-                    <button type="button" class="btn btn-link text-left"> <h3 style="color: darkslategray;"> Sign up </h3> </button>
-                    <button id="login" type="button" class="btn btn-link text-left"> <h3 style="color: darkslategray;"> Log in </h3> </button>
+                    <a type="button" class="btn btn-link text-left" href="{{ url_for('signUp') }}"> <h3 style="color: darkslategray;"> Sign up </h3> </a>
+                    <a id="login" type="button" class="btn btn-link text-left" href="{{ url_for('login') }}"> <h3 style="color: darkslategray;"> Log in </h3> </a>
                     <br>
                     <br>
                     <div class="g-signin2" data-onsuccess="onSignIn"> </div>
@@ -36,22 +36,22 @@
                     <div class="divider d-flex align-items-center my-4">
                         <p class="text-center fw-bold mx-3 mb-0"> Or email</p>
                     </div>
-                    <form class="needs-validation" novalidate>
+                    <form action="" method="POST" novalidatclass="needs-validation" novalidate>
                         <div class="form-outline">
                              <label for="email" class="form-control-label" style="color:lightgrey; font-size: x-small;">EMAIL</label>
-                            <input id="email" type="email" class="form-control" placeholder="user@blue&go.com" required="true"/>
+                            <input id="email" name="email" type="email" class="form-control" placeholder="user@blue&go.com" required="true"/>
                             <div class="valid-feedback">Looks good! </div>
                             <div class="invalid-feedback">Please provide a valid email address.</div>
                         </div>
 
                         <div class="form-outline" style="margin-top: 20px;">
                             <label for="username" class="form-control-label" style="color:lightgrey; font-size: x-small;">USERNAME </label>
-                            <input id="username" type="email" class="form-control" placeholder="blue&go!123" required="true" />
+                            <input id="username" name="username" type="email" class="form-control" placeholder="blue&go!123" required="true" />
                         </div>
 
                         <label for="pass" class="form-control-label" style="color:lightgrey; font-size: x-small; margin-top: 20px;">PASSWORD </label>
                         <div class="input-group mb-3">
-                          <input id="pass" type="password" class="form-control" placeholder="*******" required="true" aria-label="password" aria-describedby="basic-addon1" onkeyup='check();'/>
+                          <input id="pass" name="pass"type="password" class="form-control" placeholder="*******" required="true" aria-label="password" aria-describedby="basic-addon1" onkeyup='check();'/>
                             <div class="input-group-append">
                             <span class="input-group-text" onclick="show_password()">
                                     <i class="fas fa-eye" id="show"></i>
@@ -64,7 +64,7 @@
 
                         <label for="pass2" class="form-control-label" style="color:lightgrey; font-size: x-small;">CONFIRM PASSWORD </label>
                         <div class="input-group mb-3">
-                            <input id="pass2" type="password" class="form-control" placeholder="*******" required="true" aria-label="password" aria-describedby="basic-addon1" onkeyup='check();' />
+                            <input id="pass2" name="pass2" type="password" class="form-control" placeholder="*******" required="true" aria-label="password" aria-describedby="basic-addon1" onkeyup='check();' />
                             <div class="input-group-append">
                             <span class="input-group-text" onclick="show_password2()">
                                     <i class="fas fa-eye" id="show2"></i>
@@ -75,10 +75,10 @@
                         <small style="margin-top: -100rem;"><span id='message'></span></small>
                         <div class="invalid-feedback"> Invalid password </div>
                         <br>
+                        <input id="submit" type="submit" class="btn btn-outline-primary btn-lg btn-block" style="font-weight: lighter;" value="Sign up"/>
                     </form>
-
-                    <button id="submit" type="button" class="btn btn-outline-primary btn-lg btn-block" style="font-weight: lighter;"> Sign up </button>
-                    <button type="button" class="btn border btn-light border-secondary btn-lg btn-block" style="font-weight: lighter;"> Already have an account? Log in</button>
+                    <br>
+                    <a type="button" class="btn border btn-light border-secondary btn-lg btn-block" style="font-weight: lighter;" href="{{ url_for('login') }}"> Already have an account? Log in</a>
                 </div>
             </div>
         </div>
