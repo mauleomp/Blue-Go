@@ -1,4 +1,3 @@
-<?php header("Access-Control-Allow-Origin: *"); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -39,10 +38,11 @@
         </div>
     </nav>
 
+    <!-- section containing group selection -->
     <div class="container-fluid" id="section1">
 
-      <div id="carouselCards" class="carousel slide carousel-multi-item carouselOfCards" data-bs-touch="false" data-bs-interval="false">
-        <div class="carousel-inner" role=listbox;>
+      <div id="carouselCards" class="carousel slide carousel-multi-item" data-bs-touch="false" data-bs-interval="false">
+        <div class="carousel-inner">
 
           <div class="carousel-indicators carouselIndic">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -50,7 +50,6 @@
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
           </div>
 
-          <!-- First item -->
           <div class="carousel-item active text-center">
 
                 <div class="row row-cols-3" style="width: 70%; margin: auto;">
@@ -59,7 +58,7 @@
                       <div class="card-body">
                         <h5 class="card-title">Group 1</h5>
                         <p class="card-text">***Group description...***</p>
-                        <button type="button" class="btn btn-primary">Select</button>
+                        <a href="#" class="btn btn-primary stretched-link">Select</a>
                       </div>
                     </div>
                   </div>
@@ -68,7 +67,7 @@
                       <div class="card-body">
                         <h5 class="card-title">Group 2</h5>
                         <p class="card-text">***Group description...***</p>
-                        <button type="button" class="btn btn-primary">Select</button>
+                        <a href="#" class="btn btn-primary stretched-link">Select</a>
                       </div>
                     </div>
                   </div>
@@ -77,7 +76,7 @@
                       <div class="card-body">
                         <h5 class="card-title">Group 3</h5>
                         <p class="card-text">***Group description...***</p>
-                        <button type="button" class="btn btn-primary">Select</button>
+                        <a href="#" class="btn btn-primary stretched-link">Select</a>
                       </div>
                     </div>
                   </div>
@@ -91,7 +90,7 @@
                   <div class="card-body">
                     <h5 class="card-title">Group 4</h5>
                     <p class="card-text">***Group description...***</p>
-                    <button type="button" class="btn btn-primary">Select</button>
+                    <a href="#" class="btn btn-primary stretched-link">Select</a>
                   </div>
                 </div>
               </div>
@@ -100,7 +99,7 @@
                   <div class="card-body">
                     <h5 class="card-title">Group 5</h5>
                     <p class="card-text">***Group description...***</p>
-                    <button type="button" class="btn btn-primary">Select</button>
+                    <a href="#" class="btn btn-primary stretched-link">Select</a>
                   </div>
                 </div>
               </div>
@@ -109,7 +108,7 @@
                   <div class="card-body">
                     <h5 class="card-title">Group 6</h5>
                     <p class="card-text">***Group description...***</p>
-                    <button type="button" class="btn btn-primary">Select</button>
+                    <a href="#" class="btn btn-primary stretched-link">Select</a>
                   </div>
                 </div>
               </div>
@@ -123,7 +122,7 @@
                   <div class="card-body">
                     <h5 class="card-title">Group 7</h5>
                     <p class="card-text">***Group description...***</p>
-                    <button type="button" class="btn btn-primary">Select</button>
+                    <a href="#" class="btn btn-primary stretched-link">Select</a>
                   </div>
                 </div>
               </div>
@@ -132,7 +131,7 @@
                   <div class="card-body">
                     <h5 class="card-title">Group 8</h5>
                     <p class="card-text">***Group description...***</p>
-                    <button type="button" class="btn btn-primary">Select</button>
+                    <a href="#" class="btn btn-primary stretched-link">Select</a>
                   </div>
                 </div>
               </div>
@@ -152,22 +151,47 @@
         </div>
     </div>
 
-    <div class="container-fluid" id="section2">
-        <div class="row justify-content-center">
-          <div class="col text-end">
-            <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#fastestPlayer" aria-expanded="false" aria-controls="fastestPlayer">
-              Fastest Player
-            </button>
+    <!-- section containing gamemode selection and settings -->
+    <div class="container-fluid text-center" id="section2">
+
+        <div class="row">
+          <div class="col">
+            <div class="card bigbutton">
+              <div class="card-body">
+                <h5 class="card-title">Fastest Player</h5>
+                <br>
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
+                  <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
+                  <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
+                </svg>
+                <a href="#" class="stretched-link" data-bs-toggle="collapse" data-bs-target="#fastestPlayer" aria-expanded="false" aria-controls="fastestPlayer"></a>
+              </div>
+            </div>
           </div>
-          <div class="col text-center">
-            <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#randomPlayer" aria-expanded="false" aria-controls="randomPlayer">
-              Random Player
-            </button>
+          <div class="col">
+            <div class="card bigbutton">
+              <div class="card-body">
+                <h5 class="card-title">Random Player</h5>
+                <br>
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-dice-5" viewBox="0 0 16 16">
+                  <path d="M13 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h10zM3 0a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3H3z"/>
+                  <path d="M5.5 4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm4-4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                </svg>
+                <a href="#" class="stretched-link" data-bs-toggle="collapse" data-bs-target="#randomPlayer" aria-expanded="false" aria-controls="randomPlayer"></a>
+              </div>
+            </div>
           </div>
-          <div class="col text-start">
-            <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#lifelines" aria-expanded="false" aria-controls="lifelines">
-              Lifelines
-            </button>
+          <div class="col">
+            <div class="card bigbutton">
+              <div class="card-body">
+                <h5 class="card-title">Lifelines</h5>
+                <br>
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-activity" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"/>
+                </svg>
+                <a href="#" class="stretched-link" data-bs-toggle="collapse" data-bs-target="#lifelines" aria-expanded="false" aria-controls="lifelines"></a>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -192,7 +216,7 @@
               </div>
               <br>
               <br>
-              <button type="button" class="btn btn-warning btn-block btn-lg">Start!</button>
+              <button type="button" class="btn btn-success btn-block btn-lg">Start!</button>
             </div>
           </div>
 
@@ -218,7 +242,7 @@
               </div>
               <br>
               <br>
-              <button type="button" class="btn btn-warning btn-block btn-lg">Start!</button>
+              <button type="button" class="btn btn-success btn-block btn-lg">Start!</button>
             </div>
           </div>
 
@@ -250,7 +274,7 @@
               </div>
               <br>
               <br>
-              <button type="button" class="btn btn-warning btn-block btn-lg">Start!</button>
+              <button type="button" class="btn btn-success btn-block btn-lg">Start!</button>
             </div>
           </div>
         </div>
