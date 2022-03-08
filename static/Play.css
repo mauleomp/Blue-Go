@@ -1,27 +1,31 @@
 body {
-  background-color: #F6F7FB;
-  font-family: 'Rubik', sans-serif;
+    padding-top: 55px;
+    background-image: url("https://images.unsplash.com/photo-1620121478247-ec786b9be2fa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80");
 }
 
-#row1 {
-  height: 50vh;
-  background-color: navajowhite;
+#section1 {
+  height: 300px;
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
-
-#row2 {
-  height: 50vh;
-  background-color: antiquewhite;
+#carouselCards {
+  width: 100%;
+  height: 100%;
 }
 
-#col1{
-  background-color: lightgreen;
+.carousel-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
-#col2{
-  background-color: lightgreen;
+#section2 {
+  height: 300px;
+  padding: 100px;
+  background-color: rgba(255, 255, 255, 0);
 }
 
-#col3{
-  background-color: lightgreen;
+.bigbutton {
+  height: 220px;
+  background-color: #f1c40f;
 }

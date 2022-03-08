@@ -7,6 +7,11 @@ document.getElementById("login").addEventListener("click", function() {
     window.location.href = 'Login.html';
 });*/
 
+document.getElementById("submit").addEventListener("click", function() {
+    window.location.href = 'TeacherSide.html';
+});
+
+
 function show_password() {
   var x = document.getElementById("pass");
   var show_eye = document.getElementById("show");

@@ -58,7 +58,7 @@
     <div style="margin-top: 4rem; margin-left: 1rem;">
         <div class="row justify-content-end" style="margin-right: 2rem;">
             <!-- Button Add Group trigger modal -->
-            <button type="button" class="btn btn-primary btn-sm" style="font-size: small; width: fit-content" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary btn-lg" style="font-size: small; width: fit-content; height: fit-content" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 NEW GROUP
             </button>
 
@@ -115,7 +115,7 @@
                 </div>
             </div>
 
-            <div class="input-group input-group-sm mb-3" style="margin-bottom:2rem; width: fit-content";>
+            <div class="input-group input-group-md mb-3" style="margin-bottom:2rem; width: fit-content";>
                 <input type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
                 <button class="btn btn-link btn-light btn-outline-secondary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -124,12 +124,11 @@
                 </button>
             </div>
         </div>
-        <h1 class="display-6" style="font-size: large;"> Favourites</h1>
     </div>
 
     <div class="container-fluid" style="margin-top: 1rem; margin-bottom: 4rem;">
         <div id="row1" class="row" style="margin-left: 2rem; margin-right: 2rem;">
-
+            <h1 class="display-6" style="font-size: large;"> Favourites</h1>
             <div class="row row-cols-1 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-xs-1 g-4" style="margin-top: -1rem;">
                 <div class="col">
                     <div class="card">
@@ -157,15 +156,12 @@
        </div>
 
         <!-- Quizas estaria bien hacer con pop up en lugar de nueva pagina -->
-        <div>
+
+        <div id="row2" class="row" style="margin-left: 2rem; margin-right: 2rem; margin-top: 2rem;">
             <h1 class="display-6" style="font-size: large;margin-top: 2rem;"> All groups</h1>
-        </div>
-
-        <div id="row2" class="row" style="margin-left: 2rem; margin-right: 2rem;">
-
             <div class="row row-cols-1 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-xs-1 g-4" style="margin-top: -1rem;">
                 <div class="col">
-                    <div class="card position-relative">
+                    <div class="card position-relative" id="class">
                       <img src="https://images.unsplash.com/photo-1629654858857-615c2c8be8a8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1194&q=80" class="card-img" alt="...">
                       <div class="card-img-overlay text-end" style="margin-top: -1rem; margin-right: -1rem;">
                           <button class="btn btn-link" style="color:black" data-bs-toggle="dropdown">
