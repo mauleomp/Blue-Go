@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='class.css') }}">
     <title>Test</title>
 </head>
@@ -12,7 +14,7 @@
 
     <nav class="navbar fixed-top navbar-expand-sm p-2" style="background-color: white; border-bottom: 1px solid lightgrey;">
         <!-- Add the reference to the page -->
-        <a class="navbar-brand" href="#">
+        <a id="icon" class="navbar-brand" href="#">
             <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height="20" alt="Blue&GO! Logo" loading="lazy"/>
             <small onmouseover="hover()">Blue&GO!</small>
         </a>
@@ -45,9 +47,243 @@
         </div>
     </nav>
 
+    <div class="container-fluid min-vh-100 d-flex flex-column">
+        <div class="row flex-grow-1" style="margin-right:1rem;">
+            <div class="col col-9">
+                <div class="row justify-content-end" style="margin-left: 2rem; margin-right:3rem; margin-top:4rem;">
+                    <button id="insertRow" class="btn btn-primary" style="width: fit-content;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                        </svg>
+                        Add New Row
+                    </button>
+                </div>
+                <div style="margin_right:2rem;">
+                    <table id="table" class="table table-responsive table-striped table-hover"
+                         data-search="true"
+                         data-toggle="table"
+                         data-height="600"
+                         data-pagination="true"
+                         data-show-export="true"
+                         data-export-data-type="all">
+                        <thead class="table-dark">
+                            <tr>
+                              <th scope="col">ID</th>
+                              <th scope="col">First name</th>
+                              <th scope="col">Last name</th>
+                              <th scope="col">Teams</th>
+                              <th scope="col">Actions</th>
+                            </tr>
+                      </thead>
+                      <tbody>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td>
+                                  <button class="btn btn-primary rounded-pill"> Blue House </button> <button class="btn btn-light rounded-pill"> Team 1 </button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-success">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                    </svg>
+                                  </button>
+                                  <button type="button" class="btn btn-danger delete">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                      </svg>
+                                  </button>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">2</th>
+                              <td>Jacob</td>
+                              <td>Thornton</td>
+                              <td>
+                                  <button class="btn btn-success rounded-pill"> Green House </button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-success">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                    </svg>
+                                  </button>
+                                  <button type="button" class="btn btn-danger delete">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                      </svg>
+                                  </button>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td> </td>
+                              <td> </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td> </td>
+                              <td> </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td> </td>
+                              <td> </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td> </td>
+                              <td> </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td> </td>
+                              <td> </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td> </td>
+                              <td> </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td> </td>
+                              <td> </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td> </td>
+                              <td> </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td> </td>
+                              <td> </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td> </td>
+                              <td> </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td> </td>
+                              <td> </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td> </td>
+                              <td> </td>
+                            </tr>
+
+                      </tbody>
+                    </table>
+                </div>
+        </div>
+
+        <div class="col-3 text-center opacity-50" style="background-color: darkgrey;">
+            <p style="margin-top: 120px; color:white; font-size: x-large; font-family: 'Rubik', sans-serif;"> Leaderboard</p>
+
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapse_overall">Top Ranking</button>
+                <button type="button" class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapse_groups">Group Ranking</button>
+            </div>
+
+            <div class="collapse" id="collapse_overall">
+              <div class="card card-body" style="border: none; background-color: darkgrey">
+                <table class="table table-hover table-borderless" style="margin-top: 20px;">
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Mark <br> Otto</td>
+                      <td></td>
+                      <td> 200 </td>
+                    </tr>
+                    <tr>
+                      <th scope="row"> 2</th>
+                      <td>Maria <br> Perez</td>
+                      <td></td>
+                      <td> 100 </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td> Andrei <br> Diaz</td>
+                      <td></td>
+                      <td> 50 </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="collapse" id="collapse_groups">
+              <div class="card card-body" style="border: none; background-color: darkgrey">
+                <table class="table table-hover table-borderless" style="margin-top: 20px;">
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Blue House</td>
+                      <td></td>
+                      <td> 10000 </td>
+                    </tr>
+                    <tr>
+                      <th scope="row"> 2</th>
+                      <td>Red House</td>
+                      <td></td>
+                      <td>5100 </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td> Green House</td>
+                      <td></td>
+                      <td> 2030 </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="class.js"></script>
 
 
 </body>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/tableExport.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/libs/jsPDF/jspdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.19.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
 </html>
