@@ -10,7 +10,7 @@ def homePage():  # put application's code here
 
 
 @app.route('/login', methods=['POST', 'GET'])
-def loginPage():
+def login():
     error = None
     if request.method == 'POST':
         if valid_login(request.form['email'], request.form['pass']):

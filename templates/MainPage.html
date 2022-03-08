@@ -17,10 +17,10 @@
                 <small onmouseover="hover()">Blue&GO!</small>
             </a>
             <ul class="navbar-nav ml-auto">
-                <button  type="button" class="btn btn-link" href="/login" >
+                <button  type="button" class="btn btn-link" href="{{ url_for('login') }}" >
                     Login
                 </button>
-                <button  type="button" class="btn btn-primary" href="/signUp">
+                <button  type="button" class="btn btn-primary" href="{{ url_for('signUp') }}">
                     Sign up
                 </button>
             </ul>
