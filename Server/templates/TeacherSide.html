@@ -46,22 +46,23 @@
     </nav>
 
 
-    <div class="container-fluid" style="margin-top: 0rem;">
+    <div class="container-fluid text-center" style="margin-top: 0rem;">
         <div class="row">
-            <div class="col">
 
+            <div class="col-md-1"></div>
+
+            <div id="column1" class="col-md-5">
+               <div id="inside1" class="d-grid" style="margin-left: 2rem; margin-right: 3rem; margin-top: 5rem; border-radius: 3%;">
+                   <a class="btn" href=" {{ url_for('playPage') }}">
+                       <img src="{{ url_for('static', filename='images/button3.png') }}" width="70%" style="margin-right: 3rem; margin-top: 2rem"/> <h1 style="font-size: 4rem; color:white"> <b>PLAY</b> </h1>
+                   </a>
+               </div>
             </div>
-             <div id="column1" class="col">
-                <div id="inside1" class="d-grid" style="margin-left: 2rem; margin-right: 3rem; margin-top: 5rem; border-radius: 3%;">
-                    <a class="btn" href=" {{ url_for('playPage') }}">
-                        <img src="{{ url_for('static', filename='images/button3.png') }}" width="70%" style="margin-right: 3rem; margin-top: 2rem"/> <h1 style="font-size: 4rem; color:white"> <b>PLAY</b> </h1>
-                    </a>
-                </div>
-             </div>
-            <div id="column2" class="col">
+
+            <div id="column2" class="col-md-5">
                 <div id="inside2" class="d-grid" style="margin-left: 2rem; margin-right: 3rem; margin-top: 5rem; border-radius: 3%;">
                     <a class="btn" href=" {{ url_for('groups') }}">
-                          <img src="{{ url_for('static', filename='images/groups.png') }}" width="85%" style="margin-top: 2rem"/> <h1 style="font-size: 4rem; color:white; margin-top: 3rem"> <b> GROUPS </b> </h1>
+                          <img src="{{ url_for('static', filename='images/groups.png') }}" width="85%" style="margin-top: 3rem"/> <h1 style="font-size: 4rem; color:white; margin-top: 5rem"> <b> GROUPS </b> </h1>
                     </a>
                 </div>
              </div>
