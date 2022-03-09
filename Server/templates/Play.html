@@ -206,94 +206,91 @@
           <!-- Contains game description and settings -->
           <div class="row">
 
-            <div class="accordion-item">
-              <!-- Popdown for fastest player -->
-              <div class="accordion-collapse collapse" id="fastestPlayer" data-bs-parent="#accordion">
-                <div class="card card-body">
-                  <h3>First player to press the buttons gets first turn! Afterwards, turns are given in order of quickest button press</h3>
-                  <br>
-                  <div class="input-group input-group-lg">
-                    <span class="input-group-text">Points per correct answer:</span>
-                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
+            <div class="col">
+              <div class="accordion-item">
+                <!-- Popdown for fastest player -->
+                <div class="accordion-collapse collapse" id="fastestPlayer" data-bs-parent="#accordion">
+                  <div class="card card-body">
+                    <h3>First player to press the buttons gets first turn! Afterwards, turns are given in order of quickest button press</h3>
+                    <br>
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-text">Points per correct answer:</span>
+                      <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
+                    </div>
+                    <br>
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-text">Deduction of points per incorrect answer:</span>
+                      <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
+                    </div>
+                    <br>
+                    <br>
+                    <button type="button" class="btn btn-success btn-block btn-lg">Start!</button>
                   </div>
-                  <br>
-                  <div class="input-group input-group-lg">
-                    <span class="input-group-text">Deduction of points per incorrect answer:</span>
-                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <!-- Popdown for random player -->
+                <div class="accordion-collapse collapse" id="randomPlayer" data-bs-parent="#accordion">
+                  <div class="card card-body">
+                    <h3>After set amount of time a random player is chosen to answer. Afterwards, turns keep on being given in random order.</h3>
+                    <br>
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-text">Points per correct answer:</span>
+                      <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
+                    </div>
+                    <br>
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-text">Deduction of points per incorrect answer:</span>
+                      <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
+                    </div>
+                    <br>
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-text">Time frame to press the button:</span>
+                      <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="10">
+                      <span class="input-group-text">seconds</span>
+                    </div>
+                    <br>
+                    <br>
+                    <button type="button" class="btn btn-success btn-block btn-lg">Start!</button>
                   </div>
-                  <br>
-                  <br>
-                  <button type="button" class="btn btn-success btn-block btn-lg">Start!</button>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <!-- Popdown for lifelines -->
+                <div class="accordion-collapse collapse" id="lifelines" data-bs-parent="#accordion">
+                  <div class="card card-body">
+                    <h3>Everyone starts with a set amount of lifes. Every unpressed round or wrong answer results in a deduction of points!
+                      0 lifes remaining means you are out of the game.</h3>
+                    <br>
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-text">Amount of lifes per player/team:</span>
+                      <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="10">
+                    </div>
+                    <br>
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-text">Deduction of lifes for an unpressed button:</span>
+                      <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
+                    </div>
+                    <br>
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-text">Deduction of lifes for an incorrect answer:</span>
+                      <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="3">
+                    </div>
+                    <br>
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-text">Time frame to press the button:</span>
+                      <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="10">
+                      <span class="input-group-text">seconds</span>
+                    </div>
+                    <br>
+                    <br>
+                    <button type="button" class="btn btn-success btn-block btn-lg">Start!</button>
+                  </div>
                 </div>
               </div>
             </div>
-
-
-
-            <div class="accordion-item">
-              <!-- Popdown for random player -->
-              <div class="accordion-collapse collapse" id="randomPlayer" data-bs-parent="#accordion">
-                <div class="card card-body">
-                  <h3>After set amount of time a random player is chosen to answer. Afterwards, turns keep on being given in random order.</h3>
-                  <br>
-                  <div class="input-group input-group-lg">
-                    <span class="input-group-text">Points per correct answer:</span>
-                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
-                  </div>
-                  <br>
-                  <div class="input-group input-group-lg">
-                    <span class="input-group-text">Deduction of points per incorrect answer:</span>
-                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
-                  </div>
-                  <br>
-                  <div class="input-group input-group-lg">
-                    <span class="input-group-text">Time frame to press the button:</span>
-                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="10">
-                    <span class="input-group-text">seconds</span>
-                  </div>
-                  <br>
-                  <br>
-                  <button type="button" class="btn btn-success btn-block btn-lg">Start!</button>
-                </div>
-              </div>
-            </div>
-
-
-
-            <div class="accordion-item">
-              <!-- Popdown for lifelines -->
-              <div class="accordion-collapse collapse" id="lifelines" data-bs-parent="#accordion">
-                <div class="card card-body">
-                  <h3>Everyone starts with a set amount of lifes. Every unpressed round or wrong answer results in a deduction of points!
-                    0 lifes remaining means you are out of the game.</h3>
-                  <br>
-                  <div class="input-group input-group-lg">
-                    <span class="input-group-text">Amount of lifes per player/team:</span>
-                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="10">
-                  </div>
-                  <br>
-                  <div class="input-group input-group-lg">
-                    <span class="input-group-text">Deduction of lifes for an unpressed button:</span>
-                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
-                  </div>
-                  <br>
-                  <div class="input-group input-group-lg">
-                    <span class="input-group-text">Deduction of lifes for an incorrect answer:</span>
-                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="3">
-                  </div>
-                  <br>
-                  <div class="input-group input-group-lg">
-                    <span class="input-group-text">Time frame to press the button:</span>
-                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="10">
-                    <span class="input-group-text">seconds</span>
-                  </div>
-                  <br>
-                  <br>
-                  <button type="button" class="btn btn-success btn-block btn-lg">Start!</button>
-                </div>
-              </div>
-            </div>
-
 
           </div>
 
