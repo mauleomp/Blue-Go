@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../static/Play.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="../static/Play.css">
   <title>Preparing the game...</title>
 </head>
 <body>
@@ -151,137 +153,159 @@
         </div>
     </div>
 
-    <!-- section containing gamemode selection and settings -->
-    <div class="container-fluid text-center" id="section2">
+    <div class="accordion" id="accordion">
+      <!-- section containing gamemode selection and settings -->
+      <div class="container-fluid text-center" id="section2">
 
-        <div class="row">
-          <div class="col">
-            <div class="card bigbutton">
-              <div class="card-body">
-                <h5 class="card-title">Fastest Player</h5>
-                <br>
-                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
-                  <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
-                  <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
-                </svg>
-                <a href="#" class="stretched-link" data-bs-toggle="collapse" data-bs-target="#fastestPlayer" aria-expanded="false" aria-controls="fastestPlayer"></a>
+          <div class="row ">
+            <div class="col">
+              <div class="card bigbutton">
+                <div class="card-body">
+                  <h5 class="card-title">Fastest Player</h5>
+                  <br>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
+                    <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
+                    <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
+                  </svg>
+                  <a href="#" class="stretched-link" data-bs-toggle="collapse" data-bs-target="#fastestPlayer"
+                     aria-expanded="false" aria-controls="fastestPlayer" ></a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card bigbutton">
+                <div class="card-body">
+                  <h5 class="card-title">Random Player</h5>
+                  <br>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-dice-5" viewBox="0 0 16 16">
+                    <path d="M13 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h10zM3 0a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3H3z"/>
+                    <path d="M5.5 4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm4-4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                  </svg>
+                  <a href="#" class="stretched-link" data-bs-toggle="collapse" data-bs-target="#randomPlayer"
+                     aria-expanded="false" aria-controls="randomPlayer" ></a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card bigbutton">
+                <div class="card-body">
+                  <h5 class="card-title">Lifelines</h5>
+                  <br>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-activity" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"/>
+                  </svg>
+                  <a href="#" class="stretched-link" data-bs-toggle="collapse" data-bs-target="#lifelines"
+                     aria-expanded="false" aria-controls="lifelines" ></a>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="card bigbutton">
-              <div class="card-body">
-                <h5 class="card-title">Random Player</h5>
-                <br>
-                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-dice-5" viewBox="0 0 16 16">
-                  <path d="M13 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h10zM3 0a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3H3z"/>
-                  <path d="M5.5 4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm4-4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                </svg>
-                <a href="#" class="stretched-link" data-bs-toggle="collapse" data-bs-target="#randomPlayer" aria-expanded="false" aria-controls="randomPlayer"></a>
+
+          <br>
+
+          <!-- Contains game description and settings -->
+          <div class="row">
+
+            <div class="accordion-item">
+              <!-- Popdown for fastest player -->
+              <div class="accordion-collapse collapse" id="fastestPlayer" data-bs-parent="#accordion">
+                <div class="card card-body">
+                  <h3>First player to press the buttons gets first turn! Afterwards, turns are given in order of quickest button press</h3>
+                  <br>
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-text">Points per correct answer:</span>
+                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
+                  </div>
+                  <br>
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-text">Deduction of points per incorrect answer:</span>
+                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
+                  </div>
+                  <br>
+                  <br>
+                  <button type="button" class="btn btn-success btn-block btn-lg">Start!</button>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col">
-            <div class="card bigbutton">
-              <div class="card-body">
-                <h5 class="card-title">Lifelines</h5>
-                <br>
-                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-activity" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"/>
-                </svg>
-                <a href="#" class="stretched-link" data-bs-toggle="collapse" data-bs-target="#lifelines" aria-expanded="false" aria-controls="lifelines"></a>
+
+
+
+            <div class="accordion-item">
+              <!-- Popdown for random player -->
+              <div class="accordion-collapse collapse" id="randomPlayer" data-bs-parent="#accordion">
+                <div class="card card-body">
+                  <h3>After set amount of time a random player is chosen to answer. Afterwards, turns keep on being given in random order.</h3>
+                  <br>
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-text">Points per correct answer:</span>
+                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
+                  </div>
+                  <br>
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-text">Deduction of points per incorrect answer:</span>
+                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
+                  </div>
+                  <br>
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-text">Time frame to press the button:</span>
+                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="10">
+                    <span class="input-group-text">seconds</span>
+                  </div>
+                  <br>
+                  <br>
+                  <button type="button" class="btn btn-success btn-block btn-lg">Start!</button>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        <br>
 
-        <!-- Contains game description and settings -->
-        <div class="row">
 
-          <!-- Popdown for fastest player -->
-          <div class="collapse" id="fastestPlayer">
-            <div class="card card-body">
-              <h3>First player to press the buttons gets first turn! Afterwards, turns are given in order of quickest button press</h3>
-              <br>
-              <div class="input-group input-group-lg">
-                <span class="input-group-text">Points per correct answer:</span>
-                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
+            <div class="accordion-item">
+              <!-- Popdown for lifelines -->
+              <div class="accordion-collapse collapse" id="lifelines" data-bs-parent="#accordion">
+                <div class="card card-body">
+                  <h3>Everyone starts with a set amount of lifes. Every unpressed round or wrong answer results in a deduction of points!
+                    0 lifes remaining means you are out of the game.</h3>
+                  <br>
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-text">Amount of lifes per player/team:</span>
+                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="10">
+                  </div>
+                  <br>
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-text">Deduction of lifes for an unpressed button:</span>
+                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
+                  </div>
+                  <br>
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-text">Deduction of lifes for an incorrect answer:</span>
+                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="3">
+                  </div>
+                  <br>
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-text">Time frame to press the button:</span>
+                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="10">
+                    <span class="input-group-text">seconds</span>
+                  </div>
+                  <br>
+                  <br>
+                  <button type="button" class="btn btn-success btn-block btn-lg">Start!</button>
+                </div>
               </div>
-              <br>
-              <div class="input-group input-group-lg">
-                <span class="input-group-text">Deduction of points per incorrect answer:</span>
-                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
-              </div>
-              <br>
-              <br>
-              <button type="button" class="btn btn-success btn-block btn-lg">Start!</button>
             </div>
+
+
           </div>
 
-          <!-- Popdown for rando player -->
-          <div class="collapse" id="randomPlayer">
-            <div class="card card-body">
-              <h3>After set amount of time a random player is chosen to answer. Afterwards, turns keep on being given in random order.</h3>
-              <br>
-              <div class="input-group input-group-lg">
-                <span class="input-group-text">Points per correct answer:</span>
-                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
-              </div>
-              <br>
-              <div class="input-group input-group-lg">
-                <span class="input-group-text">Deduction of points per incorrect answer:</span>
-                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
-              </div>
-              <br>
-              <div class="input-group input-group-lg">
-                <span class="input-group-text">Time frame to press the button:</span>
-                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="10">
-                <span class="input-group-text">seconds</span>
-              </div>
-              <br>
-              <br>
-              <button type="button" class="btn btn-success btn-block btn-lg">Start!</button>
-            </div>
-          </div>
 
-          <!-- Popdown for lifelines -->
-          <div class="collapse" id="lifelines">
-            <div class="card card-body">
-              <h3>Everyone starts with a set amount of lifes. Every unpressed round or wrong answer results in a deduction of points!
-                0 lifes remaining means you are out of the game.</h3>
-              <br>
-              <div class="input-group input-group-lg">
-                <span class="input-group-text">Amount of lifes per player/team:</span>
-                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="10">
-              </div>
-              <br>
-              <div class="input-group input-group-lg">
-                <span class="input-group-text">Deduction of lifes for an unpressed button:</span>
-                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="1">
-              </div>
-              <br>
-              <div class="input-group input-group-lg">
-                <span class="input-group-text">Deduction of lifes for an incorrect answer:</span>
-                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="3">
-              </div>
-              <br>
-              <div class="input-group input-group-lg">
-                <span class="input-group-text">Time frame to press the button:</span>
-                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="10">
-                <span class="input-group-text">seconds</span>
-              </div>
-              <br>
-              <br>
-              <button type="button" class="btn btn-success btn-block btn-lg">Start!</button>
-            </div>
-          </div>
-        </div>
+      </div>
 
     </div>
+
 
 <script src="../static/play.js"></script>
 
 </body>
+
+
 </html>
