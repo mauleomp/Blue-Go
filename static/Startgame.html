@@ -39,35 +39,38 @@
     </nav>
 
     <!-- section containing group selection -->
-    <div class="container-fluid" id="section1">
+    <div class="container-fluid text-center" id="section1">
+
+      <br>
+      <h3>Select a group:</h1>
 
       <div id="carouselCards" class="carousel slide carousel-multi-item" data-bs-touch="false" data-bs-interval="false">
         <div class="carousel-inner">
 
-          <div class="carousel-indicators carouselIndic">
+          <div class="carousel-indicators" style="bottom:-20px;">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
           </div>
 
-          <div class="carousel-item active text-center">
+          <div class="carousel-item active text-center" style="top: 0px">
 
                 <div class="row row-cols-3" style="width: 70%; margin: auto;">
                   <div class="col">
-                    <div class="card">
+                    <div id="group1" class="card">
                       <div class="card-body">
                         <h5 class="card-title">Group 1</h5>
                         <p class="card-text">***Group description...***</p>
-                        <a href="#" class="btn btn-primary stretched-link">Select</a>
+                        <a onclick="selectgroup('group1');" class="btn btn-primary stretched-link">Select</a>
                       </div>
                     </div>
                   </div>
                   <div class="col">
-                    <div class="card">
+                    <div id="group2" class="card">
                       <div class="card-body">
                         <h5 class="card-title">Group 2</h5>
                         <p class="card-text">***Group description...***</p>
-                        <a href="#" class="btn btn-primary stretched-link">Select</a>
+                        <a onclick="selectgroup('group2');" class="btn btn-primary stretched-link">Select</a>
                       </div>
                     </div>
                   </div>
@@ -135,6 +138,17 @@
                   </div>
                 </div>
               </div>
+              <div class="col">
+                <div class="card border-secondary addgroup">
+                  <div class="card-body d-flex flex-column align-items-center">
+                    <br>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-plus-square-dotted" viewBox="0 0 16 16">
+                      <path d="M2.5 0c-.166 0-.33.016-.487.048l.194.98A1.51 1.51 0 0 1 2.5 1h.458V0H2.5zm2.292 0h-.917v1h.917V0zm1.833 0h-.917v1h.917V0zm1.833 0h-.916v1h.916V0zm1.834 0h-.917v1h.917V0zm1.833 0h-.917v1h.917V0zM13.5 0h-.458v1h.458c.1 0 .199.01.293.029l.194-.981A2.51 2.51 0 0 0 13.5 0zm2.079 1.11a2.511 2.511 0 0 0-.69-.689l-.556.831c.164.11.305.251.415.415l.83-.556zM1.11.421a2.511 2.511 0 0 0-.689.69l.831.556c.11-.164.251-.305.415-.415L1.11.422zM16 2.5c0-.166-.016-.33-.048-.487l-.98.194c.018.094.028.192.028.293v.458h1V2.5zM.048 2.013A2.51 2.51 0 0 0 0 2.5v.458h1V2.5c0-.1.01-.199.029-.293l-.981-.194zM0 3.875v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zM0 5.708v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zM0 7.542v.916h1v-.916H0zm15 .916h1v-.916h-1v.916zM0 9.375v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zm-16 .916v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zm-16 .917v.458c0 .166.016.33.048.487l.98-.194A1.51 1.51 0 0 1 1 13.5v-.458H0zm16 .458v-.458h-1v.458c0 .1-.01.199-.029.293l.981.194c.032-.158.048-.32.048-.487zM.421 14.89c.183.272.417.506.69.689l.556-.831a1.51 1.51 0 0 1-.415-.415l-.83.556zm14.469.689c.272-.183.506-.417.689-.69l-.831-.556c-.11.164-.251.305-.415.415l.556.83zm-12.877.373c.158.032.32.048.487.048h.458v-1H2.5c-.1 0-.199-.01-.293-.029l-.194.981zM13.5 16c.166 0 .33-.016.487-.048l-.194-.98A1.51 1.51 0 0 1 13.5 15h-.458v1h.458zm-9.625 0h.917v-1h-.917v1zm1.833 0h.917v-1h-.917v1zm1.834-1v1h.916v-1h-.916zm1.833 1h.917v-1h-.917v1zm1.833 0h.917v-1h-.917v1zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                    </svg>
+                    <a href="#" class="link-secondary stretched-link">Add a group</a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -152,11 +166,15 @@
     </div>
 
     <!-- section containing gamemode selection and settings -->
-    <div class="container-fluid text-center" id="section2">
+    <div class="container text-center" id="section2">
+
+        <br>
+        <h3>Select a gamemode:</h3>
+        <br>
 
         <div class="row">
           <div class="col">
-            <div class="card bigbutton">
+            <div id="gamemodeFastestPlayer" class="card bigbutton">
               <div class="card-body">
                 <h5 class="card-title">Fastest Player</h5>
                 <br>
@@ -164,12 +182,12 @@
                   <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
                   <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
                 </svg>
-                <a href="#" class="stretched-link" data-bs-toggle="collapse" data-bs-target="#fastestPlayer" aria-expanded="false" aria-controls="fastestPlayer"></a>
+                <a onclick="selectGamemode('gamemodeFastestPlayer')" class="stretched-link" data-bs-toggle="collapse" data-bs-target="#fastestPlayer" aria-expanded="false" aria-controls="fastestPlayer"></a>
               </div>
             </div>
           </div>
           <div class="col">
-            <div class="card bigbutton">
+            <div id="gamemodeRandomPlayer" class="card bigbutton">
               <div class="card-body">
                 <h5 class="card-title">Random Player</h5>
                 <br>
@@ -177,19 +195,19 @@
                   <path d="M13 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h10zM3 0a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3H3z"/>
                   <path d="M5.5 4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm4-4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
                 </svg>
-                <a href="#" class="stretched-link" data-bs-toggle="collapse" data-bs-target="#randomPlayer" aria-expanded="false" aria-controls="randomPlayer"></a>
+                <a onclick="selectGamemode('gamemodeRandomPlayer')" class="stretched-link" data-bs-toggle="collapse" data-bs-target="#randomPlayer" aria-expanded="false" aria-controls="randomPlayer"></a>
               </div>
             </div>
           </div>
           <div class="col">
-            <div class="card bigbutton">
+            <div id="gamemodeLifelines" class="card bigbutton">
               <div class="card-body">
                 <h5 class="card-title">Lifelines</h5>
                 <br>
                 <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-activity" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"/>
                 </svg>
-                <a href="#" class="stretched-link" data-bs-toggle="collapse" data-bs-target="#lifelines" aria-expanded="false" aria-controls="lifelines"></a>
+                <a onclick="selectGamemode('gamemodeLifelines')" class="stretched-link" data-bs-toggle="collapse" data-bs-target="#lifelines" aria-expanded="false" aria-controls="lifelines"></a>
               </div>
             </div>
           </div>
@@ -216,7 +234,7 @@
               </div>
               <br>
               <br>
-              <button type="button" class="btn btn-success btn-block btn-lg">Start!</button>
+              <button type="button" class="btn btn-warning btn-block btn-lg">Start!</button>
             </div>
           </div>
 
@@ -242,7 +260,7 @@
               </div>
               <br>
               <br>
-              <button type="button" class="btn btn-success btn-block btn-lg">Start!</button>
+              <button type="button" class="btn btn-warning btn-block btn-lg">Start!</button>
             </div>
           </div>
 
@@ -274,11 +292,41 @@
               </div>
               <br>
               <br>
-              <button type="button" class="btn btn-success btn-block btn-lg">Start!</button>
+              <button type="button" class="btn btn-warning btn-block btn-lg">Start!</button>
             </div>
           </div>
         </div>
 
     </div>
+
+    <div class="container-fluid" id="section3">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="card border-secondary">
+              <div class="card-body text-secondary">
+                Select a group
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card border-secondary">
+              <div class="card-body text-secondary">
+                Select a gamemode
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card border-secondary">
+              <div class="card-body text-secondary">
+                Select a group
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="Startgame.js"></script>
 </body>
 </html>
