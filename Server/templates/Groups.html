@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -57,16 +58,6 @@
         </div>
     </nav>
 
-    <!-- Maybe add a breadcrum. A Collapse button so that groups and favourites can be hidden.
-    <nav aria-label="breadcrumb" style="margin-top: 4rem; background-color: white;">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="TeacherSide.html">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Groups</li>
-      </ol>
-    </nav>
-    -->
-
-
     <div style="margin-top: 4rem; margin-left: 1rem;">
         <div class="row justify-content-end" style="margin-right: 2rem;">
             <!-- Button Add Group trigger modal -->
@@ -83,45 +74,46 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <!-- Group name, Add to favourites (checkbox), Background picture (upload), Upload students (cvs) (upload) -->
-                            <div class="mb-3">
-                                <label for="formGroupExampleInput" class="form-label" style="color:darkgrey; font-size: x-small;"> GROUP NAME </label>
-                                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example group name">
-                            </div>
+                            <form id="myForm" name="myForm">
+                                <div class="mb-3">
+                                    <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> GROUP NAME </label>
+                                    <input id="group_name" name="group_name" type="text" class="form-control" placeholder="Example group name">
+                                </div>
 
-                            <div class="form-check">
-                                <label class="form-check-label" style="color:darkgrey; font-size: x-small; margin-bottom: 1rem;" for="flexRadioDefault1">
-                                  ADD TO FAVOURITES
-                                </label>
-                                <input class="form-check-input" type="checkbox" id="flexRadioDefault1">
-                            </div>
+                                <div class="form-check">
+                                    <label class="form-check-label" style="color:darkgrey; font-size: x-small; margin-bottom: 1rem;" for="flexRadioDefault1">
+                                      ADD TO FAVOURITES
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" id="flexRadioDefault1">
+                                </div>
 
-                            <div class="mb-3">
-                                <label class="form-label" style="color:darkgrey; font-size: x-small;"> BACKGROUND PICTURE</label>
-                                <div class="input-group custom-file-button">
-                                    <label class="input-group-text" for="inputGroupFile1">
+                                <div class="mb-3">
+                                    <label class="form-label" style="color:darkgrey; font-size: x-small;"> BACKGROUND PICTURE</label>
+                                    <div class="input-group custom-file-button">
+                                        <label class="input-group-text" for="inputGroupFile1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                            </svg>
+                                        </label>
+                                        <input type="file" class="form-control" id="inputGroupFile1">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                  <label class="form-label" style="color:darkgrey; font-size: x-small;"> UPLOAD A CSC FILE WITH A LIST OF STUDENTS</label>
+                                  <div class="input-group custom-file-button">
+                                    <label class="input-group-text" for="inputGroupFile2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                                         </svg>
                                     </label>
-                                    <input type="file" class="form-control" id="inputGroupFile1">
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                              <label class="form-label" style="color:darkgrey; font-size: x-small;"> UPLOAD A CSC FILE WITH A LIST OF STUDENTS</label>
-                              <div class="input-group custom-file-button">
-                                <label class="input-group-text" for="inputGroupFile2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                    </svg>
-                                </label>
-                                <input type="file" class="form-control" id="inputGroupFile2">
+                                    <input type="file" class="form-control" id="inputGroupFile2">
+                                  </div>
                               </div>
-                          </div>
+                            </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <a id="submit_form" onclick="submitForm()" type="button" class="btn btn-primary" href=" {{ url_for('groups') }}">Save changes</a>
                         </div>
                     </div>
                 </div>
@@ -141,10 +133,10 @@
     <div class="container-fluid" style="margin-top: 1rem; margin-bottom: 4rem;">
         <div id="row1" class="row" style="margin-left: 2rem; margin-right: 2rem;">
             <h1 class="display-6" style="font-size: large;"> Favourites</h1>
-            <div class="row row-cols-1 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-xs-1 g-4" style="margin-top: -1rem;">
+            <div id="favourites" class="row row-cols-1 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-xs-1 g-4" style="margin-top: -1rem;">
                 <div class="col">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1629654858857-615c2c8be8a8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1194&q=80" class="card-img" alt="...">
+                        <img src="https://images.unsplash.com/photo-1642698166111-1e736132b0ee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" class="card-img" alt="...">
                         <div class="card-img-overlay text-end" style="margin-top: -1rem; margin-right: -1rem;">
                             <button class="btn btn-link" style="color:black" data-bs-toggle="dropdown">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
@@ -171,10 +163,10 @@
 
         <div id="row2" class="row" style="margin-left: 2rem; margin-right: 2rem; margin-top: 2rem;">
             <h1 class="display-6" style="font-size: large;margin-top: 2rem;"> All groups</h1>
-            <div class="row row-cols-1 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-xs-1 g-4" style="margin-top: -1rem;">
+            <div id="groups" class="row row-cols-1 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-xs-1 g-4" style="margin-top: -1rem;">
                 <div class="col">
                     <div class="card position-relative" id="class">
-                      <img src="https://images.unsplash.com/photo-1629654858857-615c2c8be8a8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1194&q=80" class="card-img" alt="...">
+                      <img src="https://images.unsplash.com/photo-1627637819848-7074cb1565e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" class="card-img" alt="...">
                       <div class="card-img-overlay text-end" style="margin-top: -1rem; margin-right: -1rem;">
                           <button class="btn btn-link" style="color:black" data-bs-toggle="dropdown">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
@@ -239,7 +231,7 @@
               </div>
               <div class="col">
                 <div class="card">
-                  <img src="https://images.unsplash.com/photo-1618489517022-5c31fa91d017?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="card-img-top" alt="...">
+                  <img src="https://images.unsplash.com/photo-1627637819848-7074cb1565e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" class="card-img-top" alt="...">
                     <div class="card-img-overlay text-end" style="margin-top: -1rem; margin-right: -1rem;">
                         <button class="btn btn-link" style="color:black" data-bs-toggle="dropdown">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
@@ -260,7 +252,7 @@
               </div>
               <div class="col">
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1618556450994-a6a128ef0d9d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80" class="card-img-top" alt="...">
+                    <img src="https://images.unsplash.com/photo-1642698166111-1e736132b0ee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" class="card-img-top" alt="...">
                     <div class="card-img-overlay text-end" style="margin-top: -1rem; margin-right: -1rem;">
                         <button class="btn btn-link" style="color:black" data-bs-toggle="dropdown">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
@@ -281,7 +273,7 @@
               </div>
               <div class="col">
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1627637819848-7074cb1565e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" class="card-img-top" alt="...">
+                    <img src="https://images.unsplash.com/photo-1639815189096-f75717eaecfe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" class="card-img-top" alt="...">
                     <div class="card-img-overlay text-end" style="margin-top: -1rem; margin-right: -1rem;">
                         <button class="btn btn-link" style="color:black" data-bs-toggle="dropdown">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
@@ -307,8 +299,8 @@
 
     </div>
 
+    <script src="{{ url_for('static', filename='Groups.js') }}"></script>
 
 </body>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>
