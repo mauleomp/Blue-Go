@@ -69,7 +69,7 @@ def playPage(usr=None):
 def teacher(usr=None):
     return render_template('TeacherSide.html')
 
-
 @app.route('/groups/class')
 def classroom(usr=None):
     return render_template('class.html')
+
