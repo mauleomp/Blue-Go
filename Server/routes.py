@@ -1,6 +1,6 @@
 from Server import app
 from flask import render_template, request, url_for, redirect
-from Server.script import valid_login, matchPass, register
+from Server.script import valid_login, matchPass, registerNewUser, errorMessage
 
 
 # new changes
@@ -16,8 +16,6 @@ def login():
         # modify valid login within the db
         if valid_login(request.form['email'], request.form['pass']):
             usr = request.form['email']
-            # session['user'] = usr
-            print(usr)
             return redirect(url_for('teacher'))
         else:
             error = 'Invalid username / password '
@@ -26,14 +24,13 @@ def login():
 
 @app.route('/signUp', methods=['POST', 'GET'])
 def signUp():
-    error = None
     if request.method == 'POST':
         if matchPass(request.form['pass'], request.form['pass2']):
-            register(request.form['email'], request.form['username'],
-                     request.form['pass'])
+            registerNewUser(request.form['email'], request.form['username'],
+                            request.form['pass'])
             return redirect(url_for('teacher'))
         else:
-            error = 'Passwords do not match'
+            return errorMessage("Passwords do not match.")
     elif request.method == 'GET':
         print('sign')
     return render_template('SignUp.html')
