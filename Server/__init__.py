@@ -1,8 +1,30 @@
 from flask import Flask
 
+import os
+
+
+def run_app(test_config=None):
+    app = Flask(__name__, instance_relative_config=True)
+    app.config.from_mapping(SECRET_KEY="AFr_256897/@")
+    #TODO: add your database
+
+    if test_config is None:
+        app.config.from_pyfile('config.py', silent=True)
+    else:
+        app.config.from_mapping(test_config)
+
+    try:
+        os.makedirs(app.instance_path)
+    except OSError:
+        pass
+
+    # TODO: import and call the database and blueprint
+
+    app.register_blueprint(bp)
+
+    return app
+
+
 app = Flask(__name__)
 app.secret_key = "AFr_256897/@"
-
 app.debug = True
-
-from Server import routes

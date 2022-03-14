@@ -1,6 +1,12 @@
+#once the database is done, the init will rference this doc, anf the app routes will chnage to the blueprint reference
 from Server import app
-from flask import render_template, request, url_for, redirect
 from Server.script import valid_login, matchPass, register
+
+import functools
+from flask import (Blueprint, flash, g, redirect, render_template, request, session, url_for)
+from werkzeug.security import check_password_hash, generate_password_hash
+#TODO import database
+bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
 # new changes
@@ -28,12 +34,10 @@ def login():
 def signUp():
     error = None
     if request.method == 'POST':
-        if matchPass(request.form['pass'], request.form['pass2']):
-            register(request.form['email'], request.form['username'],
-                     request.form['pass'])
-            return redirect(url_for('teacher'))
-        else:
-            error = 'Passwords do not match'
+        register(request.form['email'], request.form['username'],
+        request.form['pass'])
+        return redirect(url_for('teacher'))
+
     elif request.method == 'GET':
         print('sign')
     return render_template('SignUp.html')
