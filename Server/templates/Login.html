@@ -27,7 +27,7 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
                     <br>
-                    <a id="signup" type="button" class="btn btn-link text-left" href="{{ url_for('signUp') }}"> <h3 style="color: darkslategray;"> Sign up </h3> </a> <a type="button" class="btn btn-link text-left" href="{{ url_for('login') }}> <h3 style="color: darkslategray;"> Log in </h3> </a>
+                    <a id="login" type="button" class="btn btn-link text-left" href="{{ url_for('login') }}"> <h3 style="color: darkslategray;"> Login </h3> </a>
                     <br>
                     <br>
                     <div class="g-signin2" data-onsuccess="onSignIn"> </div>
@@ -55,6 +55,8 @@
                     <input type="submit" class="btn btn-outline-primary btn-lg btn-block" style="font-weight: lighter;" value="Login"/>
                     <br>
                     </form>
+                    <a type="button" class="btn border btn-light border-secondary btn-lg btn-block" style="font-weight: lighter;" href="{{ url_for('signUp') }}"> New to the platform? Sign up</a>
+                    <br>
                     <p> Forgot password? <a href="url">Reset your password</a></p>
                 </div>
             </div>
