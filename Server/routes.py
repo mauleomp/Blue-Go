@@ -1,4 +1,5 @@
 from Server import app
+from db_handler import connect
 from flask import render_template, request, url_for, redirect
 from Server.script import valid_login, matchPass, registerNewUser, errorMessage
 
@@ -6,6 +7,9 @@ from Server.script import valid_login, matchPass, registerNewUser, errorMessage
 # new changes
 @app.route('/')
 def homePage():  # put application's code here
+    print("########")
+    connect()
+    print("########")
     return render_template('MainPage.html')
 
 
