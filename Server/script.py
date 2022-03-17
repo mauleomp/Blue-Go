@@ -1,4 +1,5 @@
 import json
+from db_handler import connect
 
 # Only for testing purposes, we have these fields
 # Later on we will store any information on a DataBase
@@ -11,6 +12,12 @@ t_emails = []
 t_passwords = []
 
 session_open = False
+
+
+def connectDB():
+    print("########")
+    connect()
+    print("########")
 
 
 # Create and store credentials from the Sign up page
