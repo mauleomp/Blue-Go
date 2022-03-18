@@ -73,3 +73,8 @@ def classroom(usr=None):
 @app.route('/game')
 def game(usr=None):
     return render_template('StartGame.html')
+
+@app.route('/profile')
+def profile(usr=None):
+    return render_template('Settings.html')
+
