@@ -36,6 +36,10 @@ def connect():
             conn.close()
             print('Database connection closed.')
 
+
+def newStudent(s_name, s_lastname, s_number, points):
+    connect(f'PREPARE newStudent(text, text, text, text) AS INSERT INTO students VALUES($1, $2, $3, $4); EXECUTE newStudent({s_name}, {s_lastname}, {s_number}, {points}')
+
 def newTeacher(t_name, t_lastname, t_email, t_password):
     connect(f'PREPARE newTeacher(text, text, text, text) AS INSERT INTO teachers VALUES($1, $2, $3, $4); EXECUTE newTeacher({t_name}, {t_lastname}, {t_email}, {t_password});')
 
@@ -47,3 +51,4 @@ def newTeam(team_name, t_students, t_ranking, last_score):
 
 def newScore(date, score):
     connect(f'PREPARE newScore(text, integer) AS INSERT INTO scores AS($1, $2); EXECUTE newScore({date}, {score});')
+
