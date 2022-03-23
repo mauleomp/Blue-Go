@@ -35,3 +35,15 @@ def connect():
         if conn is not None:
             conn.close()
             print('Database connection closed.')
+
+def newTeacher(t_name, t_lastname, t_email, t_password):
+    connect(f'PREPARE newTeacher(text, text, text, text) AS INSERT INTO teachers VALUES($1, $2, $3, $4); EXECUTE newTeacher({t_name}, {t_lastname}, {t_email}, {t_password});')
+
+def newCourse(c_code, c_name, s_set, ranking):
+    connect(f'PREPARE newCourse(text, text, text, integer) AS INSERT INTO courses AS($1, $2, $3, $4); EXECUTE newCourse({c_code}, {c_name}, {s_set}, {ranking});')
+
+def newTeam(team_name, t_students, t_ranking, last_score):
+    connect(f'PREPARE newTeam(text, text, integer, integer) AS INSERT INTO teams AS($1, $2, $3, $4); EXECUTE newTeam({team_name}, {t_students}, {t_ranking}, {last_score});')
+
+def newScore(date, score):
+    connect(f'PREPARE newScore(text, integer) AS INSERT INTO scores AS($1, $2); EXECUTE newScore({date}, {score});')
