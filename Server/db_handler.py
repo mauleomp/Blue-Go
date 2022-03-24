@@ -39,27 +39,26 @@ def connect():
 
 
 def newStudent(s_name, s_lastname, s_number, points):
-    connect(
-        f'PREPARE newStudent(text, text, text, text) AS INSERT INTO students VALUES($1, $2, $3, $4); EXECUTE newStudent({s_name}, {s_lastname}, {s_number}, {points}')
+    connect('PREPARE newStudent(text, text, text, text) AS INSERT INTO students VALUES($1, $2, $3, $4); EXECUTE newStudent('+s_name+', '+s_lastname+', '+s_number+', '+points +');')
 
 
 def newTeacher(t_name, t_lastname, t_email, t_password):
     connect(
-        f'PREPARE newTeacher(text, text, text, text) AS INSERT INTO teachers VALUES($1, $2, $3, $4); EXECUTE newTeacher({t_name}, {t_lastname}, {t_email}, {t_password});')
+        f'PREPARE newTeacher(text, text, text, text) AS INSERT INTO teachers VALUES($1, $2, $3, $4); EXECUTE newTeacher('+t_name+', '+t_lastname+', '+t_email+', '+t_password +');')
 
 
 def newCourse(c_code, c_name, s_set, ranking):
     connect(
-        f'PREPARE newCourse(text, text, text, integer) AS INSERT INTO courses AS($1, $2, $3, $4); EXECUTE newCourse({c_code}, {c_name}, {s_set}, {ranking});')
+        f'PREPARE newCourse(text, text, text, integer) AS INSERT INTO courses AS($1, $2, $3, $4); EXECUTE newCourse('+c_code+', '+c_name+', '+s_set+', '+ranking +');')
 
 
 def newTeam(team_name, t_students, t_ranking, last_score):
     connect(
-        f'PREPARE newTeam(text, text, integer, integer) AS INSERT INTO teams AS($1, $2, $3, $4); EXECUTE newTeam({team_name}, {t_students}, {t_ranking}, {last_score});')
+        f'PREPARE newTeam(text, text, integer, integer) AS INSERT INTO teams AS($1, $2, $3, $4); EXECUTE newTeam('+team_name+', '+t_students+', '+t_ranking+', '+last_score +');')
 
 
 def newScore(date, score):
-    connect(f'PREPARE newScore(text, integer) AS INSERT INTO scores AS($1, $2); EXECUTE newScore({date}, {score});')
+    connect(f'PREPARE newScore(text, integer) AS INSERT INTO scores AS($1, $2); EXECUTE newScore('+date+', '+score+');')
 
 
 def deleteStudent(sid):
@@ -145,5 +144,41 @@ def updateScores(date, score, teamid, scid, change):
         connect('UPDATE scores SET date = ' + date + ', score = ' + score + ' WHERE team_id = ' + teamid + ' AND score_id = ' + scid + ';')
 
 
+def fetchStudents():
+    connect('SELECT * FROM students;')
 
 
+def fetchTeachers():
+    connect('SELECT * FROM teachers;')
+
+
+def fetchCourses():
+    connect('SELECT * FROM courses;')
+
+
+def fetchTeams():
+    connect('SELECT * FROM teams;')
+
+
+def fetchScores():
+    connect('SELECT * FROM scores;')
+
+
+def fetchStudent(sid):
+    connect('SELECT * FROM students WHERE st_id = ' + sid + ';')
+
+
+def fetchTeachers(tid):
+    connect('SELECT * FROM teachers WHERE t_id = ' + tid + ';')
+
+
+def fetchCourse(cid):
+    connect('SELECT * FROM courses WHERE c_id = ' + cid + ';')
+
+
+def fetchTeam(teamid):
+    connect('SELECT * FROM teams WHERE team_id = ' + teamid + ';')
+
+
+def fetchScore(scid):
+    connect('SELECT * FROM scores WHERE score_id = ' + scid + ';')
