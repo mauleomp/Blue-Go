@@ -122,6 +122,7 @@ def updateCourses(ccode, cname, sset, ranking, cid, tid, change):
         connect('UPDATE courses SET course_code = ' + ccode + ', course_name = ' + cname + ', students_set = '
                 + sset + ', ranking = ' + ranking + ' WHERE t_id = ' + tid + ' AND c_id = ' + cid + ';')
 
+
 def updateTeams(tm_name, tstudents, ranking, lscore, cid, teamid, change):
     if change == 1:
         connect('UPDATE teams SET team_name = ' + tm_name + ' WHERE team_id = ' + teamid + ' AND c_id = ' + cid + ';')
@@ -134,6 +135,7 @@ def updateTeams(tm_name, tstudents, ranking, lscore, cid, teamid, change):
     else:
         connect('UPDATE teams SET team_name = ' + tm_name + ', t_students = ' + tstudents + ', ranking = '
                 + ranking + ', last_score = ' + lscore + ' WHERE t_id = ' + tid + ' AND c_id = ' + cid + ';')
+
 
 def updateScores(date, score, teamid, scid, change):
     if change == 1:
