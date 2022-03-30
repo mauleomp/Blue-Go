@@ -56,7 +56,6 @@ def logTeacher():
 def groups(usr=None):
     return render_template('Groups.html')
 
-
 @app.route('/play')
 def playPage(usr=None):
     return render_template('Play.html')
@@ -78,3 +77,6 @@ def game(usr=None):
 def profile(usr=None):
     return render_template('Settings.html')
 
+@app.route('/buy')
+def buy(usr=None):
+    return render_template('Buy.html')
