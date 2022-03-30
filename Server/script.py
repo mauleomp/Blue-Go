@@ -1,40 +1,7 @@
 import json
-# from Server.db_handler import connect
+from Server.db_handler import connect
 
-# Only for testing purposes, we have these fields
-# Later on we will store any information on a DataBase
 
-# teacher Table
-t_names = ["Bryan"]
-t_lastnames = ["Sanchez"]
-t_usernames = ["b"]
-t_emails = ["admin@admin.com"]
-t_passwords = ["password"]
-
-# Student Table
-s_names = []
-s_lastname = []
-s_number = []
-s_points = []
-
-# Courses Table
-c_course_code = []
-c_course_name = []
-c_students_set = []
-c_ranking = []
-c_teacher = []
-
-# Teams Table
-t_team_name = []
-t_students = []
-t_ranking = []
-t_last_score = []
-t_course_name = []
-
-# Scores Table
-s_team_name = []
-s_date = []
-s_score = []
 
 
 session_open = False

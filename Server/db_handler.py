@@ -1,6 +1,41 @@
-import psycopg2
-import os
-from Server.db_config import config
+# import psycopg2
+# import os
+# from Server.db_config import config
+
+# Only for testing purposes, we have these fields
+# Later on we will store any information on a DataBase
+
+# teacher Table
+t_names = ["Bryan"]
+t_lastnames = ["Sanchez"]
+t_usernames = ["b"]
+t_emails = ["admin@admin.com"]
+t_passwords = ["password"]
+
+# Student Table
+s_names = ["Mauricio", "Mark", "Jacob", "Maria"]
+s_lastname = ["Merchan", "Otto", "Thornton", "Perez"]
+s_number = ["s2147856", "s2356546", "s2356545", "s2356541"]
+s_points = ["5", "10", "4", "7"]
+
+# Courses Table
+c_course_code = ["c123456"]
+c_course_name = ["Academic Skills"]
+c_students_set = ["[{\"s_name\": Mauricio}, {\"s_name\": Mark}, {\"s_name\": Jacob}, {\"s_name\": Maria}]"]
+c_ranking = ["1"]
+c_teacher = ["Bryan"]
+
+# Teams Table
+t_team_name = ["Team1", "Team2"]
+t_students = ["[{\"s_name\": Mauricio}, {\"s_name\": Mark}]", "[{\"s_name\": Jacob}, {\"s_name\": Maria}]"]
+t_ranking = ["1", "2"]
+t_last_score = ["15", "11"]   # should be renamed to total_score
+t_course_name = ["Academic Skills", "Academic Skills"]
+
+# Scores Table
+s_team_name = ["Team1", "Team2", "Team1", "Team2"]
+s_date = ["25/03/2022", "25/03/2022", "19/03/2022", "19/03/2022"]
+s_score = ["7", "5", "8", "6"]
 
 
 # conn = psycopg2.connect("dbname=BlueApp user=pi password=BlueAndGo")
@@ -12,14 +47,14 @@ def connect():
     conn = None
     try:
         # read connection parameters
-        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        print(BASE_DIR)
-        params = config(filename=BASE_DIR + '/Server/database.ini', section='postgresql')
+        #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        #print(BASE_DIR)
+        #params = config(filename=BASE_DIR + '/Server/database.ini', section='postgresql')
         # params = config()
 
         # connect to the PostgreSQL server
         print('Connecting to the PostgreSQL database...')
-        conn = psycopg2.connect(**params)
+        #conn = psycopg2.connect(**params)
 
         # create a cursor
         cur = conn.cursor()
@@ -34,7 +69,7 @@ def connect():
 
         # close the communication with the PostgreSQL
         cur.close()
-    except (Exception, psycopg2.DatabaseError) as error:
+    except (Exception) as error: #, psycopg2.DatabaseError) as error:
         print(error)
     finally:
         if conn is not None:
@@ -127,7 +162,7 @@ def updateCourses(ccode, cname, sset, ranking, cid, tid, change):
                 + sset + ', ranking = ' + ranking + ' WHERE t_id = ' + tid + ' AND c_id = ' + cid + ';')
 
 
-def updateTeams(tm_name, tstudents, ranking, lscore, cid, teamid, change):
+def updateTeams(tm_name, tstudents, ranking, lscore, cid, teamid, change, tid):
     if change == 1:
         connect('UPDATE teams SET team_name = ' + tm_name + ' WHERE team_id = ' + teamid + ' AND c_id = ' + cid + ';')
     elif change == 2:
@@ -141,7 +176,7 @@ def updateTeams(tm_name, tstudents, ranking, lscore, cid, teamid, change):
                 + ranking + ', last_score = ' + lscore + ' WHERE t_id = ' + tid + ' AND c_id = ' + cid + ';')
 
 
-def updateScores(date, score, teamid, scid, change):
+def updateScores(date, score, teamid, scid, cid, change):
     if change == 1:
         connect('UPDATE scores SET date = ' + date + ' WHERE team_id = ' + teamid + ' AND score_id = ' + scid + ';')
     elif change == 2:
