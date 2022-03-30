@@ -23,12 +23,11 @@
 
             <div id="column2" class="col" style="background-color: white;">
                 <div style="margin: 2rem;">
-                    <button id="close" type="button" class="btn text-right close" aria-label="Close">
+                    <a id="close" type="button" class="btn text-right close" aria-label="Close" href="{{ url_for('homePage') }}">
                       <span aria-hidden="true">&times;</span>
-                    </button>
+                    </a>
                     <br>
-                    <a id="signup" type="button" class="btn btn-link text-left" href="{{ url_for('signUp') }}"> <h3 style="color: darkslategray;"> Sign up </h3> </a>
-                    <a type="button" class="btn btn-link text-left" href="{{ url_for('login') }}"> <h3 style="color: darkslategray;"> Log in </h3> </a>
+                    <a id="login" type="button" class="btn btn-link text-left" href="{{ url_for('login') }}"> <h3 style="color: darkslategray;"> Login </h3> </a>
                     <br>
                     <br>
                     <div class="g-signin2" data-onsuccess="onSignIn"> </div>
@@ -56,12 +55,43 @@
                     <input type="submit" class="btn btn-outline-primary btn-lg btn-block" style="font-weight: lighter;" value="Login"/>
                     <br>
                     </form>
+                    <a type="button" class="btn border btn-light border-secondary btn-lg btn-block" style="font-weight: lighter;" href="{{ url_for('signUp') }}"> New to the platform? Sign up</a>
+                    <br>
                     <p> Forgot password? <a href="url">Reset your password</a></p>
                 </div>
             </div>
         </div>
-
     </div>
+
+        <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #B7BAED; height: 3rem;">
+
+                </div>
+                <div class="modal-body text-center">
+                    <h4 class="modal-title" id="exampleModalLabel"> Please Verify Your Email Address </h4>
+                    <br>
+                    We noticed your email address has not been verified. Please, confirm this is your account by following the instructions sent to your email account. <br> <br>
+                    <b> If you have any further questions, please contact us. </b>
+                    <br> <br>
+                    <p style="color:slategrey"> All the best, <br> The Blue&GO! Team  </p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a type="button" class="btn rounded-pill" style="background-color: #B7BAED"> Resend Email</a>
+                    <a type="button" class="btn rounded-pill" style="background-color: #B7BAED" href="{{ url_for('login') }}"> Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
         <script src="{{ url_for('static', filename='Login.js') }}"></script>
     </body>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
