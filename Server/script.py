@@ -1,5 +1,5 @@
 import json
-from db_handler import connect
+from Server.db_handler import connect
 
 # Only for testing purposes, we have these fields
 # Later on we will store any information on a DataBase
