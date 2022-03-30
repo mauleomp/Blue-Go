@@ -7,3 +7,6 @@ $(document).on('click', '.delete', function (event) {
     event.preventDefault();
     $(this).closest('tr').remove();
 });
+
+
+const element = document.getElementById("id01");
