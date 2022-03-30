@@ -14,7 +14,7 @@ def connect():
         # read connection parameters
         BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         print(BASE_DIR)
-        params = config(filename=BASE_DIR + '\Server\database.ini', section='postgresql')
+        params = config(filename=BASE_DIR + '/Server/database.ini', section='postgresql')
         # params = config()
 
         # connect to the PostgreSQL server
