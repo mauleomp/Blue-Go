@@ -1,0 +1,48 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #81ecec;
+}
+
+h3 {
+  padding: 25px;
+}
+
+.leaderboard {
+  position: center;
+}
+
+.progress {
+  height: 5vh;
+}
+
+.progress-bar {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg,#ffd33d,#ea4aaa 17%,#b34bff 34%,#01feff 51%,#ffd33d 68%,#ea4aaa 85%,#b34bff);
+  background-size: 300% 100%;
+  -webkit-animation: progress-animation 3s linear;
+  padding-left: 10px;
+  text-align: left;
+  font-size: 3vh;
+}
+
+@-webkit-keyframes progress-animation {
+  from {width: 0%;}
+}
+
+dl {
+  display: grid;
+  grid-template-columns: 20% auto;
+  align-items: start;
+}
+
+dt {
+  grid-column: 1;
+}
+
+dd {
+  grid-column: 2;
+}
