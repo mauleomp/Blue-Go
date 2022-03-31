@@ -55,7 +55,7 @@
         <div class="row flex-grow-1" style="margin-right:1rem;">
             <div class="col col-9">
                 <div class="row justify-content-end" style="margin-left: 2rem; margin-right: 1px; margin-top:4rem;">
-                    <button id="insertRow" class="btn btn-primary" style="font-size: small; width: fit-content; height: fit-content" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button id="insertRow" class="btn btn-info" style="font-size: small; width: fit-content; height: fit-content" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                           <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                         </svg>
@@ -66,7 +66,7 @@
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog  modal-dialog-centered">
                     <div class="modal-content">
-                        <div class="modal-header" style="background-color:#0d6efd;">
+                        <div class="modal-header" style="background-color:#5bc0de;">
                             <h5 class="modal-title" id="exampleModalLabel"> Add a student to the group</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -91,7 +91,7 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <a id="submit_form" type="button" class="btn btn-primary" href="{{ url_for('classroom') }}">Save changes</a>
+                            <a id="submit_form" type="button" class="btn btn-info" href="{{ url_for('classroom') }}">Save changes</a>
                         </div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                          data-pagination="true"
                          data-show-export="true"
                          data-export-data-type="all">
-                        <thead style="background-color: #0d6efd ;">
+                        <thead style="background-color: #5bc0de ;">
                             <tr>
                               <th scope="col">Student ID</th>
                               <th scope="col">First name</th>
@@ -450,7 +450,7 @@
         </div>
 
         <div class="col-3 text-center opacity-50 shadow-lg" style="background-color: darkgrey; margin-top: 7rem; margin-bottom: 2rem;">
-            <div style="background-color:#0d6efd; margin-top: 0px; margin-right: -12px;margin-left: -12px; height: 70px;">
+            <div style="background-color:#5bc0de; margin-top: 0px; margin-right: -12px;margin-left: -12px; height: 70px;">
                 <p style="color:black; font-size: x-large; font-family: 'Rubik', sans-serif;"> Leaderboard</p>
             </div>
             <div id="tabla" style="background-color:white; margin-top: 0px; margin-right: -12px;margin-left: -12px; height:90%;">
@@ -464,19 +464,19 @@
                       <div class="card card-body" style="border: none;">
                         <table class="table table-responsive table-border border-white" style="margin-top: 20px;">
                           <tbody>
-                            <tr class="border-5" style="background-color:#0d6efd;">
+                            <tr class="border-5" style="background-color:#5bc0de;">
                               <td>Mark Otto</td>
                               <td></td>
                               <td></td>
                               <td> 200 </td>
                             </tr>
-                            <tr class="border-5" style="background-color:#0d6efd;">
+                            <tr class="border-5" style="background-color:#5bc0de;">
                               <td>Maria Perez</td>
                               <td></td>
                               <td></td>
                               <td> 100 </td>
                             </tr>
-                            <tr class="border-5" style="background-color:#0d6efd;">
+                            <tr class="border-5" style="background-color:#5bc0de;">
                               <td> Andrei Diaz</td>
                               <td></td>
                               <td></td>
@@ -491,19 +491,19 @@
                       <div class="card card-body" style="border: none;">
                         <table class="table table-responsive table-border border-white" style="margin-top: 20px;">
                           <tbody>
-                            <tr class="border-5" style="background-color:#0d6efd;">
+                            <tr class="border-5" style="background-color:#5bc0de;">
                               <td> Blue House</td>
                               <td></td>
                               <td></td>
                               <td> 10000 </td>
                             </tr>
-                            <tr class="border-5" style="background-color:#0d6efd;">
+                            <tr class="border-5" style="background-color:#5bc0de;">
                               <td>Red House</td>
                               <td></td>
                               <td></td>
                               <td>5100 </td>
                             </tr>
-                            <tr class="border-5" style="background-color:#0d6efd;">
+                            <tr class="border-5" style="background-color:#5bc0de;">
                               <td> Green House</td>
                               <td></td>
                               <td></td>
