@@ -80,3 +80,12 @@ def profile(usr=None):
 @app.route('/buy')
 def buy(usr=None):
     return render_template('Buy.html')
+
+@app.route('/buzzers')
+def buzzers(usr=None):
+    return render_template('checkbuzzers.html')
+
+
+@app.route('/leaderboard')
+def leaderboard(usr=None):
+    return render_template('leaderboard.html')
