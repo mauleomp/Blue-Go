@@ -27,17 +27,8 @@
         </nav>
 
         <div id="header_carousel" class="container-fluid p-5" style="margin-top: 50px;">
-            <!--
-            <div class="card bg-dark text-white">
-              <img src="https://cdn.pixabay.com/photo/2020/01/22/09/39/teacher-4784916_960_720.jpg" class="card-img" alt="First slid" style="max-height: 25em; max-width: fit-content">
-              <div class="card-img-overlay">
-                <h5 class="card-title"> Interactive Teaching. </h5>
-                <p class="card-text"> Blue&GO! brings interaction to the lessons with a button click, allowing students to learn while having fun.</p>
-              </div>
-            </div>
-            -->
 
-            <div class="carousel slide" data-ride="carousel" style="max-height: 35em;">
+            <div class="carousel slide shadow-lg" data-ride="carousel" style="max-height: 35em;">
               <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img class="d-block w-100" src="https://images.unsplash.com/photo-1557425493-6f90ae4659fc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="First slide">
@@ -77,7 +68,7 @@
                            </div>
                        </div>
                         <div class="card">
-                            <img src="{{ url_for('static', filename='images/button32.png') }}" class="card-img-top" alt="Turn buzzer on">
+                            <img src="{{ url_for('static', filename='images/button32.png') }}" class="card-img-top" alt="Turn buzzer on" style="height: 250px;">
                             <br>
                             <div class="card-body">
                                 <h5 class="card-title" style=" font-family: Georgia, serif; font-weight: bold;padding-top: 7px"> Syncronize our buzzers </h5>
@@ -112,6 +103,10 @@
                 <br>
                 <br>
             </div>
+
+            <p class="text-center" style="color:darkblue;"> <b>________________________________ </b>  </p>
+            <br>
+            <br>
 
             <div id="section2" class="text-center">
                 <p style="font-size: 2em"> Game Modes </p>

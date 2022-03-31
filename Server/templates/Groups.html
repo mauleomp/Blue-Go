@@ -25,7 +25,7 @@
                 <a class="nav-link" href=" {{ url_for('playPage') }}" style="color: white"> Play </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href=" {{ url_for('groups') }}" style="color: white"> Courses </a>
+                <a class="nav-link" href=" {{ url_for('groups') }}" style="color: #5bc0de"> Courses </a>
             </li>
         </ul>
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
@@ -50,7 +50,7 @@
         </div>
     </nav>
 
-    <div style="margin-top: 4rem; margin-left: 1rem;">
+    <div style="margin-top: 5rem; margin-left: 1rem;">
         <div class="row justify-content-end" style="margin-right: 2rem;">
             <!-- Button Add Group trigger modal -->
             <button type="button" class="btn btn-primary btn-lg" style="font-size: small; width: fit-content; height: fit-content" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -64,8 +64,7 @@
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog  modal-dialog-centered">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"> Create a new course</h5>
+                        <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
                             <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
                                 <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
                                 <lord-icon
@@ -77,6 +76,8 @@
                             </button>
                         </div>
                         <div class="modal-body">
+                            <h4 class="modal-title text-center" id="exampleModalLabel"> Create a new course</h4>
+                            <br>
                             <form id="myForm" name="myForm">
                                 <div class="mb-3">
                                     <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> COURSE NAME </label>
@@ -115,8 +116,8 @@
                               </div>
                             </form>
                         </div>
-                        <div class="modal-footer">
-                            <a id="submit_form" onclick="submitForm()" type="button" class="btn btn-info" href=" {{ url_for('groups') }}">Save changes</a>
+                        <div class="modal-footer justify-content-center">
+                            <a id="submit_form" onclick="submitForm()" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href=" {{ url_for('groups') }}">Save changes</a>
                         </div>
                     </div>
                 </div>
@@ -133,7 +134,7 @@
         </div>
     </div>
 
-    <div class="container-fluid" style="margin-top: 1rem; margin-bottom: 4rem;">
+    <div class="container-fluid" style="margin-bottom: 4rem;">
         <div id="row1" class="row" style="margin-left: 2rem; margin-right: 2rem;">
             <h1 class="display-6" style="font-size: large;"> Favourites</h1>
             <div id="favourites" class="row row-cols-1 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-xs-1 g-4" style="margin-top: -1rem;">
