@@ -13,8 +13,8 @@
         <nav class="navbar fixed-top navbar-expand-sm p-2" style="background-color: white; border-bottom: 1px solid lightgrey;">
             <!-- Add the reference to the page -->
             <a class="navbar-brand" href="/">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" height="20" alt="Blue&GO! Logo" loading="lazy"/>
-                <small onmouseover="hover()">Blue&GO!</small>
+                <img src="{{ url_for('static', filename='images/logo.png') }}" height="25" alt="Blue&GO! Logo" loading="lazy"/>
+                <img src="{{ url_for('static', filename='images/letters_logo.png') }}" height="15" onmouseover="hover()" alt="Blue&GO"/>
             </a>
             <ul class="navbar-nav ml-auto">
                 <a  type="button" class="btn btn-link" href="{{ url_for('login') }}" >
