@@ -89,3 +89,7 @@ def buzzers(usr=None):
 @app.route('/leaderboard')
 def leaderboard(usr=None):
     return render_template('leaderboard.html')
+
+@app.route('/help')
+def help(usr=None):
+    return render_template('Help&Contact.html')
