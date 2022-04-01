@@ -15,7 +15,7 @@
       <div class="card-body">
         <h3 class="card-title text-center">Ranking</h3>
 
-        <dl type="text">
+        <dl id="ranking" type="text">
           <dt class="text-center">Fatima</dt>
           <dd><div class="progress"><span class="progress-bar" style="width: 75%;">+10</span></div></dd>
           <dt class="text-center">Judith</dt>
@@ -31,8 +31,14 @@
     </div>
   </div>
 
-  <div id="countdown" class="container text-center">
-    <span id="countdownnumber" style="font-size: 20vh;">10</span>
+  <div id="countdown" class="container text-center" hidden>
+    <span id="countdownnumber" style="font-size: 20vh;"></span>
+  </div>
+
+  <div id="name" class="container text-center" hidden>
+        <span id="nameinput" style="font-size: 20vh;"></span>
+        <br>
+        <span id="namefooter" style="font-size: 5vh;"></span>
   </div>
 
   <script src="{{ url_for('static', filename='leaderboard.js') }}"></script>
