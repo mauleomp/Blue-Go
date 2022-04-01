@@ -38,6 +38,91 @@ s_date = ["25/03/2022", "25/03/2022", "19/03/2022", "19/03/2022"]
 s_score = ["7", "5", "8", "6"]
 
 
+def signup(email, username, password):
+    t_usernames.append(username)
+    t_emails.append(email)
+    t_passwords.append(password)
+
+    print("User [" + username + "] was successfully registered.")
+
+    return True
+
+
+def checkLoginWithUser(username, password):
+    try:
+        index = t_usernames.index(username)
+        print("User [" + username + "] was logged in correctly.")
+        return t_passwords[index] == password
+    except ValueError:
+        print("User [" + username + "] was not logged in. Credentials are incorrect.")
+        return False
+
+
+def checkLoginWithEmail(email, password):
+    try:
+        index = t_emails.index(email)
+        print("User [" + email + "] was logged in correctly.")
+        return t_passwords[index] == password
+    except ValueError:
+        print("User [" + email + "] was not logged in. Credentials are incorrect.")
+        return False
+    
+
+def getCoursesNames():
+    temp = []
+
+    index = 0
+    while index < len(c_course_name):
+        item = [c_course_name[index], c_course_code[index]]
+        temp.append(item)
+        index += 1
+
+    return temp
+
+
+def getStudentsFromCourseCode(course_code):
+
+    """
+    try:
+        index = c_course_code.index(course_code)
+
+        result = []
+
+        i = 0
+        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        while i < len(s_names):
+            it = 0
+            if it >= 2:
+                it = 1
+            item = [s_number[i], s_names[i], s_lastname[i], t_team_name[it]]
+            result.append(item)
+            i += 1
+        print("^^^^^^^^^^^^^^^^^^^^^^^^")
+        return result
+    except ValueError:
+        return ["-1"]
+
+    """
+
+    return [["s2147856", "Mauricio", "Merchan", "Team1"],
+            ["s2356546", "Mark", "Otto", "Team1"],
+            ["s2356545", "Jacob", "Thornton", "Team2"],
+            ["s2356541", "Maria", "Perez", "Team2"]]
+
+
+def getStudentRanking(course_code):
+
+    return [["Mark", "Otto", "10"],
+            ["Maria", "Perez", "7"],
+            ["Mauricio", "Merchan", "5"]]
+
+
+def getTeamRanking(course_code):
+
+    return [["Team1", "15"],
+            ["Team2", "11"]]
+
+
 # conn = psycopg2.connect("dbname=BlueApp user=pi password=BlueAndGo")
 
 

@@ -91,7 +91,7 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <a id="submit_form" type="button" class="btn btn-primary" href="{{ url_for('classroom') }}">Save changes</a>
+                            <a id="submit_form" type="button" class="btn btn-primary" href="{{ url_for('classroom', course_code='12456') }}">Save changes</a>
                         </div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                               <th scope="col">Actions</th>
                             </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="tableBody">
                             <tr>
                               <th scope="row">s2356546</th>
                               <td>Mark</td>
@@ -403,7 +403,7 @@
             <div class="collapse" id="collapse_overall">
               <div class="card card-body" style="border: none; background-color: darkgrey">
                 <table class="table table-hover table-borderless" style="margin-top: 20px;">
-                  <tbody>
+                  <tbody id="studentRankingTableBody">
                     <tr>
                       <th scope="row">1</th>
                       <td>Mark <br> Otto</td>
@@ -430,7 +430,7 @@
             <div class="collapse" id="collapse_groups">
               <div class="card card-body" style="border: none; background-color: darkgrey">
                 <table class="table table-hover table-borderless" style="margin-top: 20px;">
-                  <tbody>
+                  <tbody id="courseRankingTableBody">
                     <tr>
                       <th scope="row">1</th>
                       <td>Blue House</td>
@@ -458,7 +458,7 @@
     </div>
 </div>
 
-<script src="../static/class.js"></script>
+<script src="{{ url_for('static', filename='class.js') }}"></script>
 
 
 </body>
