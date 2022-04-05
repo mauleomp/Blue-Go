@@ -7,24 +7,33 @@ body {
 }
 
 #section1 {
-  height: 300px;
+  height: 38vh;
   background-color: rgba(255, 255, 255, 0);
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
 }
 
 #carouselCards {
   width: 100%;
-  height: 70%;
+    height: 90%;
 }
 
 .card {
-  height: 150px;
-  max-width: 400px;
+  height: 100%;
   background-color: rgba(255, 255, 255, 0.9);
 }
 
+.card-img-top {
+    width: 100%;
+    height:15vh;
+    object-fit: cover;
+}
+
 .select {
-  height: 150px;
-  max-width: 400px
+  height: 100%;
 }
 
 .carousel-inner {
@@ -39,7 +48,7 @@ body {
 }
 
 .bigbutton {
-  height: 270px;
+  /*height: 30vh;*/
   background-color: rgba(255, 255, 255, 0.9);
 }
 
