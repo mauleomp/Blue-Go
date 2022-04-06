@@ -12,36 +12,37 @@
 </head>
 <body>
 
-    <nav class="navbar fixed-top navbar-expand-sm p-2" style="background-color: white; border-bottom: 1px solid lightgrey;">
+    <nav class="navbar fixed-top navbar-expand-sm p-2" style="background-color: #01253F ; border-bottom: 1px solid lightgrey;">
         <!-- Add the reference to the page -->
-        <a id="icon" class="navbar-brand" href="#">
-            <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height="20" alt="Blue&GO! Logo" loading="lazy"/>
-            <small onmouseover="hover()">Blue&GO!</small>
+        <a class="navbar-brand" href="#">
+            <img src="{{ url_for('static', filename='images/white_logo.png') }}" height="25" alt="Blue&GO! Logo" loading="lazy"/>
+            <img src="{{ url_for('static', filename='images/white_letter_logo.png') }}" height="15" onmouseover="hover()" alt="Blue&GO"/>
         </a>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href=" {{ url_for('teacher') }}"> Home </a>
+                <a class="nav-link active" aria-current="page" href=" {{ url_for('teacher') }}" style="color: white"> Home </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href=" {{ url_for('playPage') }}"> Play </a>
+                <a class="nav-link" href=" {{ url_for('playPage') }}" style="color: white"> Play </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href=" {{ url_for('groups') }}"> Courses </a>
+                <a class="nav-link" href=" {{ url_for('groups') }}" style="color: #5bc0de"> Courses </a>
             </li>
         </ul>
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                    <button class="btn btn-link" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-person-circle" viewBox="0 0 16 16">
                           <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                           <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
                         </svg>
                   </button>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Help and feedback</a></li>
+                    <li><a class="dropdown-item" href=" {{ url_for('profile') }}">Profile</a></li>
+                    <li><a class="dropdown-item" href=" {{ url_for('profile') }}">Settings</a></li>
+                    <li><a class="dropdown-item" href=" {{ url_for('help') }}">Contact</a></li>
+                    <li><a class="dropdown-item" href=" {{ url_for('help') }}">Help</a></li>
                     <div class="dropdown-divider"></div>
                     <li><a class="dropdown-item" href="#">Log out</a></li>
                   </ul>
@@ -54,23 +55,24 @@
     <div class="container-fluid min-vh-100 d-flex flex-column">
         <div class="row flex-grow-1" style="margin-right:1rem;">
             <div class="col col-9">
-                <div class="row justify-content-end" style="margin-left: 2rem; margin-right: 1px; margin-top:4rem;">
-                    <button id="insertRow" class="btn btn-primary" style="font-size: small; width: fit-content; height: fit-content" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                <div class="row-fluid" style="margin-top:1rem;">
+                    <br>
+                    <button id="insertRow" class="btn" style="color:white; margin-left:560px; margin-bottom:-79px; font-size: small; width: fit-content; height: 38px;background-color:slategrey" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                           <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                        </svg>
-                        NEW STUDENT
+                        </svg> NEW STUDENT
                     </button>
 
                     <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog  modal-dialog-centered">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"> Add a student to the group</h5>
+                        <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
+                            <h4 class="modal-title text-center" id="exampleModalLabel"> Add a student to the group</h4>
+                            <br>
                             <form id="myForm" name="myForm">
                                 <div class="mb-3">
                                     <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> STUDENT ID </label>
@@ -86,12 +88,12 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> TEAMS </label>
-                                    <input name="group_name" type="text" class="form-control" placeholder="Blue House; Team 1;">
+                                    <input name="group_name" type="text" class="form-control" placeholder="Team 1">
                                 </div>
                             </form>
                         </div>
-                        <div class="modal-footer">
-                            <a id="submit_form" type="button" class="btn btn-primary" href="{{ url_for('classroom', course_code='12456') }}">Save changes</a>
+                        <div class="modal-footer justify-content-center">
+                            <a id="submit_form" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href="{{ url_for('classroom') }}">Save changes</a>
                         </div>
                     </div>
                 </div>
@@ -99,14 +101,14 @@
 
                 </div>
                 <div style="margin_right:2rem;">
-                    <table id="table" class="table table-responsive table-striped table-hover"
+                    <table id="table" class="table table-responsive table-hover"
                          data-search="true"
                          data-toggle="table"
-                         data-height="600"
+                         data-height="690"
                          data-pagination="true"
                          data-show-export="true"
                          data-export-data-type="all">
-                        <thead class="table-dark">
+                        <thead style="background-color: #5bc0de ;">
                             <tr>
                               <th scope="col">Student ID</th>
                               <th scope="col">First name</th>
@@ -115,26 +117,116 @@
                               <th scope="col">Actions</th>
                             </tr>
                       </thead>
-                      <tbody id="tableBody">
+                      <tbody>
                             <tr>
                               <th scope="row">s2356546</th>
                               <td>Mark</td>
                               <td>Otto</td>
                               <td>
-                                  <button class="btn btn-primary rounded-pill"> Blue House </button> <button class="btn btn-light rounded-pill"> Team 1 </button>
+                                  <button class="btn btn-light rounded-pill"> Team 1 </button>
                               </td>
                               <td>
-                                  <button type="button" class="btn btn-success">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                  <button type="button" class="btn border">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#edit">
                                       <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                       <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
                                   </button>
-                                  <button type="button" class="btn btn-danger delete">
+
+                                  <!-- Modal edit entry-->
+                                  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog  modal-dialog-centered">
+                                          <div class="modal-content">
+                                              <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                 <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <h4 class="modal-title text-center" id="exampleModalLabel"> Edit entry </h4>
+                                                  <br>
+                                                  <form id="myForm" name="myForm">
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> STUDENT ID: </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                            <input name="group_name" type="text" class="form-control" placeholder="s2356546" value="s2356546">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                            <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> FIRST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="First name" value="Mark">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> LAST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Last name" value="Otto">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> TEAMS </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Blue House; Team 1;" value="Blue House; Team 1;">
+                                                          </div>
+                                                      </div>
+                                                  </form>
+                                              </div>
+                                              <div class="modal-footer justify-content-center">
+                                                  <a id="submit_form" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href="{{ url_for('classroom') }}">Update</a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <button type="button" class="btn border" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                         <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
                                       </svg>
                                   </button>
+
+                                  <!-- Modal delete -->
+                                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog  modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="text-center" id="exampleModalLabel"> Are you sure you want to delete this entry? </p>
+                                            </div>
+                                            <div class="modal-footer justify-content-center">
+                                                <a id="submit_form" type="button" class="btn rounded-pill delete" style="background-color: #5bc0de" href=" {{ url_for('classroom') }}"> Delete </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                               </td>
                             </tr>
                             <tr>
@@ -142,323 +234,1270 @@
                               <td>Jacob</td>
                               <td>Thornton</td>
                               <td>
-                                  <button class="btn btn-success rounded-pill"> Green House </button>
+                                  <button class="btn btn-light rounded-pill"> Team 1 </button>
                               </td>
                               <td>
-                                  <button type="button" class="btn btn-success">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                  <button type="button" class="btn border">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#edit">
                                       <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                       <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
                                   </button>
-                                  <button type="button" class="btn btn-danger delete">
+
+                                  <!-- Modal edit entry-->
+                                  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog  modal-dialog-centered">
+                                          <div class="modal-content">
+                                              <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                 <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <h4 class="modal-title text-center" id="exampleModalLabel"> Edit entry </h4>
+                                                  <br>
+                                                  <form id="myForm" name="myForm">
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> STUDENT ID: </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                            <input name="group_name" type="text" class="form-control" placeholder="s2356546" value="s2356546">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                            <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> FIRST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="First name" value="Mark">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> LAST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Last name" value="Otto">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> TEAMS </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Blue House; Team 1;" value="Blue House; Team 1;">
+                                                          </div>
+                                                      </div>
+                                                  </form>
+                                              </div>
+                                              <div class="modal-footer justify-content-center">
+                                                  <a id="submit_form" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href="{{ url_for('classroom') }}">Update</a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <button type="button" class="btn border" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                         <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
                                       </svg>
                                   </button>
+
+                                  <!-- Modal delete -->
+                                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog  modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="text-center" id="exampleModalLabel"> Are you sure you want to delete this entry? </p>
+                                            </div>
+                                            <div class="modal-footer justify-content-center">
+                                                <a id="submit_form" type="button" class="btn rounded-pill delete" style="background-color: #5bc0de" href=" {{ url_for('classroom') }}"> Delete </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                               </td>
                             </tr>
                             <tr>
                               <th scope="row">s2356541</th>
                               <td>Maria</td>
                               <td>Perez</td>
-                              <td> </td>
+                              <td> <button class="btn btn-light rounded-pill"> Team 1 </button> </td>
                               <td>
-                                <button type="button" class="btn btn-success">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <button type="button" class="btn border">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#edit">
                                       <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                       <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
                                   </button>
-                                  <button type="button" class="btn btn-danger delete">
+
+                                  <!-- Modal edit entry-->
+                                  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog  modal-dialog-centered">
+                                          <div class="modal-content">
+                                              <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                 <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <h4 class="modal-title text-center" id="exampleModalLabel"> Edit entry </h4>
+                                                  <br>
+                                                  <form id="myForm" name="myForm">
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> STUDENT ID: </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                            <input name="group_name" type="text" class="form-control" placeholder="s2356546" value="s2356546">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                            <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> FIRST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="First name" value="Mark">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> LAST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Last name" value="Otto">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> TEAMS </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Blue House; Team 1;" value="Blue House; Team 1;">
+                                                          </div>
+                                                      </div>
+                                                  </form>
+                                              </div>
+                                              <div class="modal-footer justify-content-center">
+                                                  <a id="submit_form" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href="{{ url_for('classroom') }}">Update</a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <button type="button" class="btn border" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                         <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
                                       </svg>
                                   </button>
+
+                                  <!-- Modal delete -->
+                                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog  modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="text-center" id="exampleModalLabel"> Are you sure you want to delete this entry? </p>
+                                            </div>
+                                            <div class="modal-footer justify-content-center">
+                                                <a id="submit_form" type="button" class="btn rounded-pill delete" style="background-color: #5bc0de" href=" {{ url_for('classroom') }}"> Delete </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                               </td>
                             </tr>
                             <tr>
                               <th scope="row">s2336546</th>
                               <td>Jasper</td>
                               <td>Mollah</td>
-                              <td> </td>
+                              <td> <button class="btn btn-light rounded-pill"> Team 1 </button> </td>
                               <td>
-                                <button type="button" class="btn btn-success">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <button type="button" class="btn border">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#edit">
                                       <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                       <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
                                   </button>
-                                  <button type="button" class="btn btn-danger delete">
+
+                                  <!-- Modal edit entry-->
+                                  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog  modal-dialog-centered">
+                                          <div class="modal-content">
+                                              <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                 <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <h4 class="modal-title text-center" id="exampleModalLabel"> Edit entry </h4>
+                                                  <br>
+                                                  <form id="myForm" name="myForm">
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> STUDENT ID: </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                            <input name="group_name" type="text" class="form-control" placeholder="s2356546" value="s2356546">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                            <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> FIRST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="First name" value="Mark">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> LAST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Last name" value="Otto">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> TEAMS </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Blue House; Team 1;" value="Blue House; Team 1;">
+                                                          </div>
+                                                      </div>
+                                                  </form>
+                                              </div>
+                                              <div class="modal-footer justify-content-center">
+                                                  <a id="submit_form" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href="{{ url_for('classroom') }}">Update</a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <button type="button" class="btn border" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                         <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
                                       </svg>
                                   </button>
+
+                                  <!-- Modal delete -->
+                                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog  modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="text-center" id="exampleModalLabel"> Are you sure you want to delete this entry? </p>
+                                            </div>
+                                            <div class="modal-footer justify-content-center">
+                                                <a id="submit_form" type="button" class="btn rounded-pill delete" style="background-color: #5bc0de" href=" {{ url_for('classroom') }}"> Delete </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                               </td>
                             </tr>
                             <tr>
                               <th scope="row">s2956546</th>
                               <td>Andrei</td>
                               <td>Badea</td>
-                              <td> </td>
+                              <td> <button class="btn btn-light rounded-pill"> Team 2 </button></td>
                               <td>
-                              <button type="button" class="btn btn-success">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                             <button type="button" class="btn border">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#edit">
                                       <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                       <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
                                   </button>
-                                  <button type="button" class="btn btn-danger delete">
+
+                                  <!-- Modal edit entry-->
+                                  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog  modal-dialog-centered">
+                                          <div class="modal-content">
+                                              <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                 <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <h4 class="modal-title text-center" id="exampleModalLabel"> Edit entry </h4>
+                                                  <br>
+                                                  <form id="myForm" name="myForm">
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> STUDENT ID: </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                            <input name="group_name" type="text" class="form-control" placeholder="s2356546" value="s2356546">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                            <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> FIRST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="First name" value="Mark">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> LAST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Last name" value="Otto">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> TEAMS </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Blue House; Team 1;" value="Blue House; Team 1;">
+                                                          </div>
+                                                      </div>
+                                                  </form>
+                                              </div>
+                                              <div class="modal-footer justify-content-center">
+                                                  <a id="submit_form" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href="{{ url_for('classroom') }}">Update</a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <button type="button" class="btn border" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                         <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
                                       </svg>
                                   </button>
+
+                                  <!-- Modal delete -->
+                                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog  modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="text-center" id="exampleModalLabel"> Are you sure you want to delete this entry? </p>
+                                            </div>
+                                            <div class="modal-footer justify-content-center">
+                                                <a id="submit_form" type="button" class="btn rounded-pill delete" style="background-color: #5bc0de" href=" {{ url_for('classroom') }}"> Delete </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                               </td>
                             </tr>
                             <tr>
                               <th scope="row">s2256546</th>
                               <td>Humaid</td>
                               <td>Gonzalez</td>
-                              <td> </td>
+                              <td> <button class="btn btn-light rounded-pill"> Team 2 </button> </td>
                               <td>
-                              <button type="button" class="btn btn-success">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                              <button type="button" class="btn border">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#edit">
                                       <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                       <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
                                   </button>
-                                  <button type="button" class="btn btn-danger delete">
+
+                                  <!-- Modal edit entry-->
+                                  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog  modal-dialog-centered">
+                                          <div class="modal-content">
+                                              <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                 <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <h4 class="modal-title text-center" id="exampleModalLabel"> Edit entry </h4>
+                                                  <br>
+                                                  <form id="myForm" name="myForm">
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> STUDENT ID: </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                            <input name="group_name" type="text" class="form-control" placeholder="s2356546" value="s2356546">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                            <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> FIRST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="First name" value="Mark">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> LAST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Last name" value="Otto">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> TEAMS </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Blue House; Team 1;" value="Blue House; Team 1;">
+                                                          </div>
+                                                      </div>
+                                                  </form>
+                                              </div>
+                                              <div class="modal-footer justify-content-center">
+                                                  <a id="submit_form" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href="{{ url_for('classroom') }}">Update</a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <button type="button" class="btn border" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                         <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
                                       </svg>
                                   </button>
+
+                                  <!-- Modal delete -->
+                                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog  modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="text-center" id="exampleModalLabel"> Are you sure you want to delete this entry? </p>
+                                            </div>
+                                            <div class="modal-footer justify-content-center">
+                                                <a id="submit_form" type="button" class="btn rounded-pill delete" style="background-color: #5bc0de" href=" {{ url_for('classroom') }}"> Delete </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                               </td>
                             </tr>
                             <tr>
                               <th scope="row">s2156546</th>
                               <td>Judith</td>
                               <td>Bravo</td>
-                              <td> </td>
+                              <td> <button class="btn btn-light rounded-pill"> Team 2 </button> </td>
                               <td>
-                              <button type="button" class="btn btn-success">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                              <button type="button" class="btn border">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#edit">
                                       <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                       <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
                                   </button>
-                                  <button type="button" class="btn btn-danger delete">
+
+                                  <!-- Modal edit entry-->
+                                  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog  modal-dialog-centered">
+                                          <div class="modal-content">
+                                              <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                 <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <h4 class="modal-title text-center" id="exampleModalLabel"> Edit entry </h4>
+                                                  <br>
+                                                  <form id="myForm" name="myForm">
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> STUDENT ID: </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                            <input name="group_name" type="text" class="form-control" placeholder="s2356546" value="s2356546">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                            <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> FIRST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="First name" value="Mark">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> LAST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Last name" value="Otto">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> TEAMS </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Blue House; Team 1;" value="Blue House; Team 1;">
+                                                          </div>
+                                                      </div>
+                                                  </form>
+                                              </div>
+                                              <div class="modal-footer justify-content-center">
+                                                  <a id="submit_form" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href="{{ url_for('classroom') }}">Update</a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <button type="button" class="btn border" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                         <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
                                       </svg>
                                   </button>
+
+                                  <!-- Modal delete -->
+                                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog  modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="text-center" id="exampleModalLabel"> Are you sure you want to delete this entry? </p>
+                                            </div>
+                                            <div class="modal-footer justify-content-center">
+                                                <a id="submit_form" type="button" class="btn rounded-pill delete" style="background-color: #5bc0de" href=" {{ url_for('classroom') }}"> Delete </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                               </td>
                             </tr>
                             <tr>
                               <th scope="row">s2566546</th>
                               <td>Mauro</td>
                               <td>Lopez</td>
-                              <td> </td>
+                              <td> <button class="btn btn-light rounded-pill"> Team 3 </button> </td>
                               <td>
-                              <button type="button" class="btn btn-success">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                              <button type="button" class="btn border">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#edit">
                                       <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                       <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
                                   </button>
-                                  <button type="button" class="btn btn-danger delete">
+
+                                  <!-- Modal edit entry-->
+                                  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog  modal-dialog-centered">
+                                          <div class="modal-content">
+                                              <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                 <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <h4 class="modal-title text-center" id="exampleModalLabel"> Edit entry </h4>
+                                                  <br>
+                                                  <form id="myForm" name="myForm">
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> STUDENT ID: </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                            <input name="group_name" type="text" class="form-control" placeholder="s2356546" value="s2356546">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                            <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> FIRST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="First name" value="Mark">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> LAST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Last name" value="Otto">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> TEAMS </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Blue House; Team 1;" value="Blue House; Team 1;">
+                                                          </div>
+                                                      </div>
+                                                  </form>
+                                              </div>
+                                              <div class="modal-footer justify-content-center">
+                                                  <a id="submit_form" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href="{{ url_for('classroom') }}">Update</a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <button type="button" class="btn border" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                         <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
                                       </svg>
                                   </button>
+
+                                  <!-- Modal delete -->
+                                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog  modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="text-center" id="exampleModalLabel"> Are you sure you want to delete this entry? </p>
+                                            </div>
+                                            <div class="modal-footer justify-content-center">
+                                                <a id="submit_form" type="button" class="btn rounded-pill delete" style="background-color: #5bc0de" href=" {{ url_for('classroom') }}"> Delete </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                               </td>
                             </tr>
                             <tr>
                               <th scope="row">s2561146</th>
                               <td>Brian</td>
                               <td>Sanchez</td>
-                              <td> </td>
+                              <td> <button class="btn btn-light rounded-pill"> Team 3 </button></td>
                               <td>
-                              <button type="button" class="btn btn-success">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                              <button type="button" class="btn border">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#edit">
                                       <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                       <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
                                   </button>
-                                  <button type="button" class="btn btn-danger delete">
+
+                                  <!-- Modal edit entry-->
+                                  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog  modal-dialog-centered">
+                                          <div class="modal-content">
+                                              <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                 <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <h4 class="modal-title text-center" id="exampleModalLabel"> Edit entry </h4>
+                                                  <br>
+                                                  <form id="myForm" name="myForm">
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> STUDENT ID: </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                            <input name="group_name" type="text" class="form-control" placeholder="s2356546" value="s2356546">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                            <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> FIRST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="First name" value="Mark">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> LAST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Last name" value="Otto">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> TEAMS </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Blue House; Team 1;" value="Blue House; Team 1;">
+                                                          </div>
+                                                      </div>
+                                                  </form>
+                                              </div>
+                                              <div class="modal-footer justify-content-center">
+                                                  <a id="submit_form" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href="{{ url_for('classroom') }}">Update</a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <button type="button" class="btn border" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                         <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
                                       </svg>
                                   </button>
+
+                                  <!-- Modal delete -->
+                                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog  modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="text-center" id="exampleModalLabel"> Are you sure you want to delete this entry? </p>
+                                            </div>
+                                            <div class="modal-footer justify-content-center">
+                                                <a id="submit_form" type="button" class="btn rounded-pill delete" style="background-color: #5bc0de" href=" {{ url_for('classroom') }}"> Delete </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                               </td>
                             </tr>
                             <tr>
                               <th scope="row">s2161146</th>
                               <td>Bass</td>
                               <td> T.</td>
-                              <td> </td>
+                              <td> <button class="btn btn-light rounded-pill"> Team 3 </button></td>
                               <td>
-                                <button type="button" class="btn btn-success">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <button type="button" class="btn border">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#edit">
                                       <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                       <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
                                   </button>
-                                  <button type="button" class="btn btn-danger delete">
+
+                                  <!-- Modal edit entry-->
+                                  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog  modal-dialog-centered">
+                                          <div class="modal-content">
+                                              <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                 <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <h4 class="modal-title text-center" id="exampleModalLabel"> Edit entry </h4>
+                                                  <br>
+                                                  <form id="myForm" name="myForm">
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> STUDENT ID: </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                            <input name="group_name" type="text" class="form-control" placeholder="s2356546" value="s2356546">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                            <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> FIRST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="First name" value="Mark">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> LAST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Last name" value="Otto">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> TEAMS </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Blue House; Team 1;" value="Blue House; Team 1;">
+                                                          </div>
+                                                      </div>
+                                                  </form>
+                                              </div>
+                                              <div class="modal-footer justify-content-center">
+                                                  <a id="submit_form" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href="{{ url_for('classroom') }}">Update</a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <button type="button" class="btn border" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                         <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
                                       </svg>
                                   </button>
+
+                                  <!-- Modal delete -->
+                                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog  modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="text-center" id="exampleModalLabel"> Are you sure you want to delete this entry? </p>
+                                            </div>
+                                            <div class="modal-footer justify-content-center">
+                                                <a id="submit_form" type="button" class="btn rounded-pill delete" style="background-color: #5bc0de" href=" {{ url_for('classroom') }}"> Delete </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                               </td>
                             </tr>
                             <tr>
                               <th scope="row">s3161146</th>
                               <td>Mark</td>
                               <td>Otto</td>
-                              <td> </td>
+                              <td> <button class="btn btn-light rounded-pill"> Team 4 </button></td>
                               <td>
-                                <button type="button" class="btn btn-success">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <button type="button" class="btn border">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#edit">
                                       <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                       <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
                                   </button>
-                                  <button type="button" class="btn btn-danger delete">
+
+                                  <!-- Modal edit entry-->
+                                  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog  modal-dialog-centered">
+                                          <div class="modal-content">
+                                              <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                 <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <h4 class="modal-title text-center" id="exampleModalLabel"> Edit entry </h4>
+                                                  <br>
+                                                  <form id="myForm" name="myForm">
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> STUDENT ID: </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                            <input name="group_name" type="text" class="form-control" placeholder="s2356546" value="s2356546">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                            <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> FIRST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="First name" value="Mark">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> LAST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Last name" value="Otto">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> TEAMS </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Blue House; Team 1;" value="Blue House; Team 1;">
+                                                          </div>
+                                                      </div>
+                                                  </form>
+                                              </div>
+                                              <div class="modal-footer justify-content-center">
+                                                  <a id="submit_form" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href="{{ url_for('classroom') }}">Update</a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <button type="button" class="btn border" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                         <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
                                       </svg>
                                   </button>
+
+                                  <!-- Modal delete -->
+                                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog  modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="text-center" id="exampleModalLabel"> Are you sure you want to delete this entry? </p>
+                                            </div>
+                                            <div class="modal-footer justify-content-center">
+                                                <a id="submit_form" type="button" class="btn rounded-pill delete" style="background-color: #5bc0de" href=" {{ url_for('classroom') }}"> Delete </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                               </td>
                             </tr>
                             <tr>
                               <th scope="row">s3161148</th>
                               <td> Jasper</td>
                               <td>H.</td>
-                              <td> </td>
+                              <td> <button class="btn btn-light rounded-pill"> Team 5 </button> </td>
                               <td>
-                                <button type="button" class="btn btn-success">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <button type="button" class="btn border">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#edit">
                                       <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                       <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
                                   </button>
-                                  <button type="button" class="btn btn-danger delete">
+
+                                  <!-- Modal edit entry-->
+                                  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog  modal-dialog-centered">
+                                          <div class="modal-content">
+                                              <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                 <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <h4 class="modal-title text-center" id="exampleModalLabel"> Edit entry </h4>
+                                                  <br>
+                                                  <form id="myForm" name="myForm">
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> STUDENT ID: </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                            <input name="group_name" type="text" class="form-control" placeholder="s2356546" value="s2356546">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                            <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> FIRST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="First name" value="Mark">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> LAST NAME </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Last name" value="Otto">
+                                                          </div>
+                                                      </div>
+                                                      <br>
+                                                      <div class="row">
+                                                          <div class="col">
+                                                              <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> TEAMS </label>
+                                                          </div>
+                                                          <div class="col-8">
+                                                              <input name="group_name" type="text" class="form-control" placeholder="Blue House; Team 1;" value="Blue House; Team 1;">
+                                                          </div>
+                                                      </div>
+                                                  </form>
+                                              </div>
+                                              <div class="modal-footer justify-content-center">
+                                                  <a id="submit_form" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href="{{ url_for('classroom') }}">Update</a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <button type="button" class="btn border" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                         <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
                                       </svg>
                                   </button>
+
+                                  <!-- Modal delete -->
+                                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog  modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                                                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fdzomkrp.json"
+                                                        trigger="loop-on-hover"
+                                                        colors="black"
+                                                        style="width:30px;height:30px">
+                                                    </lord-icon>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="text-center" id="exampleModalLabel"> Are you sure you want to delete this entry? </p>
+                                            </div>
+                                            <div class="modal-footer justify-content-center">
+                                                <a id="submit_form" type="button" class="btn rounded-pill delete" style="background-color: #5bc0de" href=" {{ url_for('classroom') }}"> Delete </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                               </td>
                             </tr>
-                            <tr>
-                              <th scope="row">s3161246</th>
-                              <td>Victoria</td>
-                              <td> G.</td>
-                              <td> </td>
-                              <td>
-                                <button type="button" class="btn btn-success">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                                    </svg>
-                                  </button>
-                                  <button type="button" class="btn btn-danger delete">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-                                      </svg>
-                                  </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th scope="row">s1161146</th>
-                              <td>Marta</td>
-                              <td>Sanchez</td>
-                              <td> </td>
-                              <td>
-                                <button type="button" class="btn btn-success">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                                    </svg>
-                                  </button>
-                                  <button type="button" class="btn btn-danger delete">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-                                      </svg>
-                                  </button>
-                              </td>
-                            </tr>
+
+
 
                       </tbody>
                     </table>
                 </div>
         </div>
 
-        <div class="col-3 text-center opacity-50" style="background-color: darkgrey;">
-            <p style="margin-top: 120px; color:white; font-size: x-large; font-family: 'Rubik', sans-serif;"> Leaderboard</p>
-
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapse_overall">Top Ranking</button>
-                <button type="button" class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapse_groups">Group Ranking</button>
+        <div class="col-3 shadow-lg" style="margin-top: 76px; margin-bottom: 45px;">
+            <div class="row d-flex border p-3 text-center" style="background-color:#5bc0de; margin-top: 0px; height: 70px;">
+                  <p style="color:black; font-size: x-large; font-family: 'Rubik', sans-serif;"> Leaderboard</p>
             </div>
+            <div class="row text-center" id="tabla" style="background-color:white; margin-top: 10px;">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button id="fati" type="button" class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapse_overall" aria-expanded="false" aria-controls="collapse_overall"> <p id="top"> Top Ranking </p></button>
+                        <button type="button" class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapse_groups" aria-expanded="false" aria-controls="collapse_overall"> <p id="group"> Group Ranking </p></button>
+                    </div>
 
-            <div class="collapse" id="collapse_overall">
-              <div class="card card-body" style="border: none; background-color: darkgrey">
-                <table class="table table-hover table-borderless" style="margin-top: 20px;">
-                  <tbody id="studentRankingTableBody">
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Mark <br> Otto</td>
-                      <td></td>
-                      <td> 200 </td>
-                    </tr>
-                    <tr>
-                      <th scope="row"> 2</th>
-                      <td>Maria <br> Perez</td>
-                      <td></td>
-                      <td> 100 </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td> Andrei <br> Diaz</td>
-                      <td></td>
-                      <td> 50 </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+                    <div class="accordion-group">
+                        <div class="collapse" id="collapse_overall" data-bs-parent="#tabla">
+                          <div class="card card-body" style="border: none;">
+                            <table class="table table-responsive table-border border-white" style="margin-top: 20px;">
+                              <tbody>
+                                <tr class="border-5" style="background-color:#5bc0de;">
+                                  <td>Mark Otto</td>
+                                  <td></td>
+                                  <td></td>
+                                  <td> 200 </td>
+                                </tr>
+                                <tr class="border-5" style="background-color:#5bc0de;">
+                                  <td>Maria Perez</td>
+                                  <td></td>
+                                  <td></td>
+                                  <td> 100 </td>
+                                </tr>
+                                <tr class="border-5" style="background-color:#5bc0de;">
+                                  <td> Andrei Diaz</td>
+                                  <td></td>
+                                  <td></td>
+                                  <td> 50 </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+
+                        <div class="collapse" id="collapse_groups" data-bs-parent="#tabla">
+                          <div class="card card-body" style="border: none;">
+                            <table class="table table-responsive table-border border-white" style="margin-top: 20px;">
+                              <tbody>
+                                <tr class="border-5" style="background-color:#5bc0de;">
+                                  <td> Blue House</td>
+                                  <td></td>
+                                  <td></td>
+                                  <td> 10000 </td>
+                                </tr>
+                                <tr class="border-5" style="background-color:#5bc0de;">
+                                  <td>Red House</td>
+                                  <td></td>
+                                  <td></td>
+                                  <td>5100 </td>
+                                </tr>
+                                <tr class="border-5" style="background-color:#5bc0de;">
+                                  <td> Green House</td>
+                                  <td></td>
+                                  <td></td>
+                                  <td> 2030 </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                    </div>
             </div>
-
-            <div class="collapse" id="collapse_groups">
-              <div class="card card-body" style="border: none; background-color: darkgrey">
-                <table class="table table-hover table-borderless" style="margin-top: 20px;">
-                  <tbody id="courseRankingTableBody">
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Blue House</td>
-                      <td></td>
-                      <td> 10000 </td>
-                    </tr>
-                    <tr>
-                      <th scope="row"> 2</th>
-                      <td>Red House</td>
-                      <td></td>
-                      <td>5100 </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td> Green House</td>
-                      <td></td>
-                      <td> 2030 </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
         </div>
     </div>
 </div>
 
-<script src="{{ url_for('static', filename='class.js') }}"></script>
+<script src="../static/class.js"></script>
 
 
 </body>

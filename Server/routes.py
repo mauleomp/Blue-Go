@@ -8,7 +8,7 @@ from Server.script import valid_login, matchPass, registerNewUser, errorMessage,
 # new changes
 @app.route('/')
 def homePage():  # put application's code here
-    connectDB()
+    # connectDB()
     return render_template('MainPage.html')
 
 
@@ -22,6 +22,7 @@ def login():
             return redirect(url_for('teacher'))
         else:
             error = 'Invalid username / password '
+            return errorMessage(error)
     return render_template('login.html', error=error)
 
 
@@ -109,3 +110,8 @@ def classroom(course_code):
 @app.route('/game')
 def game(usr=None):
     return render_template('StartGame.html')
+
+
+@app.route('/buy')
+def buy(usr=None):
+    return render_template('Buy.html')
