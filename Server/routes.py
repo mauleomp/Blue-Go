@@ -56,6 +56,12 @@ def logTeacher():
 def groups(usr=None):
     return render_template('Groups.html')
 
+
+@app.route('/play/setup')
+def checkBuzzers(usr=None):
+    return render_template('checkbuzzers.html')
+
+
 @app.route('/play')
 def playPage(usr=None):
     return render_template('Play.html')
@@ -64,6 +70,7 @@ def playPage(usr=None):
 @app.route('/teacher')
 def teacher(usr=None):
     return render_template('TeacherSide.html')
+
 
 @app.route('/groups/class')
 def classroom(usr=None):
