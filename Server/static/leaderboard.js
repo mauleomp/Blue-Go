@@ -8,19 +8,23 @@ var leaderboardjson = {
   ]
 };
 
-roundclassic();
-async function roundclassic() {
+roundclassic(1);
+//Play one round of classic gamemode. This means, play with one question untill it is answered correctly.
+async function roundclassic(questionnumber) {
   //Await countdown before starting the round
   await(new Promise((resolve, reject) => {
     startcountdown(3);
     setTimeout(() => resolve(), 4000);
   }));
-  waitforpress(1);
+  waitforpress(questionnumber);
+
   var currentplayer;
+  //Keep looping until answer is correct
   var loop = setInterval(function () {
-    //   example: {"iscorrect": true}
-    //   or:      {"iscorrect": false, "nextname":"Fatima"}
     getIsCorrect().then(function(json) {
+
+      //   example json: {"iscorrect": true}
+      //   or:      {"iscorrect": false, "nextname":"Fatima"}
       if (json.iscorrect) {
         //Await correct answer animation
         await(new Promise((resolve, reject) => {
@@ -34,13 +38,18 @@ async function roundclassic() {
         //Displaying name of first presser. There was no incorrect answer yet
         currentplayer = json.nextname;
         displayname(json.nextname);
+        //Go again
 
       } else if (json.nextname !== currentplayer) {
-          //Await incorrect answer animation
-          await(new Promise((resolve, reject) => {
-            incorrectanswer(json.nextname);
-            setTimeout(() => resolve(), 3000);
-          }));
+        //Await incorrect answer animation
+        //Give turn to the next player in line
+        currentplayer = json.nextname;
+        await(new Promise((resolve, reject) => {
+          incorrectanswer(json.nextname);
+          setTimeout(() => resolve(), 3000);
+        }));
+        //Go again
+
       } else {
         //No new value. Go again...
       }
