@@ -47,20 +47,19 @@ function generatecourses(input) {
     // var json = JSON.parse(input);
     var json = input;
 
-    var res = "";
+    var res = '<div class="carousel-item active text-center" style="top: 0px">\n' +
+            '<div class="row row-cols-3 text-center" style="width: 70%; margin: auto;">\n';
+    res += getaddcoursecard();
+    addcarouselindicator(0);
     for (let i = 0; i < json.list.length; i++) {
-        if (i === 0) {
-            res +=  '<div class="carousel-item active text-center" style="top: 0px">\n' +
-                        '<div class="row row-cols-3 text-center" style="width: 70%; margin: auto;">\n';
-            addcarouselindicator(i/3);
-            // res += initialcard;
-        } else if (i%3 === 0) {
+
+        if ((i+1)%3 === 0) {
             res +=  '<div class="carousel-item text-center" style="top: 0px">\n' +
                         '<div class="row row-cols-3 text-center" style="width: 70%; margin: auto;">\n';
-            addcarouselindicator(i/3)
+            addcarouselindicator((i+1)/3)
         }
         res += createcoursecard(i, json.list[i].name, json.list[i].img);
-        if (i%3 === 2 || i === json.list.length-1) {
+        if ((i+1)%3 === 2 || i === json.list.length-1) {
             res +=      '</div>\n' +
                     '</div>\n';
         }
@@ -71,7 +70,7 @@ function generatecourses(input) {
 function createcoursecard(id, name, img) {
     var res = '' +
         '<div class="col">\n' +
-            '<div id="' + id + '" class="card">\n' +
+            '<div id="' + id + '" class="card coursecard">\n' +
                 '<img src="' + img + '" class="card-img-top" alt="...">\n' +
                 '<div class="card-body">\n' +
                     '<h5 class="card-title" style="color:black;">' + name + '</h5>\n' +
@@ -93,38 +92,22 @@ function addcarouselindicator(number) {
     document.getElementById("carouselindicators").innerHTML += res;
 }
 
-{
-    let initialcard =
-        '                  <div class="col">\n' +
-        '                    <div id="anonymous" class="select d-flex flex-column rounded" style="background-color: rgba(255,255,255,0.9);">\n' +
-        '                      <button type="button" class="btn" onclick="selectgroup(\'anonymous\');" id="anonymous" style="height:50%;">\n' +
-        '                        <div class="row">\n' +
-        '                          <div class="col-3"></div>\n' +
-        '                          <div class="col-6 d-flex align-items-end justify-content-center">Play anonymously</div>\n' +
-        '                          <div class="col-3 text-start">\n' +
-        '                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-question-square" viewBox="0 0 16 16">\n' +
-        '                              <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>\n' +
-        '                              <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>\n' +
-        '                            </svg>\n' +
-        '                          </div>\n' +
-        '                        </div>\n' +
-        '                      </button>\n' +
-        '                      <button type="button" class="btn btn-info" style="height:50%;">\n' +
-        '                        <div class="row">\n' +
-        '                          <div class="col-3"></div>\n' +
-        '                          <div class="col-6 d-flex align-items-start justify-content-center">Add a course</div>\n' +
-        '                          <div class="col-3 text-start">\n' +
-        '                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">\n' +
-        '                              <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>\n' +
-        '                              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>\n' +
-        '                            </svg>\n' +
-        '                          </div>\n' +
-        '                        </div>\n' +
-        '                      </button>\n' +
-        '                    </div>\n' +
-        '                  </div>'
-}
-
 function resetForm(form) {
     document.forms[form].reset();
+}
+
+function getaddcoursecard() {
+    let addcoursecard = '                    <div class="col">\n' +
+        '                        <div id="0" class="card addcoursecard"  style="height:100%;">\n' +
+        '                            <div class="card-body">\n' +
+        '                            <h5 class="card-title" style="color:black;">Add a course</h5>\n' +
+        '                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-square icon" viewBox="0 0 16 16">\n' +
+        '                                  <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>\n' +
+        '                                  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>\n' +
+        '                                </svg>\n' +
+        '                            </div>\n' +
+        '                            <a onclick="" class="stretched-link"></a>\n' +
+        '                        </div>\n' +
+        '                    </div>';
+    return addcoursecard;
 }

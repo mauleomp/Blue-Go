@@ -60,6 +60,11 @@ def groups(usr=None):
 def playPage(usr=None):
     return render_template('Play.html')
 
+# Potentially temporary
+@app.route('/play2')
+def playPage2(usr=None):
+    return render_template('InitializeGame.html')
+
 
 @app.route('/teacher')
 def teacher(usr=None):
