@@ -25,12 +25,13 @@ function getAllStudents(){
    var txt = "", x;
    http.onreadystatechange = function() {
        if (this.readyState == 4 && this.status == 200) {
+           // Response with all the students in a JSON array
            all_students = JSON.parse(this.responseText);
 
            console.log(all_students)
 
-           addStudentsInTable()
-
+           // Update the current table body with the students
+           addStudentsInTable();
        }
    };
    const link = server + "/getStudents"
