@@ -11,6 +11,17 @@ document.getElementById("login").addEventListener("click", function() {
     window.location.href = 'TeacherSide.html';
 });*/
 
+document.addEventListener("DOMContentLoaded", function(){
+  const messasge = document.getElementById("serverMesssage").value
+  alert(messasge)
+
+  if (messasge !== "" && messasge !== null){
+    alert(messasge)
+    $('ResponseModal').modal('show')
+  }
+
+});
+
 
 function show_password() {
   var x = document.getElementById("pass");

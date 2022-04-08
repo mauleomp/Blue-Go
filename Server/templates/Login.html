@@ -32,7 +32,7 @@
                     <br>
                     <div class="g-signin2" data-onsuccess="onSignIn"> </div>
                     <br>
-                    <form method="POST">
+                    <form id="loginForm" method="POST">
                         <div class="form-outline">
                              <label for="email" style="color:lightgrey; font-size: x-small;">USERNAME OR EMAIL</label>
                             <input id="email" name="email" type="email" class="form-control" placeholder="user@blue&go.com" required="true"/>
@@ -50,9 +50,9 @@
                            </span>
                        </div>
                    </div>
-                    <div class="invalid-feedback"> Invalid password </div>
+                    <div> <p style="color:red">{{error}}</p> </div>
                     <br>
-                    <input type="submit" class="btn btn-outline-primary btn-lg btn-block" style="font-weight: lighter;" value="Login"/>
+                    <input type="submit" id="submitLogin" class="btn btn-outline-primary btn-lg btn-block" style="font-weight: lighter;" value="Login"/>
                     <br>
                     </form>
                     <a type="button" class="btn border btn-light border-secondary btn-lg btn-block" style="font-weight: lighter;" href="{{ url_for('signUp') }}"> New to the platform? Sign up</a>
@@ -63,33 +63,6 @@
         </div>
     </div>
 
-        <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-      Launch demo modal
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header" style="background-color: #B7BAED; height: 3rem;">
-
-                </div>
-                <div class="modal-body text-center">
-                    <h4 class="modal-title" id="exampleModalLabel"> Please Verify Your Email Address </h4>
-                    <br>
-                    We noticed your email address has not been verified. Please, confirm this is your account by following the instructions sent to your email account. <br> <br>
-                    <b> If you have any further questions, please contact us. </b>
-                    <br> <br>
-                    <p style="color:slategrey"> All the best, <br> The Blue&GO! Team  </p>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <a type="button" class="btn rounded-pill" style="background-color: #B7BAED"> Resend Email</a>
-                    <a type="button" class="btn rounded-pill" style="background-color: #B7BAED" href="{{ url_for('login') }}"> Close</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
         <script src="{{ url_for('static', filename='Login.js') }}"></script>

@@ -1,7 +1,7 @@
 from Server import app
 
 from flask import render_template, request, url_for, redirect
-from Server.script import valid_login, matchPass, registerNewUser, errorMessage, connectDB, confirmationMessage\
+from Server.script import valid_login, matchPass, registerNewUser, errorMessage, connectDB, confirmationMessage \
     , getAllCourses, getStudentsC, getStudentsRank, getTeamsRank
 
 
@@ -19,11 +19,11 @@ def login():
         # modify valid login within the db
         if valid_login(request.form['email'], request.form['pass']):
             usr = request.form['email']
-            return redirect(url_for('teacher'))
+            return render_template('TeacherSide.html', error=error)
         else:
-            error = 'Invalid username / password '
-            return errorMessage(error)
-    return render_template('login.html', error=error)
+            error = 'Invalid username / password'
+            return render_template('login.html', error=error)
+    return render_template('login.html')
 
 
 @app.route('/signUp', methods=['POST', 'GET'])
@@ -35,12 +35,15 @@ def signUp():
                                        request.form['pass'])
 
             if response:
-                return confirmationMessage("User was registered correctly.")
+                message = 'Thank you for registering! User was registered correctly.'
+                return render_template('SignUp.html', message=message)
             else:
-                return errorMessage("User could not be registered. Please try again.")
+                message = 'User could not be registered. Please try again.'
+                return render_template('SignUp.html', message=message)
 
         else:
-            return errorMessage("Passwords do not match. Please try again.")
+            message = 'Passwords do not match. Please try again.'
+            return render_template('SignUp.html', message=message)
     elif request.method == 'GET':
         print('sign')
     return render_template('SignUp.html')
@@ -71,7 +74,9 @@ def getStudentsFromCourse(course_code):
 # Returns the student ranking from this course
 @app.route('/groups/class/<course_code>/getStudentsRanking', methods=['GET'])
 def getStudentsRankingC(course_code):
-    return getStudentsRank(course_code)    
+    return getStudentsRank(course_code)
+
+
 # Returns the student ranking from this course
 
 
@@ -112,6 +117,26 @@ def game(usr=None):
     return render_template('StartGame.html')
 
 
+@app.route('/profile')
+def profile(usr=None):
+    return render_template('Settings.html')
+
+
 @app.route('/buy')
 def buy(usr=None):
     return render_template('Buy.html')
+
+
+@app.route('/buzzers')
+def buzzers(usr=None):
+    return render_template('checkbuzzers.html')
+
+
+@app.route('/leaderboard')
+def leaderboard(usr=None):
+    return render_template('leaderboard.html')
+
+
+@app.route('/help')
+def help(usr=None):
+    return render_template('Help&Contact.html')
