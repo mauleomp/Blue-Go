@@ -51,11 +51,14 @@
         </div>
     </nav>
 
-    <!-- section containing group selection -->
-    <div class="container-fluid text-center" id="section1">
+    <div class="container-fluid d-flex justify-content-center align-items-end" id="titlesection1">
+        <h3 style="color: white;">Select a Course:</h3>
+    </div>
 
-      <br>
-      <h3 style="color: white;">Select a Course:</h3>
+    <!-- section containing group selection -->
+    <div class="container-fluid d-flex justify-content-center" id="section1">
+
+{#      <h3 style="color: white;">Select a Course:</h3>#}
 
       <div id="carouselCards" class="carousel slide carousel-multi-item" data-bs-touch="false" data-bs-interval="false">
         <div id="courses" class="carousel-inner">
@@ -207,24 +210,24 @@
         </div>
     </div>
 
+    <div class="container-fluid d-flex justify-content-center" id="titlesection2">
+        <h3 style="color: white;">Select a Gamemode:</h3>
+    </div>
+
     <!-- section containing gamemode selection and settings -->
-    <div class="container text-center" id="section2">
+    <div class="container d-flex justify-content-center align-items-center text-center" id="section2">
 
-        <br>
-        <h3 style="color: white;">Select a gamemode:</h3>
-        <br>
-
-        <div class="row">
+        <div class="row" style="width:100%; height:100%;">
           <div class="col">
-            <div id="gamemodeFastestPlayer" class="card bigbutton">
+            <div id="Classic" class="card bigbutton">
               <div class="card-body">
                 <h5 class="card-title">Classic</h5>
                 <br>
-                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-stopwatch icon" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-stopwatch icon" viewBox="0 0 16 16">
                   <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
                   <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
                 </svg>
-                <a onclick="selectGamemode('gamemodeFastestPlayer')" class="stretched-link"></a>
+                <a onclick="selectGamemode('Classic')" class="stretched-link"></a>
               </div>
               <div class="card-footer">
                 <button type="button" class="btn btn-outline-secondary settingsbutton" data-bs-toggle="modal" data-bs-target="#classic">Change settings</button>
@@ -232,15 +235,15 @@
             </div>
           </div>
           <div class="col">
-            <div id="gamemodeRandomPlayer" class="card bigbutton">
+            <div id="Random" class="card bigbutton">
               <div class="card-body">
                 <h5 class="card-title">Random</h5>
                 <br>
-                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-dice-5 icon" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-dice-5 icon" viewBox="0 0 16 16">
                   <path d="M13 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h10zM3 0a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3H3z"/>
                   <path d="M5.5 4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm4-4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
                 </svg>
-                <a onclick="selectGamemode('gamemodeRandomPlayer')" class="stretched-link"></a>
+                <a onclick="selectGamemode('Random')" class="stretched-link"></a>
               </div>
               <div class="card-footer">
                 <button type="button" class="btn btn-outline-secondary settingsbutton" data-bs-toggle="modal" data-bs-target="#random">Change settings</button>
@@ -248,14 +251,14 @@
             </div>
           </div>
           <div class="col">
-            <div id="gamemodeLifelines" class="card bigbutton">
+            <div id="Lifelines" class="card bigbutton">
               <div class="card-body">
                 <h5 class="card-title">Lifelines</h5>
                 <br>
-                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-activity icon" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-activity icon" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"/>
                 </svg>
-                <a onclick="selectGamemode('gamemodeLifelines')" class="stretched-link"></a>
+                <a onclick="selectGamemode('Lifelines')" class="stretched-link"></a>
               </div>
               <div class="card-footer">
                 <button type="button" class="btn btn-outline-secondary settingsbutton" data-bs-toggle="modal" data-bs-target="#lifelines">Change settings</button>
@@ -405,8 +408,21 @@
     </div>
 
     <div class="container-fluid" id="section3">
-      <div class="container d-grid d-flex justify-content-center">
-        <button type="button" id="startbutton" class="btn btn-warning btn-block" disabled style="width: 100%; height: 100px; font-size: 40px;">Initialize game!</button>
+      <div class="container">
+          <br>
+          <div class="row text-center my-auto">
+              <div class="col-4"><button onclick="selectGamemode('Anonymously')" id="Anonymously" type="button" class="btn btn-secondary selectbutton text-center">
+                  <p id="anonymoustext">Play anonymously</p>
+                  <p id="anonymousfooter" style="font-size: 2vh;">Press to play anonymously!</p>
+              </button></div>
+{#              <div class="col-4"><button type="button" class="btn btn-warning selectbutton" disabled>Select a gamemode...</button></div>#}
+              <div class="col-8"><button type="button" id="startbutton" class="btn selectbutton" disabled>
+                  <span style="color: white;">Initialize game!</span>
+              </button></div>
+          </div>
+
+
+
       </div>
     </div>
 

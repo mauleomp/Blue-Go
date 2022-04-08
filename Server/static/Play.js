@@ -5,17 +5,21 @@ function selectgroup(id) {
   if (typeof selectedGroup !== "undefined") {
     document.getElementById(selectedGroup).style.backgroundColor = "rgba(255, 255, 255, 0.9)";
   }
-  document.getElementById(id).style.backgroundColor = "orange";
+  document.getElementById(id).style.backgroundColor = "#eeca66";
   selectedGroup = id;
   checkstart();
   return false;
 }
 
 function selectGamemode(id) {
-    if (typeof selectedGamemode !== "undefined") {
+    if (typeof selectedGamemode !== "undefined" && selectedGamemode !== "Anonymously") {
       document.getElementById(selectedGamemode).style.backgroundColor = "rgba(255, 255, 255, 0.9)";
+    } else if (id !== "Anonymously") {
+        document.getElementById("Anonymously").style.backgroundColor = '#31C1D6';
     }
-    document.getElementById(id).style.backgroundColor = "orange";
+    document.getElementById(id).style.backgroundColor = '#eeca66';
+    // document.getElementById("Anonymously").style.backgroundColor = '#eeca66';
+    document.getElementById("anonymoustext").innerHTML = "Playing " + id;
     selectedGamemode = id;
     checkstart();
     return false;
@@ -69,7 +73,7 @@ function createcoursecard(id, name, img) {
         '<div class="col">\n' +
             '<div id="' + id + '" class="card">\n' +
                 '<img src="' + img + '" class="card-img-top" alt="...">\n' +
-                '<div class="card-body" style="transform: rotate(0);">\n' +
+                '<div class="card-body">\n' +
                     '<h5 class="card-title" style="color:black;">' + name + '</h5>\n' +
                 '</div>\n' +
                 '<a onclick="selectgroup(\'' + id + '\');" class="stretched-link"></a>' +
