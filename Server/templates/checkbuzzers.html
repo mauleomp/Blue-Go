@@ -12,34 +12,28 @@
 
   <div class="container">
     <div class="card" style="padding: 5vh;">
-      <div class="card-body"></div>
-        <h5 class="card-title text-center">Connecting with the buzzers...</h5>
+      <div class="card-body">
+        <h5 id="text" class="card-title text-center">Connecting with the buzzers...</h5>
+        <br>
+        <br>
+        <div id="buzzercontainer" class="card"></div>
+        <br>
+{#        <div id="connectedplayers" class="card">#}
+{#            <div class="row" style="margin: 10px;">Bas</div>#}
+{#            <div class="row">Fatima</div>#}
+{#            <div class="row">Judith</div>#}
+{#        </div>#}
         <br>
         <br>
 
-        <div class="card">
-          <div class="row">
-            <div class="col-2"><div class="card buzzer">1</div></div>
-            <div class="col-2"><div class="card buzzer">2</div></div>
-            <div class="col-2"><div class="card buzzer">3</div></div>
-            <div class="col-2"><div class="card buzzer">4</div></div>
-            <div class="col-2"><div class="card buzzer">5</div></div>
-            <div class="col-2"><div class="card buzzer">6</div></div>
-          </div>
-          <div class="row">
-            <div class="col-2"><div class="card buzzer">7</div></div>
-            <div class="col-2"><div class="card buzzer">8</div></div>
-            <div class="col-2"><div class="card buzzer">9</div></div>
-            <div class="col-2"><div class="card buzzer">10</div></div>
-        </div>
+        <button type="button" class="btn btn-warning" style="height: 10vh; width:100%;">
+          <span style="font-size: 4vh;">Start Game!</span>
+        </button>
+      </div>
     </div>
-    <br>
-    <br>
-
-    <button type="button" class="btn btn-warning" style="height: 10vh;">
-      <span style="font-size: 4vh;">Start Game!</span>
-    </button>
   </div>
+
+  <script src="../static/checkbuzzers.js"></script>
 
 </body>
 </html>

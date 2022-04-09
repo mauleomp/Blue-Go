@@ -12,7 +12,7 @@ document.getElementById("login").addEventListener("click", function() {
 });*/
 
 document.addEventListener("DOMContentLoaded", function(){
-  const messasge = document.getElementById("serverMesssage").value
+  const messasge = document.getElementById("serverMesssage").innerText;
   alert(messasge)
 
   if (messasge !== "" && messasge !== null){

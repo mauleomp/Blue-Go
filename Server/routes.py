@@ -62,12 +62,30 @@ def logTeacher():
 # Returns all the courses.
 @app.route('/groups/getAllCourses', methods=['GET'])
 def getCoursesAll():
+    """
+        Returns a JSON object with this format:
+
+        { courses: [ {"code": 00000, "name": Course1},
+                     {"code": 00001, "name": Course2},
+                     ....  ]
+        }
+
+    """
     return getAllCourses()
 
 
 # Returns all the courses.
 @app.route('/groups/class/<course_code>/getStudents', methods=['GET'])
 def getStudentsFromCourse(course_code):
+    """
+        Returns a JSON object with this format:
+
+        { students: [ {s_lastname": Otto, s_name: "Mark", s_number: "s2356546", t_teams: "Team1"},
+                      {s_lastname": Watson, s_name: "Mary", s_number: "s2257547", t_teams: "Team2"},
+                    ....  ]
+        }
+
+    """
     return getStudentsC(course_code)
 
 
@@ -85,6 +103,25 @@ def getTeamsRankingC(course_code):
     return getTeamsRank(course_code)
 
 
+@app.route('/play/getAllCourses', methods=['GET'])
+def getAllCoursesFromPlay():
+    return getAllCourses()
+
+
+@app.route('/play/save_game_preferences', methods=['POST'])
+def postCourseAndGameMode():
+    course_code   = request.form['course_code']
+    print(course_code)
+    game_mode     = request.form['game_mode']
+    print(game_mode)
+    game_settings = request.form['game_settings']
+    print(game_settings)
+
+    # TODO: check the values, and return a response
+
+    return confirmationMessage("Game settings updated")
+
+
 '''
 @app.route('/teacher', methods=['POST, GET'])
 def logTeacher():
@@ -96,9 +133,15 @@ def groups(usr=None):
     return render_template('Groups.html')
 
 
+@app.route('/play2')
+def playPage2(usr=None):
+    return render_template('Play.html')
+
+
+# Potentially temporary
 @app.route('/play')
 def playPage(usr=None):
-    return render_template('Play.html')
+    return render_template('InitializeGame.html')
 
 
 @app.route('/teacher')

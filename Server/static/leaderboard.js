@@ -1,3 +1,69 @@
+//example leaderboard
+var leaderboardjson = {
+  "totalpoints": 100,
+  "ranking": [
+      {"name": "Fatima", "points": 75, "pointsdifference": +10},
+      {"name": "Bas", "points": 60, "pointsdifference": +5},
+      {"name": "Judith", "points": 60, "pointsdifference": -10}
+  ]
+};
+
+roundclassic(1);
+//Play one round of classic gamemode. This means, play with one question until it is answered correctly.
+async function roundclassic(questionnumber) {
+  //Await countdown before starting the round
+  await(new Promise((resolve, reject) => {
+    startcountdown(3);
+    setTimeout(() => resolve(), 4000);
+  }));
+  waitforpress(questionnumber);
+
+  var currentplayer;
+  //Keep looping until answer is correct
+  var loop = setInterval(function () {
+    getIsCorrect().then(function(json) {
+
+      //   example json: {"iscorrect": true}
+      //   or:      {"iscorrect": false, "nextname":"Fatima"}
+      if (json.iscorrect) {
+        //Await correct answer animation
+        await(new Promise((resolve, reject) => {
+          correctanswer();
+          setTimeout(() => resolve(), 3000);
+        }));
+        //End the loop
+        clearInterval(loop);
+
+      } else if (typeof currentplayer === "undefined") {
+        //Displaying name of first presser. There was no incorrect answer yet
+        currentplayer = json.nextname;
+        displayname(json.nextname);
+        //Go again
+
+      } else if (json.nextname !== currentplayer) {
+        //Await incorrect answer animation
+        //Give turn to the next player in line
+        currentplayer = json.nextname;
+        await(new Promise((resolve, reject) => {
+          incorrectanswer(json.nextname);
+          setTimeout(() => resolve(), 3000);
+        }));
+        //Go again
+
+      } else {
+        //No new value. Go again...
+      }
+    })
+  }, 1000);
+
+  getRanking().then(function(json) {
+    showrankings(json);
+  })
+
+}
+
+
+
 //Displays rankings based on JSON input, formatting can be seen in example JSON.
 //Python still must determine how long the rankings are displayed.
 //Animation of the leaderboard takes 3s, so take that into account.
@@ -32,7 +98,7 @@ function startcountdown(number) {
     if (i < 0) {
       clearInterval(interval);
       document.getElementById("countdown").hidden = true;
-      return false;
+      return true;
     }
   }, 1000);
 }
@@ -77,29 +143,84 @@ function correctanswer() {
   }, 3000);
 }
 
+
+function getIsCorrect() {
+    // The URL of the server
+    var server = window.location.href;
+
+    // GET request
+    var http = new XMLHttpRequest();
+    http.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            // Response containing a JSON object
+            //   example: {"iscorrect": true}
+            //   or:      {"iscorrect": false, "nextname":"Fatima"}
+
+            var response = JSON.parse(this.responseText);
+
+            // After just received the data, return the json as a resolved promise
+            return new Promise(function(resolve, reject) {
+              resolve(repsonse);
+            });
+        }
+    };
+    // URL route that is stored in server
+    const link = server + "/REPLACE_CUSTOM_WITH_URL" // If parameters, then append them here
+
+    // Send the http GET request
+    http.open("GET", link, true);
+    http.send();
+}
+
+function getRanking() {
+    // The URL of the server
+    var server = window.location.href;
+
+    // GET request
+    var http = new XMLHttpRequest();
+    http.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            // Response containing a JSON object with ranking
+            // example:
+            // {
+            //   "totalpoints": 100,
+            //   "ranking": [
+            //       {"name": "Fatima", "points": 75, "pointsdifference": +10},
+            //       {"name": "Bas", "points": 60, "pointsdifference": +5},
+            //       {"name": "Judith", "points": 60, "pointsdifference": -10}
+            //   ]
+            // };
+
+            var response = JSON.parse(this.responseText);
+
+            // After just received the data, return the json as a resolved promise
+            return new Promise(function(resolve, reject) {
+              resolve(repsonse);
+            });
+        }
+    };
+    // URL route that is stored in server
+    const link = server + "/REPLACE_CUSTOM_WITH_URL" // If parameters, then append them here
+
+    // Send the http GET request
+    http.open("GET", link, true);
+    http.send();
+}
+
+
 //---------------------------------------------------------------------------------------------------------------------
 
-//example leaderboard
-var leaderboardjson = {
-  "totalpoints": 100,
-  "ranking": [
-      {"name": "Fatima", "points": 75, "pointsdifference": +10},
-      {"name": "Bas", "points": 60, "pointsdifference": +5},
-      {"name": "Judith", "points": 60, "pointsdifference": -10}
-  ]
-};
-
 //example game sequence
-displayname("Fatima");
-setTimeout(function () {
-  incorrectanswer("Bas");
-}, 2000);
-setTimeout(function () {
-  correctanswer();
-}, 8000);
-setTimeout(function () {
-  showrankings(leaderboardjson);
-}, 12000);
-setTimeout(function () {
-  displayname("Judith");;
-}, 17000);
+// displayname("Fatima");
+// setTimeout(function () {
+//   incorrectanswer("Bas");
+// }, 2000);
+// setTimeout(function () {
+//   correctanswer();
+// }, 8000);
+// setTimeout(function () {
+//   showrankings(leaderboardjson);
+// }, 12000);
+// setTimeout(function () {
+//   displayname("Judith");;
+// }, 17000);

@@ -3,6 +3,16 @@ from Server.db_handler import signup, checkLoginWithUser, checkLoginWithEmail, g
     , getStudentsFromCourseCode, getStudentRanking, getTeamRanking
 
 session_open = False
+images_set = ["https://images.unsplash.com/photo-1639815189096-f75717eaecfe?ixlib=rb-1.2.1&ixid"
+              "=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80",
+              "https://images.unsplash.com/photo-1642698166111-1e736132b0ee?ixlib=rb-1.2.1&ixid"
+              "=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80",
+              "https://images.unsplash.com/photo-1627637819848-7074cb1565e8?ixlib=rb-1.2.1&ixid"
+              "=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80",
+              "https://images.unsplash.com/photo-1639815189096-f75717eaecfe?ixlib=rb-1.2.1&ixid"
+              "=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80",
+              "https://images.unsplash.com/photo-1639815189096-f75717eaecfe?ixlib=rb-1.2.1&ixid"
+              "=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"]
 
 
 def connectDB():
@@ -58,9 +68,13 @@ def getAllCourses():
     courses = getCoursesNames()
 
     temp = {'courses': []}
+    index = 0
     for x in courses:
-        y = {"name": str(x[0]), "code": str(x[1])}
+        if index >= len(images_set):
+            index = 0
+        y = {"name": str(x[0]), "code": str(x[1]), "img": str(images_set[index])}
         temp['courses'].append(y)
+        index = index + 1
 
     json.dumps(temp, sort_keys=True, indent=4)
     return temp
@@ -90,8 +104,8 @@ def getStudentsRank(course_code):
     temp = {'s_ranking': []}
     for x in ranking:
         y = {"s_name": str(x[0]),
-             "s_lastname": str(x[0]),
-             "s_rank": str(x[1])}
+             "s_lastname": str(x[1]),
+             "s_rank": str(x[2])}
         
         temp['s_ranking'].append(y)
 
