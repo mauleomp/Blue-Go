@@ -9,7 +9,7 @@ var leaderboardjson = {
 };
 
 roundclassic(1);
-//Play one round of classic gamemode. This means, play with one question untill it is answered correctly.
+//Play one round of classic gamemode. This means, play with one question until it is answered correctly.
 async function roundclassic(questionnumber) {
   //Await countdown before starting the round
   await(new Promise((resolve, reject) => {
