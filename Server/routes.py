@@ -122,6 +122,11 @@ def postCourseAndGameMode():
     return confirmationMessage("Game settings updated")
 
 
+@app.route('/buzzers/getConnectedBuzzers', methods=['GET'])
+def getConnectedBuzzersS():
+    return
+
+
 '''
 @app.route('/teacher', methods=['POST, GET'])
 def logTeacher():

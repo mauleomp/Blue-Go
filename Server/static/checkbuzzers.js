@@ -1,3 +1,4 @@
+var buzzers = [];
 var examplejson = {
   buzzers: [
         { "buzzerID": 0,
@@ -12,7 +13,34 @@ var examplejson = {
     ]
 };
 
-loadbuttons(examplejson);
+document.addEventListener("DOMContentLoaded", function(){
+
+    // Update Functions: obtain and replace html input with server response
+    getBuzzers();
+
+});
+
+function getBuzzers(){
+    var server = window.location.href;
+    var http = new XMLHttpRequest();
+    var txt = "", x;
+    http.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            all_courses = JSON.parse(this.responseText);
+
+            generatecourses(all_courses)
+
+            setTimeout(function(){
+                getBuzzers()
+            }, 3000);
+        }
+    };
+    const link = server + "/getConnectedBuzzers"
+    http.open("GET", link, true);
+    http.send();
+}
+
+
 function loadbuttons(input) {
   var list = input.buzzers;
   generatebuttons(list.length);
