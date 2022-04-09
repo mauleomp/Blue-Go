@@ -2,7 +2,7 @@ from Server import app
 
 from flask import render_template, request, url_for, redirect
 from Server.script import valid_login, matchPass, registerNewUser, errorMessage, connectDB, confirmationMessage \
-    , getAllCourses, getStudentsC, getStudentsRank, getTeamsRank
+    , getAllCourses, getStudentsC, getStudentsRank, getTeamsRank, getConnectedBuzzers
 
 
 # new changes
@@ -110,9 +110,9 @@ def getAllCoursesFromPlay():
 
 @app.route('/play/save_game_preferences', methods=['POST'])
 def postCourseAndGameMode():
-    course_code   = request.form['course_code']
+    course_code = request.form['course_code']
     print(course_code)
-    game_mode     = request.form['game_mode']
+    game_mode = request.form['game_mode']
     print(game_mode)
     game_settings = request.form['game_settings']
     print(game_settings)
@@ -124,7 +124,7 @@ def postCourseAndGameMode():
 
 @app.route('/buzzers/getConnectedBuzzers', methods=['GET'])
 def getConnectedBuzzersS():
-    return
+    return getConnectedBuzzers()
 
 
 '''

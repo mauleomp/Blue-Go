@@ -1,17 +1,4 @@
 var buzzers = [];
-var examplejson = {
-  buzzers: [
-        { "buzzerID": 0,
-          "teamConnected": true,
-          "teamName": "Team0"},
-        { "buzzerID": 1,
-          "teamConnected": true,
-          "teamName": "Team1"},
-        { "buzzerID": 2,
-          "teamConnected": false,
-          "teamName": undefined}
-    ]
-};
 
 document.addEventListener("DOMContentLoaded", function(){
 
@@ -26,9 +13,9 @@ function getBuzzers(){
     var txt = "", x;
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            all_courses = JSON.parse(this.responseText);
+            buzzers = JSON.parse(this.responseText);
 
-            generatecourses(all_courses)
+            loadbuttons(buzzers)
 
             setTimeout(function(){
                 getBuzzers()

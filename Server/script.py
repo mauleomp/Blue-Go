@@ -14,7 +14,6 @@ images_set = ["https://images.unsplash.com/photo-1639815189096-f75717eaecfe?ixli
               "https://images.unsplash.com/photo-1639815189096-f75717eaecfe?ixlib=rb-1.2.1&ixid"
               "=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"]
 
-
 def connectDB():
     print("########")
     # connect()
@@ -106,7 +105,7 @@ def getStudentsRank(course_code):
         y = {"s_name": str(x[0]),
              "s_lastname": str(x[1]),
              "s_rank": str(x[2])}
-        
+
         temp['s_ranking'].append(y)
 
     json.dumps(temp, sort_keys=True, indent=4)
@@ -122,6 +121,28 @@ def getTeamsRank(course_code):
              "c_rank": str(x[1])}
 
         temp['c_ranking'].append(y)
+
+    json.dumps(temp, sort_keys=True, indent=4)
+    return temp
+
+
+# For testing purposes:
+counter = 0
+def getConnectedBuzzers():
+    temp1 = "{ buzzers: [ { \"buzzerID\": 0, \"teamConnected\": true, \"teamName\": \"Team0\"}, { \"buzzerID\": 1, \"teamConnected\": true, \"teamName\": \"Team1\"}, { \"buzzerID\": 2, \"teamConnected\": false, \"teamName\": undefined}]}"
+    temp2 = "{ buzzers: [ { \"buzzerID\": 0, \"teamConnected\": true, \"teamName\": \"Team0\"}, { \"buzzerID\": 1, \"teamConnected\": true, \"teamName\": \"Team1\"}, { \"buzzerID\": 2, \"teamConnected\": false, \"teamName\": undefined}]}"
+    temp3 = "{ buzzers: [ { \"buzzerID\": 0, \"teamConnected\": true, \"teamName\": \"Team0\"}, { \"buzzerID\": 1, \"teamConnected\": true, \"teamName\": \"Team1\"}, { \"buzzerID\": 2, \"teamConnected\": false, \"teamName\": undefined}]}"
+    temp4 = "{ buzzers: [ { \"buzzerID\": 0, \"teamConnected\": true, \"teamName\": \"Team0\"}, { \"buzzerID\": 1, \"teamConnected\": true, \"teamName\": \"Team1\"}, { \"buzzerID\": 2, \"teamConnected\": false, \"teamName\": undefined}]}"
+
+    buzzers = [temp1, temp2, temp3, temp4]
+
+    buzz = buzzers[counter]
+
+    temp = {'buzzers': []}
+    y = {"buzzerID": "0",
+         "teamConnected": "true",
+         "teamName": "Team0"}
+    temp['buzzers'].append(y)
 
     json.dumps(temp, sort_keys=True, indent=4)
     return temp
