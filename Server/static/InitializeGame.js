@@ -98,7 +98,7 @@ function resetForm(form) {
 
 function getaddcoursecard() {
     let addcoursecard = '                    <div class="col">\n' +
-        '                        <div id="0" class="card addcoursecard"  style="height:100%;">\n' +
+        '                        <div class="card addcoursecard"  style="height:100%;">\n' +
         '                            <div class="card-body">\n' +
         '                            <h5 class="card-title" style="color:black;">Add a course</h5>\n' +
         '                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-square icon" viewBox="0 0 16 16">\n' +
@@ -106,7 +106,7 @@ function getaddcoursecard() {
         '                                  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>\n' +
         '                                </svg>\n' +
         '                            </div>\n' +
-        '                            <a onclick="" class="stretched-link"></a>\n' +
+        '                            <a data-bs-toggle="modal" data-bs-target="#addcourse" class="stretched-link"></a>\n' +
         '                        </div>\n' +
         '                    </div>';
     return addcoursecard;
