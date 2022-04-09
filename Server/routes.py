@@ -95,6 +95,15 @@ def buzzers(usr=None):
 def leaderboard(usr=None):
     return render_template('leaderboard.html')
 
+@app.route('/leaderboard/isCorrect', methods=['GET'])
+def isCorrect(usr=None):
+    # return '{"iscorrect": false, "nextname":"Bas"}';
+    return '{"iscorrect": true, "nextname":"Bas"}';
+
+@app.route('/leaderboard/ranking', methods=['GET'])
+def ranking(usr=None):
+    return  '{"totalpoints": 100, "ranking": [{"name": "Fatima", "points": 75, "pointsdifference": 10},{"name": "Bas", "points": 60, "pointsdifference": 5},{"name": "Judith", "points": 60, "pointsdifference": -10}]}';
+
 @app.route('/help')
 def help(usr=None):
     return render_template('Help&Contact.html')
