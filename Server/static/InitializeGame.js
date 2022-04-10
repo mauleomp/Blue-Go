@@ -2,7 +2,10 @@ var selectedGroup;
 var selectedGamemode;
 
 function selectgroup(id) {
-  if (typeof selectedGroup !== "undefined") {
+  if (selectedGroup === "Anonymously") {
+    document.getElementById(selectedGroup).style.backgroundColor = "#6c757d";
+  }
+  else if (typeof selectedGroup !== "undefined") {
     document.getElementById(selectedGroup).style.backgroundColor = "rgba(255, 255, 255, 0.9)";
   }
   document.getElementById(id).style.backgroundColor = "#eeca66";
@@ -14,12 +17,8 @@ function selectgroup(id) {
 function selectGamemode(id) {
     if (typeof selectedGamemode !== "undefined" && selectedGamemode !== "Anonymously") {
       document.getElementById(selectedGamemode).style.backgroundColor = "rgba(255, 255, 255, 0.9)";
-    } else if (id !== "Anonymously") {
-        document.getElementById("Anonymously").style.backgroundColor = '#31C1D6';
     }
     document.getElementById(id).style.backgroundColor = '#eeca66';
-    // document.getElementById("Anonymously").style.backgroundColor = '#eeca66';
-    document.getElementById("anonymoustext").innerHTML = "Playing " + id;
     selectedGamemode = id;
     checkstart();
     return false;
