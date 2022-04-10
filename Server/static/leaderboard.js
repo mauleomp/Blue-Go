@@ -15,17 +15,8 @@ let endgame = false;
 let roundcount = 1;
 //---------------------
 
+// showrankings();
 playclassic();
-
-//Play next round using global boolean when button is pressed
-document.getElementById("nextroundbutton").addEventListener('click', function() {
-    nextround = true;
-})
-
-//End game using global boolean when button is pressed
-document.getElementById("endgamebutton").addEventListener('click', function() {
-    endgame = true;
-})
 
 //Starts the game with the questionnumber. Roundclassic then loops
 function playclassic() {
@@ -37,7 +28,6 @@ function playclassic() {
 //If next round is chosen, the function increases the roundcount and calls itself again.
 async function roundclassic() {
 
-      nextround = false;
       closerankings();
       //Await countdown before starting the round
       await(new Promise((resolve, reject) => {
@@ -102,14 +92,18 @@ async function endround() {
 //Waits for input on whether to continue playing, or to stop the game.
 async function playnextround() {
     var loop = setInterval(async function() {
-        if (nextround) {
-            roundcount++;
-            roundclassic();
-        } else if (endgame) {
-            closerankings();
-            clearInterval(loop);
-            //Game has ended, what now?
-        }
+        console.log("1");
+        getStatus().then(function(json) {
+            if (json.status === "endgame") {
+                closerankings();
+                clearInterval(loop);
+                //Game has ended, what now?
+            } else if (json.questionnumber >= roundcount && json.status === "nextround") {
+                roundcount++;
+                roundclassic();
+                clearInterval(loop);
+            }
+        });
     }, 1000);
 }
 
@@ -258,6 +252,66 @@ function getRanking() {
         // Send the http GET request
         http.open("GET", link, true);
         http.send();
+    });
+}
+
+function getStatus() {
+
+    return new Promise(function(resolve, reject) {
+        // The URL of the server
+        var server = window.location.href;
+
+        // GET request
+        var http = new XMLHttpRequest();
+        http.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                // Response containing a json with status on how to continue and current questionnumber
+                // {questionnumber": 1, "status": "nextround"}
+                // or    {questionnumber": 1, "status": "endgame"}
+
+                var response = JSON.parse(this.responseText);
+
+                // After just received the data, return the json as a resolved promise
+                resolve(response);
+            }
+        };
+        // URL route that is stored in server
+        const link = server + "/status" // If parameters, then append them here
+
+        // Send the http GET request
+        http.open("GET", link, true);
+        http.send();
+    });
+}
+
+//Play next round using global boolean when button is pressed
+document.getElementById("nextroundbutton").addEventListener('click', function() {
+    postJSON({"questionnumber": roundcount, "status": "nextround"}, "/status");
+})
+
+//End game using global boolean when button is pressed
+document.getElementById("endgamebutton").addEventListener('click', function() {
+    postJSON({"status": "endgame"}, "/status")
+})
+
+function postJSON(json, address){
+    return new Promise(function(resolve, reject) {
+        // The URL of the server
+        var server = window.location.href
+
+        // POST request
+        var http = new XMLHttpRequest();
+        http.open("POST", server + address, true);
+        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        http.onreadystatechange = function () {
+            // If the server responded with a response OK
+            if (http.readyState == 4 && http.status == 200) {
+                console.log(http.responseText);
+                resolve();
+            }
+        }
+        // Send the http POST request with a form
+        http.send(json);
     });
 }
 
