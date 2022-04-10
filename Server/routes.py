@@ -2,7 +2,7 @@ from Server import app
 
 from flask import render_template, request, url_for, redirect
 from Server.script import valid_login, matchPass, registerNewUser, errorMessage, connectDB, confirmationMessage \
-    , getAllCourses, getStudentsC, getStudentsRank, getTeamsRank, getConnectedBuzzers
+    , getAllCourses, getStudentsC, getStudentsRank, getTeamsRank, getConnectedBuzzers, updateCourseNameS
 
 
 # new changes
@@ -60,7 +60,7 @@ def logTeacher():
 
 
 # Returns all the courses.
-@app.route('/groups/getAllCourses', methods=['GET'])
+@app.route('/courses/getAllCourses', methods=['GET'])
 def getCoursesAll():
     """
         Returns a JSON object with this format:
@@ -75,7 +75,7 @@ def getCoursesAll():
 
 
 # Returns all the courses.
-@app.route('/groups/class/<course_code>/getStudents', methods=['GET'])
+@app.route('/courses/class/<course_code>/getStudents', methods=['GET'])
 def getStudentsFromCourse(course_code):
     """
         Returns a JSON object with this format:
@@ -90,7 +90,7 @@ def getStudentsFromCourse(course_code):
 
 
 # Returns the student ranking from this course
-@app.route('/groups/class/<course_code>/getStudentsRanking', methods=['GET'])
+@app.route('/courses/class/<course_code>/getStudentsRanking', methods=['GET'])
 def getStudentsRankingC(course_code):
     return getStudentsRank(course_code)
 
@@ -98,9 +98,16 @@ def getStudentsRankingC(course_code):
 # Returns the student ranking from this course
 
 
-@app.route('/groups/class/<course_code>/getTeamsRanking', methods=['GET'])
+@app.route('/courses/class/<course_code>/getTeamsRanking', methods=['GET'])
 def getTeamsRankingC(course_code):
     return getTeamsRank(course_code)
+
+
+@app.route('/courses/updateCourseName', methods=['POST'])
+def updateCourseNameR():
+    course_code = request.form["course_code"]
+    course_name = request.form["course_name"]
+    return updateCourseNameS(course_code, course_name)
 
 
 @app.route('/play/getAllCourses', methods=['GET'])
@@ -149,8 +156,8 @@ def logTeacher():
 '''
 
 
-@app.route('/groups')
-def groups(usr=None):
+@app.route('/courses')
+def courses(usr=None):
     return render_template('Groups.html')
 
 
@@ -170,7 +177,7 @@ def teacher(usr=None):
     return render_template('TeacherSide.html')
 
 
-@app.route('/groups/class/<course_code>')
+@app.route('/courses/class/<course_code>')
 def classroom(course_code):
     print(course_code)
     return render_template('class.html', course_code=str(course_code))

@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
     // Get the course_code from the URL
     course_code = window.location.href.split("/")[5];
+    const href = "/courses/class/" + course_code
+    document.getElementById("newStudentSubmit_form").setAttribute("href", href)
 
     // Update Functions: obtain and replace html input with server response
     getAllStudents()
@@ -16,9 +18,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 
-document.getElementById("icon").addEventListener("click", function() {
-    window.location.href = 'TeacherSide.html';
-});
 
 $(document).on('click', '.delete', function (event) {
     event.preventDefault();
@@ -168,7 +167,7 @@ function addStudentsInTable(){
             "                            </form>\n" +
             "                       </div>\n" +
             "                       <div class=\"modal-footer justify-content-center\">\n" +
-            "                           <a id=\"submit_form_" + s_number + "\" type=\"button\" class=\"btn rounded-pill\" style=\"background-color: #5bc0de\" href=\"/groups/class/" + course_code + "\">Update</a>\n" +
+            "                           <a id=\"submit_form_" + s_number + "\" type=\"button\" class=\"btn rounded-pill\" style=\"background-color: #5bc0de\" href=\"/courses/class/" + course_code + "\">Update</a>\n" +
             "                       </div>\n" +
             "                 </div>\n" +
             "            </div>\n" +
@@ -199,7 +198,7 @@ function addStudentsInTable(){
             "                        <p class=\"text-center\" id=\"ModalLabelDelete_" + s_number + "\"> Are you sure you want to delete this entry? </p>\n" +
             "                    </div>\n" +
             "                    <div class=\"modal-footer justify-content-center\">\n" +
-            "                        <a id=\"submit_form_delete_" + s_number + "\" type=\"button\" class=\"btn rounded-pill delete\" style=\"background-color: #5bc0de\" href=\"/groups/class/" + course_code + "\"> Delete </a>\n" +
+            "                        <a id=\"submit_form_delete_" + s_number + "\" type=\"button\" class=\"btn rounded-pill delete\" style=\"background-color: #5bc0de\" href=\"/courses/class/" + course_code + "\"> Delete </a>\n" +
             "                    </div>\n" +
             "                </div>\n" +
             "            </div>\n" +

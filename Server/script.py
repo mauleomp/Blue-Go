@@ -1,6 +1,6 @@
 import json
 from Server.db_handler import signup, checkLoginWithUser, checkLoginWithEmail, getCoursesNames \
-    , getStudentsFromCourseCode, getStudentRanking, getTeamRanking
+    , getStudentsFromCourseCode, getStudentRanking, getTeamRanking, updateCourseNameDB
 
 session_open = False
 images_set = ["https://images.unsplash.com/photo-1639815189096-f75717eaecfe?ixlib=rb-1.2.1&ixid"
@@ -79,6 +79,16 @@ def getAllCourses():
     return temp
 
 
+def updateCourseNameS(course_code, course_name):
+    response = updateCourseNameDB(course_code, course_name)
+
+    if response != "-1":
+        return confirmationMessage("Course name \'" + course_name + "\' with course code \'"
+                                   + course_code + "\' was updated successfully.")
+    else:
+        errorMessage("Course name could not be changed.")
+
+
 def getStudentsC(course_code):
     students = getStudentsFromCourseCode(course_code)
 
@@ -128,6 +138,8 @@ def getTeamsRank(course_code):
 
 # For testing purposes:
 counter = 0
+
+
 def getConnectedBuzzers():
     temp1 = "{ buzzers: [ { \"buzzerID\": 0, \"teamConnected\": true, \"teamName\": \"Team0\"}, { \"buzzerID\": 1, \"teamConnected\": true, \"teamName\": \"Team1\"}, { \"buzzerID\": 2, \"teamConnected\": false, \"teamName\": undefined}]}"
     temp2 = "{ buzzers: [ { \"buzzerID\": 0, \"teamConnected\": true, \"teamName\": \"Team0\"}, { \"buzzerID\": 1, \"teamConnected\": true, \"teamName\": \"Team1\"}, { \"buzzerID\": 2, \"teamConnected\": false, \"teamName\": undefined}]}"

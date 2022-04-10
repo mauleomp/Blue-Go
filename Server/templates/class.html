@@ -26,7 +26,7 @@
                 <a class="nav-link" href=" {{ url_for('playPage') }}" style="color: white"> Play </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href=" {{ url_for('groups') }}" style="color: #5bc0de"> Courses </a>
+                <a class="nav-link" href=" {{ url_for('courses') }}" style="color: #5bc0de"> Courses </a>
             </li>
         </ul>
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
@@ -57,7 +57,7 @@
             <div class="col col-9">
                 <div class="row-fluid" style="margin-top:1rem;">
                     <br>
-                    <button id="insertRow" class="btn" style="color:white; margin-left:560px; margin-bottom:-79px; font-size: small; width: fit-content; height: 38px;background-color:slategrey" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button id="insertRow" class="btn" style="color:white; margin-left:560px; margin-bottom:-79px; font-size: small; width: fit-content; height: 38px;background-color:slategrey" data-bs-toggle="modal" data-bs-target="#newStudentModal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                           <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                         </svg> NEW STUDENT
@@ -93,7 +93,7 @@
                             </form>
                         </div>
                         <div class="modal-footer justify-content-center">
-                            <a id="submit_form" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href="{{ url_for('classroom', course_code='12456') }}">Save changes</a>
+                            <a id="newStudentSubmit_form" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href="{{ url_for('classroom', course_code='0') }}">Save changes</a>
                         </div>
                     </div>
                 </div>

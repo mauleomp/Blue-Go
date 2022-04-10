@@ -123,6 +123,16 @@ def getTeamRanking(course_code):
             ["Team2", "11"]]
 
 
+def updateCourseNameDB(course_code, course_name):
+    try:
+        index = c_course_code.index(course_code)
+
+        c_course_name[index] = course_name
+        return "OK"
+    except ValueError:
+        return "-1"
+
+
 # conn = psycopg2.connect("dbname=BlueApp user=pi password=BlueAndGo")
 
 
