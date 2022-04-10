@@ -127,6 +127,24 @@ def getConnectedBuzzersS():
     return getConnectedBuzzers()
 
 
+@app.route('/buzzers/start_game', methods=['POST'])
+def postStartGame():
+    # TODO: call function startGame(game_mode)
+    return confirmationMessage("Game has started properly.")
+
+
+@app.route('/leaderboard/isAnswerCorrect', methods=['GET'])
+def getIsAnswerCorrectL():
+    # TODO: call function startGame(game_mode)
+    return confirmationMessage("Game has started properly.")
+
+
+@app.route('/leaderboard/getRanking', methods=['GET'])
+def getIsAnswerCorrectL():
+    # TODO: call function startGame(game_mode)
+    return confirmationMessage("Game has started properly.")
+
+
 '''
 @app.route('/teacher', methods=['POST, GET'])
 def logTeacher():

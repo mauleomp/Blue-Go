@@ -165,7 +165,7 @@ function getIsCorrect() {
         }
     };
     // URL route that is stored in server
-    const link = server + "/REPLACE_CUSTOM_WITH_URL" // If parameters, then append them here
+    const link = server + "/isAnswerCorrect" // If parameters, then append them here
 
     // Send the http GET request
     http.open("GET", link, true);
@@ -200,7 +200,7 @@ function getRanking() {
         }
     };
     // URL route that is stored in server
-    const link = server + "/REPLACE_CUSTOM_WITH_URL" // If parameters, then append them here
+    const link = server + "/getRanking" // If parameters, then append them here
 
     // Send the http GET request
     http.open("GET", link, true);

@@ -13,9 +13,26 @@
   <div class="container">
     <div class="card" style="padding: 5vh;">
       <div class="card-body">
-        <h5 id="text" class="card-title text-center">Connecting with the buzzers...</h5>
+        <h1>Connection status</h1>
         <br>
-        <br>
+        <div>
+            <div class="row">
+                <p> <span class="badge rounded-pill bg-success">Green</span> = Buzzer connected properly.</p>
+            </div>
+
+            <div class="row">
+                <p> <span style="margin-right: 9px" class="badge rounded-pill bg-danger">Red</span> = Buzzer has connection problems, please reset it.</p>
+            </div>
+
+            <div class="row">
+
+                <p><span style="color: black" class="badge rounded-pill bg-light">White</span>= Buzzer is not connected.</p>
+            </div>
+
+        </div>
+
+        <h5 id="text" style="margin-bottom: 15px" class="card-title text-center">Connecting with the buzzers</h5>
+
         <div id="buzzercontainer" class="card"></div>
         <br>
 {#        <div id="connectedplayers" class="card">#}
@@ -24,9 +41,8 @@
 {#            <div class="row">Judith</div>#}
 {#        </div>#}
         <br>
-        <br>
 
-        <button type="button" class="btn btn-warning" style="height: 10vh; width:100%;">
+        <button type="button" onclick="submitStartGame()" class="btn btn-warning" style="height: 10vh; width:100%;">
           <span style="font-size: 4vh;">Start Game!</span>
         </button>
       </div>
