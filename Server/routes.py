@@ -1,12 +1,6 @@
-#once the database is done, the init will rference this doc, anf the app routes will chnage to the blueprint reference
 from Server import app
-from Server.script import valid_login, matchPass, register
-
-import functools
-from flask import (Blueprint, flash, g, redirect, render_template, request, session, url_for)
-from werkzeug.security import check_password_hash, generate_password_hash
-#TODO import database
-bp = Blueprint('auth', __name__, url_prefix='/auth')
+from flask import render_template, request, url_for, redirect
+from Server.script import valid_login, matchPass, registerNewUser, errorMessage
 
 
 # new changes
@@ -22,8 +16,6 @@ def login():
         # modify valid login within the db
         if valid_login(request.form['email'], request.form['pass']):
             usr = request.form['email']
-            # session['user'] = usr
-            print(usr)
             return redirect(url_for('teacher'))
         else:
             error = 'Invalid username / password '
@@ -32,12 +24,13 @@ def login():
 
 @app.route('/signUp', methods=['POST', 'GET'])
 def signUp():
-    error = None
     if request.method == 'POST':
-        register(request.form['email'], request.form['username'],
-        request.form['pass'])
-        return redirect(url_for('teacher'))
-
+        if matchPass(request.form['pass'], request.form['pass2']):
+            registerNewUser(request.form['email'], request.form['username'],
+                            request.form['pass'])
+            return redirect(url_for('teacher'))
+        else:
+            return errorMessage("Passwords do not match.")
     elif request.method == 'GET':
         print('sign')
     return render_template('SignUp.html')
@@ -64,6 +57,11 @@ def groups(usr=None):
     return render_template('Groups.html')
 
 
+@app.route('/play/setup')
+def checkBuzzers(usr=None):
+    return render_template('checkbuzzers.html')
+
+
 @app.route('/play')
 def playPage(usr=None):
     return render_template('Play.html')
@@ -73,6 +71,7 @@ def playPage(usr=None):
 def teacher(usr=None):
     return render_template('TeacherSide.html')
 
+
 @app.route('/groups/class')
 def classroom(usr=None):
     return render_template('class.html')
@@ -80,3 +79,24 @@ def classroom(usr=None):
 @app.route('/game')
 def game(usr=None):
     return render_template('StartGame.html')
+
+@app.route('/profile')
+def profile(usr=None):
+    return render_template('Settings.html')
+
+@app.route('/buy')
+def buy(usr=None):
+    return render_template('Buy.html')
+
+@app.route('/buzzers')
+def buzzers(usr=None):
+    return render_template('checkbuzzers.html')
+
+
+@app.route('/leaderboard')
+def leaderboard(usr=None):
+    return render_template('leaderboard.html')
+
+@app.route('/help')
+def help(usr=None):
+    return render_template('Help&Contact.html')
