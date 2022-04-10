@@ -2,10 +2,15 @@ var selectedGroup;
 var selectedGamemode;
 
 function selectgroup(id) {
+  if (id === "Anonymously") {
+    document.getElementById("selectcoursetext").innerHTML = "Playing " + id;
+    document.getElementById("selectcoursefooter").innerHTML = "";
+  }
   if (selectedGroup === "Anonymously") {
     document.getElementById(selectedGroup).style.backgroundColor = "#6c757d";
-  }
-  else if (typeof selectedGroup !== "undefined") {
+    document.getElementById("selectcoursetext").innerHTML = "";
+    document.getElementById("selectcoursefooter").innerHTML = "Press to play anonymously!";
+  } else if (typeof selectedGroup !== "undefined") {
     document.getElementById(selectedGroup).style.backgroundColor = "rgba(255, 255, 255, 0.9)";
   }
   document.getElementById(id).style.backgroundColor = "#eeca66";
