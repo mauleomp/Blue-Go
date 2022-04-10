@@ -64,31 +64,31 @@
                     </button>
 
                     <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="newStudentModal" tabindex="-1" aria-labelledby="newStudentModalLabel" aria-hidden="true">
                 <div class="modal-dialog  modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <h4 class="modal-title text-center" id="exampleModalLabel"> Add a student to the group</h4>
+                            <h4 class="modal-title text-center" id="newStudentModalLabel"> Add a student to the group</h4>
                             <br>
-                            <form id="myForm" name="myForm">
+                            <form id="newStudentForm" name="newStudentForm">
                                 <div class="mb-3">
-                                    <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> STUDENT ID </label>
-                                    <input name="group_name" type="text" class="form-control" placeholder="s2356546">
+                                    <label for="add_s_number" class="form-label" style="color:darkgrey; font-size: x-small;"> STUDENT ID </label>
+                                    <input id="add_s_number" name="s_number" type="text" class="form-control" placeholder="s1234567">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> FIRST NAME </label>
-                                    <input name="group_name" type="text" class="form-control" placeholder="First name">
+                                    <label for="add_s_name" class="form-label" style="color:darkgrey; font-size: x-small;"> FIRST NAME </label>
+                                    <input id="add_s_name" name="s_name" type="text" class="form-control" placeholder="First name">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> LAST NAME </label>
-                                    <input name="group_name" type="text" class="form-control" placeholder="Last name">
+                                    <label for="add_s_lastname" class="form-label" style="color:darkgrey; font-size: x-small;"> LAST NAME </label>
+                                    <input id="add_s_lastname" name="s_lastname" type="text" class="form-control" placeholder="Last name">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> TEAMS </label>
-                                    <input name="group_name" type="text" class="form-control" placeholder="Team 1">
+                                    <label for="new_t_teams" class="form-label" style="color:darkgrey; font-size: x-small;"> TEAMS </label>
+                                    <input id="new_t_teams" name="t_teams" type="text" class="form-control" placeholder="Team X">
                                 </div>
                             </form>
                         </div>

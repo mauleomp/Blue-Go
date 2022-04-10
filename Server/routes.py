@@ -135,14 +135,12 @@ def postStartGame():
 
 @app.route('/leaderboard/isAnswerCorrect', methods=['GET'])
 def getIsAnswerCorrectL():
-    # TODO: call function startGame(game_mode)
-    return confirmationMessage("Game has started properly.")
+    return '{"iscorrect": true, "nextname":"Bas"}'
 
 
 @app.route('/leaderboard/getRanking', methods=['GET'])
-def getIsAnswerCorrectL():
-    # TODO: call function startGame(game_mode)
-    return confirmationMessage("Game has started properly.")
+def getRankingLeaderBoard():
+    return '{"totalpoints": 100, "ranking": [{"name": "Fatima", "points": 75, "pointsdifference": 10},{"name": "Bas", "points": 60, "pointsdifference": 5},{"name": "Judith", "points": 60, "pointsdifference": -10}]}';
 
 
 '''

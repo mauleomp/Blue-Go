@@ -157,10 +157,11 @@ function getIsCorrect() {
             //   or:      {"iscorrect": false, "nextname":"Fatima"}
 
             var response = JSON.parse(this.responseText);
+            console.log(response)
 
             // After just received the data, return the json as a resolved promise
             return new Promise(function(resolve, reject) {
-              resolve(repsonse);
+              resolve(response);
             });
         }
     };
