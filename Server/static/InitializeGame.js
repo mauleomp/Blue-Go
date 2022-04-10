@@ -53,8 +53,16 @@ function submitGamePreferences(){
     http.send(params)
 }
 
-function selectgroup(id) {
-  if (typeof selectedCourse !== "undefined") {
+function selectCourse(id) {
+  if (id === "Anonymously") {
+    document.getElementById("selectcoursetext").innerHTML = "Playing " + id;
+    document.getElementById("selectcoursefooter").innerHTML = "As anonymous";
+  }
+  if (selectedCourse === "Anonymously") {
+    document.getElementById(selectedCourse).style.backgroundColor = "#6c757d";
+    document.getElementById("selectcoursetext").innerHTML = "";
+    document.getElementById("selectcoursefooter").innerHTML = "Press to play anonymously!";
+  } else if (typeof selectedCourse !== "undefined") {
     document.getElementById(selectedCourse).style.backgroundColor = "rgba(255, 255, 255, 0.9)";
   }
   document.getElementById(id).style.backgroundColor = "#eeca66";
@@ -63,18 +71,17 @@ function selectgroup(id) {
   return false;
 }
 
+
 function selectGamemode(id) {
     if (typeof selectedGamemode !== "undefined" && selectedGamemode !== "Anonymously") {
         document.getElementById(selectedGamemode).style.backgroundColor = "rgba(255, 255, 255, 0.9)";
-
-    } else if (id !== "Anonymously") {
-        document.getElementById("Anonymously").style.backgroundColor = '#31C1D6';
 
     }
 
     document.getElementById(id).style.backgroundColor = '#eeca66';
     // document.getElementById("Anonymously").style.backgroundColor = '#eeca66';
-    document.getElementById("anonymoustext").innerHTML = "Playing " + id;
+    document.getElementById("selectcoursetext").innerHTML = "Playing " + id;
+
     selectedGamemode = id;
     if (id === 'Classic'){
         game_settings = classic_settings;
@@ -143,7 +150,7 @@ function createcoursecard(id, name, img) {
                 '<div class="card-body">\n' +
                     '<h5 class="card-title" style="color:black;">' + name + '</h5>\n' +
                 '</div>\n' +
-                '<a onclick="selectgroup(\'' + id + '\');" class="stretched-link"></a>' +
+                '<a onclick="selectCourse(\'' + id + '\');" class="stretched-link"></a>' +
             '</div>\n' +
         '</div>\n';
     return res;
