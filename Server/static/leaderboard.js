@@ -10,29 +10,36 @@ var leaderboardjson = {
 
 //--------------------
 //Global variables
-let nextround;
-let endgame = false;
+let countdowntime;
 let roundcount = 1;
 //---------------------
 
 // showrankings();
-playclassic();
+playrandom(5);
 
-//Starts the game with the questionnumber. Roundclassic then loops
+//Starts a classic game, who has 3 second countdowns as default
 function playclassic() {
-    roundclassic(1);
+    countdowntime = 3;
+    playround(3);
 }
 
-//Play one round of classic gamemode. This means, play with one question until it is answered correctly.
+//Starts a classic game, with a custom countdown time
+function playrandom(time) {
+    countdowntime = time;
+    playround();
+}
+
+//Play one round of classic or random gamemode. This means, play with one question until it is answered correctly.
+//Only difference in front end is that classic always plays with a 3 second countdown, while random countdown timer can be changed in the settings
 //After the question is answered correctly, waits for a response to either end or continue the game.
 //If next round is chosen, the function increases the roundcount and calls itself again.
-async function roundclassic() {
+async function playround() {
 
       closerankings();
       //Await countdown before starting the round
       await(new Promise((resolve, reject) => {
-        startcountdown(3);
-        setTimeout(() => resolve(), 4000);
+        startcountdown(countdowntime);
+        setTimeout(() => resolve(), 1000*(countdowntime+1));
       }));
       waitforpress(roundcount);
 
@@ -100,7 +107,7 @@ async function playnextround() {
                 //Game has ended, what now?
             } else if (json.questionnumber >= roundcount && json.status === "nextround") {
                 roundcount++;
-                roundclassic();
+                playround();
                 clearInterval(loop);
             }
         });
@@ -284,17 +291,15 @@ function getStatus() {
     });
 }
 
-//Play next round using global boolean when button is pressed
 document.getElementById("nextroundbutton").addEventListener('click', function() {
     postJSON({"questionnumber": roundcount, "status": "nextround"}, "/status");
 })
 
-//End game using global boolean when button is pressed
 document.getElementById("endgamebutton").addEventListener('click', function() {
     postJSON({"status": "endgame"}, "/status")
 })
 
-function postJSON(json, address){
+function postJSON(json, address) {
     return new Promise(function(resolve, reject) {
         // The URL of the server
         var server = window.location.href
