@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -10,7 +11,7 @@
 </head>
 <body>
 
-        <nav class="navbar fixed-top navbar-expand-sm p-2" style="background-color: #01253F ; border-bottom: 1px solid lightgrey;">
+        <nav class="navbar fixed-top navbar-expand-sm p-2" style="background-color: #01253F ;">
         <!-- Add the reference to the page -->
         <a class="navbar-brand" href="#">
             <img src="{{ url_for('static', filename='images/white_logo.png') }}" height="25" alt="Blue&GO! Logo" loading="lazy"/>
@@ -50,17 +51,15 @@
 
     <div class="container-fluid" style="margin-top: 3rem;">
     <div class="row flex-nowrap">
-        <div class="col-2 px-0">
-            <div style="margin-top: 30px; margin-left: 2rem;">
-                <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
+        <div class="col-2 text-center" style="background-color: #01253F;">
+                <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100 text-center" style="margin-top: 2rem;">
                     <div class="d-flex">
                       <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <button class="btn btn-outline-secondary" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" style="border:0px;">Profile</button>
-                        <button class="btn btn-outline-secondary" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false" style="margin-top: 20px; border:0px;">Settings</button>
+                        <button class="btn btn-block" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" style="background-color:white; width: 100%; border:0px;">Profile</button>
+                        <button class="btn" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false" style="background-color:white;margin-top: 20px; border:0px;">Settings</button>
                       </div>
                     </div>
                 </div>
-            </div>
         </div>
         <main class="col ps-md-2 pt-2">
             <div class="row">
