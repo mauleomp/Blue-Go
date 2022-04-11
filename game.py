@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Game:
     # mode: is the mode of the game that could be NORMAL,RANDOM, LIFETIMES
     # buzzers: list of buzzers, clients of the game

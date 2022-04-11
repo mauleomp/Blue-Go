@@ -87,14 +87,20 @@ async def handleMessage(message, key, game):
             if addr in game.getBuzzers():
                 buzz = game.getBuzzers()[addr]
                 buzz.setStudents(students)
-                #TODO: INTERACT WITH THE SERVER
+                # TODO: INTERACT WITH THE SERVER
             key.data.outb += '1'
         case 'signal':
             if game.getSate() == State.WAITING:
                 if checkQueue(key, game):
                     key.data.outb += 'Y'
                 else:
-                    key.data
+                    key.data.outb += 'N'
+
+        case 'turn':
+            if game.getSate() == State.INITIATE and game.getTurn() == key.data.addr:
+                key.data.outb += 'Y'
+            else:
+                key.data.out += 'N'
 
 
 # check the message and respond to it using key.data.outb += response in a byte
@@ -102,11 +108,13 @@ async def handleMessage(message, key, game):
 def checkQueue(key, game):
     if not game.getQueue():
         game.joinQueue(key)
+        game.setTurn(key.data.addr)
         game.setState(State.INITIATE)
         return True
     else:
         game.joinQueue(key)
         return False
+
 
 # returns the next key(buzzer) in list
 # use like:
@@ -116,10 +124,20 @@ if next != None:
     next.data.out += 'append the message'
 '''
 
+
+def correctAnswer(game, points: int = 10):
+    id = game.getTurn()
+    buzz = game.getBuzzers()[id]
+    buzz.increasePoints(points)
+    game.setTurn(None)
+
+
 def nextInQueue(game):
     game.getQueue().pop(0)
     if game.getQueue():
-        return game.getQueue()[0]
+        turn = game.getQueue()[0]
+        game.setTurn(turn.data.addr)
+        return
     else:
         None
 
@@ -250,10 +268,12 @@ async def activateIR(game):
     await destroy()
 
 
+# -------------------  FUNTIONS TO CALL FROM THE SERVER ----------------------
+
+
 async def initiateGame(mode):
     game = Game(mode)
     asyncio.run(initiateServer(game))
-
     # asyncio.run(activateIR(game))
     game.setState(State.SEARCHING)
     return game
@@ -263,3 +283,11 @@ async def startQuestion(game):
     game.setState(State.WAITING)
 
 
+async def finishGame(game):
+    game.setState(State.ENDGAME)
+    sel.close()
+
+
+
+
+from Server import app
