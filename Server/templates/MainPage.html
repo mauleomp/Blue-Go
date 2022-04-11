@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -154,7 +155,7 @@
                         <h5> Empower your students</h5> <br>
                             <p>Help every student learn anything with confidence, no matter what they’re striving to achieve. Using Blue&GO!, you can motivate your students quickly. </p>
                     <br>
-                     <a href="{{ url_for('buy') }}" class="link-primary"> Bring Blue&GO! to your class </a>
+                     <a onclick="button_click()" href="" class="link-primary"> Bring Blue&GO! to your class </a>
                     </div>
                     <div class="col" style="margin: 2rem;">
                         <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="img-fluid rounded" alt="Responsive image">
@@ -171,6 +172,9 @@
                     Buy it today!
                 </a>
             </div>
+
+            <div class="error"></div>
+
         </div>
 
         <div class="container-fluid p-4" style="background-color:white;"></div>
