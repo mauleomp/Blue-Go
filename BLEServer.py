@@ -1,61 +1,265 @@
+# IMPORTS FOR THE BLE SERVER
 import bluetooth
+import selectors
+import types
+import asyncio
+from game import Game, Buzzer, State
+# IMPORTS FOR IR CONTROLLER
+import RPi.GPIO as GPIO
+from time import time
+from threading import Thread
+
+pins = {"0xff18e7": "UP", "0xff4ab5": "DOWN", "0xff10ef": "LEFT", "0xff5aa5": "RIGHT", "0xff38c7": "OK"}
+
+global sel
+global state
+global mode
+global playing
+
+# VARIABLES FOR THE GAME AND THE SERVER
+sel = selectors.DefaultSelector()
+state = State.CREATE
+mode = "FAST"
+playing = False
 
 
-
-def displayDev():
-    print("Performing inquiry...")
-
-    nearby_devices = bluetooth.discover_devices(duration=8, lookup_names=True, flush_cache=True, lookup_class=False)
-
-    print("Found {} devices".format(len(nearby_devices)))
-    for addr, name in nearby_devices:
-        try:
-            print("   {} - {}".format(addr, name))
-        except UnicodeEncodeError:
-            print("   {} - {}".format(addr, name.encode("utf-8", "replace")))
-
-
-#def handleData(data):
-
-
-def initiateServer():
-    server_sock = bluetooth.BluetoothSoket(bluetooth.RFCOMM)
-    server_sock.bind(("", bluetooth.PORT_ANY))
-    server_sock.lsiten(1)
-
-    port = server_sock.getSockname()[1]
-    uuid = '28ffb42a-a8fd-11ec-b909-0242ac120002'
-
-    bluetooth.advertuse_servise(server_sock, "RaspServer", service_id = uuid,
+# ----------------------- FUNCTIONS OF THE SERVER -------------------------------------
+async def initiateServer(game):
+    # unique uuid to connect with. used previously when connecting with BLE
+    uuid = "ca52bb51-cab6-4122-ad2c-df2d5f733d04"
+    # creation of the server socket with the mac and port
+    server_sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+    server_sock.bind(('B8:27:EB:94:BC:91', bluetooth.PORT_ANY))
+    server_sock.listen(1)
+    # Advertise the service with our socket and uuid
+    bluetooth.advertise_service(server_sock, "blue", service_id=uuid,
                                 service_classes=[uuid, bluetooth.SERIAL_PORT_CLASS],
-                                profiles=[bluetooth.SERIAL_PORT_PROFILE]
+                                profiles=[bluetooth.SERIAL_PORT_PROFILE],
+                                # protocols=[bluetooth.OBEX_UUID]
                                 )
-    print("WAITING FOR CONECTIONS ON RFCOMM CHANNEL.. ", port)
-
-    client_sock, client_info = server_sock.accept()
-    print("Accepted conection from", client_info)
+    print("Listening on : ", server_sock.getsockname())
+    # trying to handle different sockets within a selector
+    sel.register(server_sock, selectors.EVENT_READ, data=None)
 
     try:
+
         while True:
-            data = client_sock.recv(1024)
-            if not data:
-                break
-            ###we will handle the data here
-            #handleData(data)
-            print("DATA: ", data)
-    except OSError:
-        #correct and handlle the error
+            events = sel.select(timeout=None)
+            for key, mask in events:
+                if key.data is None:
+                    await acceptClient(key.fileobj, game)
+                else:
+                    await servConnexion(key, mask, game)
+    except KeyboardInterrupt:
+        print("keyboard interruption. ")
         pass
-
-    print("DISCONECTED..")
-
-    client_sock.close()
-    server_sock.close()
-    print("ALL FINISHED")
+    finally:
+        sel.close()
 
 
-if __name__ == '__main__':
-    initiateServer()
+async def acceptClient(sock, game):
+    client_sock, client_info = sock.accept()
+    print("Accepted connection from", client_info)
+    data = types.SimpleNamespace(addr=client_info, inb=b"", outb=b"")
+    events = selectors.EVENT_READ | selectors.EVENT_WRITE
+    sel.register(client_sock, events, data=data)
+    # TODO: get the information from the database and create a class
+    if client_info in game.getBuzzer():
+        pass
+    else:
+        group = ""
+        buzzer = Buzzer(client_sock, group)
+        game.appendBuzzer(client_info, buzzer)
 
+
+async def handleMessage(message, key, game):
+    addr = key.data.addr
+    msg = message.split(':')
+    command = msg[0]
+    match command:
+        case 'game_started':
+            if game.getSate == State.INITIATE or game.getSate == State.WAITING:
+                key.data.outb += 'Y'
+            else:
+                key.data.outb += 'N'
+        case 'students':
+            students = command[1].split(';')
+            if addr in game.getBuzzers():
+                buzz = game.getBuzzers()[addr]
+                buzz.setStudents(students)
+                #TODO: INTERACT WITH THE SERVER
+            key.data.outb += '1'
+        case 'signal':
+            if game.getSate() == State.WAITING:
+                if checkQueue(key, game):
+                    key.data.outb += 'Y'
+                else:
+                    key.data
+
+
+# check the message and respond to it using key.data.outb += response in a byte
+# this function should check if the person is the first
+def checkQueue(key, game):
+    if not game.getQueue():
+        game.joinQueue(key)
+        game.setState(State.INITIATE)
+        return True
+    else:
+        game.joinQueue(key)
+        return False
+
+# returns the next key(buzzer) in list
+# use like:
+'''
+next = nextInQueue
+if next != None:
+    next.data.out += 'append the message'
+'''
+
+def nextInQueue(game):
+    game.getQueue().pop(0)
+    if game.getQueue():
+        return game.getQueue()[0]
+    else:
+        None
+
+
+async def servConnexion(key, mask, game):
+    sock = key.fileobj
+    data = key.data
+    # Event to read the data received from the buzzer
+    if mask & selectors.EVENT_READ:
+        msg = sock.recv(1024)
+        if msg:
+            # handle the data here
+            await handleMessage(key, msg, game)
+            print(data.addr, " : ", msg)
+        else:
+            print("Closing the connection with ", data.addr)
+            sel.register(sock)
+            sock.close()
+
+    # Event to send the correspondent data to the user
+    if mask & selectors.EVENT_WRITE:
+        if data.outb:
+            print(f"Sending back {data.outb!r} to {data.addr}")
+            sent = sock.send(data.outb)
+            data.outb = data.outb[sent:]
+
+
+# -------------------------------- FUNCTIONS OF THE CONTROLLER ------------------------------
+
+#  up the pin reading on the raspberry board
+def setup():
+    GPIO.setmode(GPIO.BOARD)  # Numbers GPIOs by physical location
+    GPIO.setup(11, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+
+# obtain the binary data from the ir remote
+async def binary_aquire(pin, duration):
+    # aquires data as quickly as possible
+    t0 = time()
+    results = []
+    while (time() - t0) < duration:
+        results.append(GPIO.input(pin))
+    return results
+
+
+# catch read the pulsation from the certain pin
+async def on_ir_receive(pinNo, bouncetime=150):
+    # when edge detect is called (which requires less CPU than constant
+    # data acquisition), we acquire data as quickly as possible
+    data = await binary_aquire(pinNo, bouncetime / 1000.0)
+    if len(data) < bouncetime:
+        return
+    rate = len(data) / (bouncetime / 1000.0)
+    pulses = []
+    i_break = 0
+    # detect run lengths using the acquisition rate to turn the times in to microseconds
+    for i in range(1, len(data)):
+        if (data[i] != data[i - 1]) or (i == len(data) - 1):
+            pulses.append((data[i - 1], int((i - i_break) / rate * 1e6)))
+            i_break = i
+    # decode ( < 1 ms "1" pulse is a 1, > 1 ms "1" pulse is a 1, longer than 2 ms pulse is something else)
+    # does not decode channel, which may be a piece of the information after the long 1 pulse in the middle
+    outbin = ""
+    for val, us in pulses:
+        if val != 1:
+            continue
+        if outbin and us > 2000:
+            break
+        elif us < 1000:
+            outbin += "0"
+        elif 1000 < us < 2000:
+            outbin += "1"
+    try:
+        return int(outbin, 2)
+    except ValueError:
+        # probably an empty code
+        return None
+
+
+# clean the GPIO port for not reading IR signals
+def destroy():
+    GPIO.cleanup()
+
+
+async def handleCommand(command, game):
+    match command:
+        # TODO: handle the outputs from here
+        case "UP":
+            print(">>UP")
+        case "DOWN":
+            print(">>DOWN")
+        case "LEFT":
+            print(">>LEFT")
+        case "RIGHT":
+            print(">>RIGHT")
+        case "OK":
+            if game.getSate() == State.CREATE or game.getSate == State.SEARCHING:
+                print("on create")
+                # do something
+            else:
+                pass
+
+            print(">>OK")
+
+
+async def activateIR(game):
+    setup()
+    try:
+        print("Starting IR Listener")
+        while True:
+            GPIO.wait_for_edge(11, GPIO.FALLING)
+            code = await on_ir_receive(11)
+            if code:
+                intCode = str(hex(code))
+                if intCode in pins:
+                    # Handle the commands here
+                    command = pins[intCode]
+                    await handleCommand(command, game)
+
+            else:
+                print("Invalid code")
+    except KeyboardInterrupt:
+        pass
+    except RuntimeError as err:
+        print(err)
+        pass
+    print("Quitting")
+    await destroy()
+
+
+async def initiateGame(mode):
+    game = Game(mode)
+    asyncio.run(initiateServer(game))
+
+    # asyncio.run(activateIR(game))
+    game.setState(State.SEARCHING)
+    return game
+
+
+async def startQuestion(game):
+    game.setState(State.WAITING)
 
 
