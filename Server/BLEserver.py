@@ -24,6 +24,8 @@ playing = False
 
 
 # ----------------------- FUNCTIONS OF THE SERVER -------------------------------------
+#This function is in charge of creating the socket for connecting the bluetooth devices
+
 async def initiateServer(game):
     # unique uuid to connect with. used previously when connecting with BLE
     uuid = "ca52bb51-cab6-4122-ad2c-df2d5f733d04"
@@ -57,6 +59,7 @@ async def initiateServer(game):
         sel.close()
 
 
+# This function handles the new  clients connected to the server
 async def acceptClient(sock, game):
     client_sock, client_info = sock.accept()
     print("Accepted connection from", client_info)
@@ -72,35 +75,42 @@ async def acceptClient(sock, game):
         game.appendBuzzer(client_info, buzzer)
 
 
+#this function handles the message received by a certain buzzer
 async def handleMessage(message, key, game):
     addr = key.data.addr
     msg = message.split(':')
     command = msg[0]
-    match command:
-        case 'game_started':
-            if game.getSate == State.INITIATE or game.getSate == State.WAITING:
+    if command == 'game_started':
+        if game.getSate == State.INITIATE or game.getSate == State.WAITING:
+            key.data.outb += 'Y'
+        else:
+            key.data.outb += 'N'
+
+    elif command == 'students':
+        students = command[1].split(';')
+        if addr in game.getBuzzers():
+            buzz = game.getBuzzers()[addr]
+            buzz.setStudents(students)
+            # TODO: INTERACT WITH THE SERVER
+        key.data.outb += '1'
+    elif command == 'signal':
+        if game.getSate() == State.WAITING:
+            if checkQueue(key, game):
                 key.data.outb += 'Y'
             else:
                 key.data.outb += 'N'
-        case 'students':
-            students = command[1].split(';')
-            if addr in game.getBuzzers():
-                buzz = game.getBuzzers()[addr]
-                buzz.setStudents(students)
-                # TODO: INTERACT WITH THE SERVER
-            key.data.outb += '1'
-        case 'signal':
-            if game.getSate() == State.WAITING:
-                if checkQueue(key, game):
-                    key.data.outb += 'Y'
-                else:
-                    key.data.outb += 'N'
+        elif game.getSate() == State.INITIATE:
+            if key not in game.getQueue():
+                game.joinQueue(key)
 
-        case 'turn':
-            if game.getSate() == State.INITIATE and game.getTurn() == key.data.addr:
-                key.data.outb += 'Y'
-            else:
-                key.data.out += 'N'
+    elif command == 'turn':
+        if game.getSate() == State.INITIATE and game.getTurn() == key.data.addr:
+            key.data.outb += 'Y'
+        else:
+            key.data.out += 'N'
+
+    else:
+        key.data.outb += '0'
 
 
 # check the message and respond to it using key.data.outb += response in a byte
@@ -123,25 +133,34 @@ next = nextInQueue
 if next != None:
     next.data.out += 'append the message'
 '''
+#called when commands says that is a wrong answer
+def wrongAnswer(game):
+    # Todo: check if the points decrease
+    next = nextInQueue(game)
+    if next != None:
+        game.setTurn(next)
+        return True
+    else:
+        return False
 
 
-def correctAnswer(game, points: int = 10):
-    id = game.getTurn()
-    buzz = game.getBuzzers()[id]
-    buzz.increasePoints(points)
-    game.setTurn(None)
-
-
+# method to return the next socket in queue
 def nextInQueue(game):
     game.getQueue().pop(0)
     if game.getQueue():
         turn = game.getQueue()[0]
-        game.setTurn(turn.data.addr)
-        return
+        return turn
     else:
         None
 
+# Method that is called when buzzer gives a good answer
+def correctAnswer(game, points: int = 10):
+    id = game.getTurn().data.addr
+    buzz = game.getBuzzers()[id]
+    buzz.increasePoints(points)
+    game.setTurn(None)
 
+#This method handles the connection (it handles the received )
 async def servConnexion(key, mask, game):
     sock = key.fileobj
     data = key.data
