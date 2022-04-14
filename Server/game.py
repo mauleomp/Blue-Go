@@ -1,18 +1,29 @@
 from enum import Enum
+'''
+MODES:
 
+- FAST
+- RANDOM
+- LIVES
+'''
 
 class Game:
     # mode: is the mode of the game that could be NORMAL,RANDOM, LIFETIMES
     # buzzers: list of buzzers, clients of the game
 
-    def __init__(self, mode):
+    def __init__(self, mode, teams, settings):
         self.ranking = list()
         self.mode = mode
         self.buzzers = dict()
         self.queue = list()
-        self.sate: State = State.CREATE
+        self.sate: State = State.CONNECTING
         self.playing = False
         self.turn = None
+        self.teams = teams
+        self.isAnon = False
+        if teams is None:
+            True
+
 
     @property
     def getMode(self):
@@ -41,6 +52,14 @@ class Game:
     @property
     def getTurn(self):
         return self.turn
+
+    @property
+    def isAnon(self):
+        return self.isAnon
+
+    @property
+    def getTeams(self):
+        return self.teams
 
     def setPlaying(self, is_playing):
         self.playing = is_playing
@@ -93,11 +112,12 @@ class Buzzer:
     def getStudents(self):
         return self.students
 
-    def increasePoints(self, p: int):
+    def increasePoints(self, p: int = 10):
         self.points = self.points + p
 
-    def decreasePoints(self, p: int):
-        self.points = self.points - p
+    def decreasePoints(self, p: int = 3):
+        if self.points > 2:
+            self.points = self.points - p
 
     def restLive(self):
         self.lives = self.lives - 1
@@ -107,8 +127,18 @@ class Buzzer:
 
 
 class State(Enum):
+    CONNECTING = 1
+    # INITIATE = 2
+    WAITING = 2
+    VERIFYING = 3
+    ENDGAME = 4
+
+
+    '''
     CREATE = 1
     SEARCHING = 2
     INITIATE = 3
     WAITING = 4
     ENDGAME = 5
+    '''
+
