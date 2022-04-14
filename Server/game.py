@@ -11,7 +11,7 @@ class Game:
     # mode: is the mode of the game that could be NORMAL,RANDOM, LIFETIMES
     # buzzers: list of buzzers, clients of the game
 
-    def __init__(self, mode, teams, settings):
+    def __init__(self, mode, teams):
         self.ranking = list()
         self.mode = mode
         self.buzzers = dict()
@@ -22,7 +22,7 @@ class Game:
         self.teams = teams
         self.isAnon = False
         if teams is None:
-            True
+            self.isAnon = True
 
 
     @property

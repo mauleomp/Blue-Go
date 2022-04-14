@@ -3,7 +3,7 @@ import bluetooth
 import selectors
 import types
 import asyncio
-from Server.game import Game, Buzzer, State
+from game import Game, Buzzer, State
 # IMPORTS FOR IR CONTROLLER
 import RPi.GPIO as GPIO
 from time import time
@@ -26,7 +26,8 @@ async def initiateServer(game):
     uuid = "ca52bb51-cab6-4122-ad2c-df2d5f733d04"
     # creation of the server socket with the mac and port
     server_sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
-    server_sock.bind(('B8:27:EB:94:BC:91', bluetooth.PORT_ANY))
+    addr = bluetooth.read_local_bdaddr()[0]
+    server_sock.bind((addr, bluetooth.PORT_ANY))
     server_sock.listen(1)
     # Advertise the service with our socket and uuid
     bluetooth.advertise_service(server_sock, "blue", service_id=uuid,
@@ -62,13 +63,10 @@ async def acceptClient(sock, game):
     events = selectors.EVENT_READ | selectors.EVENT_WRITE
     sel.register(client_sock, events, data=data)
     # TODO: get the information from the database and create a class
-    if client_info in game.getBuzzers():
-        pass
-    else:
-        group = len(game.getBuzzers.keys()) + 1
-        buzzer = Buzzer(client_sock, group)
-        game.appendBuzzer(client_info, buzzer)
-        # TODO: send a notification to the server (WebApp)
+    group = len(game.getBuzzers.keys()) + 1
+    buzzer = Buzzer(client_sock, group)
+    game.appendBuzzer(client_info, buzzer)
+    # TODO: send a notification to the server (WebApp)
 
 
 # This method handles the connection (it handles the received )
@@ -80,8 +78,9 @@ async def servConnexion(key, mask, game):
         msg = sock.recv(1024)
         if msg:
             # handle the data here
-            await handleMessage(key, msg, game)
+            ans = handleMessage(key, msg, game)
             print(data.addr, " : ", msg)
+            data.outb += ans
         else:
             print("Closing the connection with ", data.addr)
             sel.register(sock)
@@ -96,15 +95,17 @@ async def servConnexion(key, mask, game):
 
 
 # this function handles the message received by a certain buzzer
-async def handleMessage(message, key, game):
+def handleMessage(key, message, game):
     addr = key.data.addr
-    msg = message.split(':')
+    mbytes = message.decode('utf-8')
+    print(type(mbytes),mbytes)
+    msg = mbytes.split(';')
     command = msg[0]
+    ans = None
     if command == 'game_mode':
-        if game.isAnon():
-            key.data.outb += 'Y'
-        else:
-            key.data.outb += 'N'
+        key.fileobj.send()
+        ans = bytes('Y', 'utf-8')
+        print(">>game mode received")
 
     elif command == 'students':
         students = command[1].split(';')
@@ -112,25 +113,49 @@ async def handleMessage(message, key, game):
             buzz = game.getBuzzers()[addr]
             buzz.setStudents(students)
             # TODO: INTERACT WITH THE SERVER
-        key.data.outb += '1'
+        ans = bytes('1', 'utf-8')
+        print(">>students received")
 
     elif command == 'game_started':
         if game.getSate == State.WAITING:
-            key.data.outb += 'Y'
+            ans = bytes('Y', 'utf-8')
         else:
-            key.data.outb += 'N'
+            ans = bytes('N', 'utf-8')
+
+        print(" >>game started received")
 
     elif command == 'signal':
         if game.getSate() == State.WAITING:
             if checkQueue(key, game):
-                key.data.outb += 'Y'
+                ans = bytes('Y', 'utf-8')
             else:
-                key.data.outb += 'N'
+                ans = bytes('N', 'utf-8')
         elif game.getSate() == State.VERIFYING:
             if key not in game.getQueue():
                 game.joinQueue(key)
         elif game.getSate() == State.ENDGAME:
-            key.data.outb += '0'
+            ans = bytes(9)
+        print(">> signal received")
+
+    elif command == 'question-finished':
+        if game.getSate() == State.VERIFYING:
+            if game.getTurn() == key.data.addr:
+                ans = bytes('5', 'utf-8')
+            else:
+                ans = bytes('N', 'utf-8')
+        elif game.getSate()== State.ENDGAME or game.getSate() == State.WAITING:
+            ans = bytes('Y', 'utf-8')
+        print(">> question finished received")
+
+    elif command == 'game-finished':
+        if game.getSate() == State.ENDGAME():
+            ans = bytes('Y', 'utf-8')
+        else:
+            ans = bytes('N', 'utf-8')
+    else:
+        ans = bytes('Y', 'utf-8')
+        print(">>ERROR")
+    return ans
 
 
 
@@ -292,17 +317,22 @@ MODE could be : 'FAST' 'RANDOM' 'LIVES'
 teams: array of the group of students
 settings: array of the settings
 '''
-async def initiateGame(mode, teams, settings ):
-    game = Game(mode, teams, settings)
+def initiateGame(mode, teams):
+    game = Game(mode, teams)
     asyncio.run(initiateServer(game))
     # asyncio.run(activateIR(game))
     return game
 
 
-async def startQuestion(game):
+def startQuestion(game):
     game.setState(State.WAITING)
 
 
-async def finishGame(game):
+def finishGame(game):
     game.setState(State.ENDGAME)
     sel.close()
+
+
+if __name__ == "__main__":
+    game = initiateGame('FAST', None)
+    startQuestion(game)
