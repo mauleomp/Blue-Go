@@ -11,18 +11,31 @@ class Game:
     # mode: is the mode of the game that could be NORMAL,RANDOM, LIFETIMES
     # buzzers: list of buzzers, clients of the game
 
-    def __init__(self, mode, teams):
+    def __init__(self, mode, teams, conf: list = None):
+        self.plus_points = 10
+        self.rest_points = 5
+        self.time = 0
+        self.conf4 = 0
         self.ranking = list()
         self.mode = mode
         self.buzzers = dict()
         self.queue = list()
         self.sate: State = State.CONNECTING
-        self.playing = False
         self.turn = None
         self.teams = teams
         self.isAnon = False
         if teams is None:
             self.isAnon = True
+        if conf is not None:
+            self.plus_points = conf[0]
+            self.rest_points = conf[1]
+            if mode == "RANDOM":
+                self.time = conf[2]
+            elif mode == "LIVES":
+                self.time = conf[2]
+                self.conf4 = conf[3]
+
+
 
 
     @property
@@ -42,10 +55,6 @@ class Game:
         return self.sate
 
     @property
-    def isPlaying(self):
-        return self.playing
-
-    @property
     def getRanking(self):
         return self.ranking
 
@@ -60,9 +69,6 @@ class Game:
     @property
     def getTeams(self):
         return self.teams
-
-    def setPlaying(self, is_playing):
-        self.playing = is_playing
 
     def setState(self, newState):
         self.sate = newState
@@ -123,15 +129,18 @@ class Buzzer:
         self.lives = self.lives - 1
 
     def setStudents(self, lst):
+        #TODO: handle the students here
+        # do an algorithm that puts only the new students
         self.students = lst
 
 
 class State(Enum):
     CONNECTING = 1
-    # INITIATE = 2
-    WAITING = 2
-    VERIFYING = 3
-    ENDGAME = 4
+    INITIATE = 2
+    WAITING = 3
+    VERIFYING = 4
+    QFINISHED = 5
+    ENDGAME = 6
 
 
     '''

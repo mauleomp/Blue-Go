@@ -3,7 +3,7 @@ import bluetooth
 import selectors
 import types
 import asyncio
-from game import Game, Buzzer, State
+from Server.game import Game, Buzzer, State
 # IMPORTS FOR IR CONTROLLER
 import RPi.GPIO as GPIO
 from time import time
@@ -98,33 +98,35 @@ async def servConnexion(key, mask, game):
 def handleMessage(key, message, game):
     addr = key.data.addr
     mbytes = message.decode('utf-8')
-    print(type(mbytes),mbytes)
-    msg = mbytes.split(';')
+    bars = mbytes.split('\r')
+    msg = bars[0].split(';')
     command = msg[0]
     ans = None
     if command == 'game_mode':
-        key.fileobj.send()
-        ans = bytes('Y', 'utf-8')
         print(">>game mode received")
+        if game.isAnon:
+            ans = bytes('Y', 'utf-8')
+        else:
+            ans = bytes('N', 'utf-8')
 
     elif command == 'students':
+        print(">>students received")
         students = command[1].split(';')
-        if addr in game.getBuzzers():
+        if addr in game.getBuzzers().keys():
             buzz = game.getBuzzers()[addr]
             buzz.setStudents(students)
             # TODO: INTERACT WITH THE SERVER
         ans = bytes('1', 'utf-8')
-        print(">>students received")
 
     elif command == 'game_started':
+        print(" >>game started received")
         if game.getSate == State.WAITING:
             ans = bytes('Y', 'utf-8')
         else:
             ans = bytes('N', 'utf-8')
 
-        print(" >>game started received")
-
     elif command == 'signal':
+        print(">> signal received")
         if game.getSate() == State.WAITING:
             if checkQueue(key, game):
                 ans = bytes('Y', 'utf-8')
@@ -135,7 +137,6 @@ def handleMessage(key, message, game):
                 game.joinQueue(key)
         elif game.getSate() == State.ENDGAME:
             ans = bytes(9)
-        print(">> signal received")
 
     elif command == 'question-finished':
         if game.getSate() == State.VERIFYING:
@@ -143,7 +144,7 @@ def handleMessage(key, message, game):
                 ans = bytes('5', 'utf-8')
             else:
                 ans = bytes('N', 'utf-8')
-        elif game.getSate()== State.ENDGAME or game.getSate() == State.WAITING:
+        elif game.getSate() == State.ENDGAME or game.getSate() == State.WAITING:
             ans = bytes('Y', 'utf-8')
         print(">> question finished received")
 
@@ -153,8 +154,8 @@ def handleMessage(key, message, game):
         else:
             ans = bytes('N', 'utf-8')
     else:
-        ans = bytes('Y', 'utf-8')
         print(">>ERROR")
+        ans = bytes('0', 'utf-8')
     return ans
 
 
@@ -203,6 +204,7 @@ def correctAnswer(game):
     game.setTurn(None)
 
 def nextQuestion(game):
+    game.setState(State.WAITING)
     game.setTurn(None)
 
 
@@ -264,25 +266,39 @@ def destroy():
     GPIO.cleanup()
 
 
-async def handleCommand(command, game):
-    match command:
-        # TODO: handle the outputs from here
-        case "UP":
-            print(">>UP")
-        case "DOWN":
-            print(">>DOWN")
-        case "LEFT":
-            print(">>LEFT")
-        case "RIGHT":
-            print(">>RIGHT")
-        case "OK":
-            if game.getSate() == State.CONECTING:
-                print("on create")
-                # do something
+def handleCommand(command, game):
+
+    # TODO :  call the server on each interaction
+    if command == "OK":
+        if game.getSate() == State.CONNECTING:
+            if len(game.getBuzzers()) > 0:
+                game.setState(State.INITIATE)
             else:
                 pass
+        elif game.getSate() == State.INITIATE:
+            game.setState(State.WAITING)
 
-            print(">>OK")
+        elif game.getSate() == State.QFINISHED:
+            game.setState(State.WAITING)
+
+    elif command == "UP":
+        if game.getSate() == State.VERIFYING:
+            game.setState(State.QFINISHED)
+            nextQuestion(game)
+
+    elif command == "LEFT":
+        if game.getSate() == State.VERIFYING:
+            wrongAnswer(game)
+
+    elif command == "RIGHT":
+        if game.setState() == State.VERIFYING:
+            game.setState(State.QFINISHED)
+            correctAnswer(game)
+    elif command == "DOWN":
+        if game.getSate() == State.QFINISHED:
+            game.setState(State.ENDGAME)
+
+
 
 
 async def activateIR(game):
