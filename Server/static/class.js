@@ -1,15 +1,18 @@
 
 $('#collapse_overall').on('shown.bs.collapse', function () {
     document.getElementById('first').style.color = 'blue';
+    document.getElementById('second').style.color = 'grey';
 });
 $('#collapse_overall').on('hidden.bs.collapse', function () {
-    document.getElementById('first').style.color = 'grey';
+    $('#collapse_overall').collapse("show");
 });
 $('#collapse_groups').on('shown.bs.collapse', function () {
     document.getElementById('second').style.color = 'blue';
+    document.getElementById('first').style.color = 'grey';
 });
 $('#collapse_groups').on('hidden.bs.collapse', function () {
     document.getElementById('second').style.color = 'grey';
+    $('#collapse_groups').collapse("show");
 });
 
 var all_students = []
