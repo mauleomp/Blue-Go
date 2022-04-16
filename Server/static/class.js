@@ -1,3 +1,17 @@
+
+$('#collapse_overall').on('shown.bs.collapse', function () {
+    document.getElementById('first').style.color = 'blue';
+});
+$('#collapse_overall').on('hidden.bs.collapse', function () {
+    document.getElementById('first').style.color = 'grey';
+});
+$('#collapse_groups').on('shown.bs.collapse', function () {
+    document.getElementById('second').style.color = 'blue';
+});
+$('#collapse_groups').on('hidden.bs.collapse', function () {
+    document.getElementById('second').style.color = 'grey';
+});
+
 var all_students = []
 var s_ranking = []
 var c_ranking = []
