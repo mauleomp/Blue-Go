@@ -64,7 +64,7 @@ async def acceptClient(sock, game):
     sel.register(client_sock, events, data=data)
     # TODO: get the information from the database and create a class
     group = len(game.getBuzzers.keys()) + 1
-    buzzer = Buzzer(client_sock, group)
+    buzzer = Buzzer(client_sock, group, game.getPoints(), game.getRestPoints())
     game.appendBuzzer(client_info, buzzer)
     # TODO: send a notification to the server (WebApp)
 
@@ -104,7 +104,7 @@ def handleMessage(key, message, game):
     ans = None
     if command == 'game_mode':
         print(">>game mode received")
-        if game.isAnon:
+        if game.isAnon():
             ans = bytes('Y', 'utf-8')
         else:
             ans = bytes('N', 'utf-8')
@@ -132,6 +132,7 @@ def handleMessage(key, message, game):
                 ans = bytes('Y', 'utf-8')
             else:
                 ans = bytes('N', 'utf-8')
+            correctAnswer(game)
         elif game.getSate() == State.VERIFYING:
             if key not in game.getQueue():
                 game.joinQueue(key)
@@ -323,7 +324,7 @@ async def activateIR(game):
         print(err)
         pass
     print("Quitting")
-    await destroy()
+    destroy()
 
 
 # -------------------  FUNTIONS TO CALL FROM THE SERVER ----------------------

@@ -12,10 +12,13 @@ class Game:
     # buzzers: list of buzzers, clients of the game
 
     def __init__(self, mode, teams, conf: list = None):
+        # --------SETTINGS OF THE GAME ----------------
         self.plus_points = 10
         self.rest_points = 5
         self.time = 0
         self.conf4 = 0
+
+        # -------- ATRIBUTES OF THE GAME ----------------
         self.ranking = list()
         self.mode = mode
         self.buzzers = dict()
@@ -23,9 +26,11 @@ class Game:
         self.sate: State = State.CONNECTING
         self.turn = None
         self.teams = teams
-        self.isAnon = False
+        self.anonymous = False
+
+        # -------- MANAGE ACCORDING THE SETTINGS  ------------
         if teams is None:
-            self.isAnon = True
+            self.anonymous = True
         if conf is not None:
             self.plus_points = conf[0]
             self.rest_points = conf[1]
@@ -35,9 +40,7 @@ class Game:
                 self.time = conf[2]
                 self.conf4 = conf[3]
 
-
-
-
+    # ----------------- GET PROPERTIES OF THE GAME --------------------
     @property
     def getMode(self):
         return self.mode
@@ -64,11 +67,22 @@ class Game:
 
     @property
     def isAnon(self):
-        return self.isAnon
+        return self.anonymous
 
     @property
     def getTeams(self):
         return self.teams
+
+    @property
+    def getPoints(self):
+        return self.plus_points
+
+    @property
+    def getRestPoints(self):
+        return self.rest_points
+
+    def getTime(self):
+        return self.time
 
     def setState(self, newState):
         self.sate = newState
@@ -91,10 +105,12 @@ class Game:
 
 
 class Buzzer:
-    def __init__(self, button, group):
+    def __init__(self, button, group, to_sum, to_rest):
         self.button = button
         self.group = group
         self.students = list()
+        self.increment = to_sum
+        self.decrease = to_rest
         self.points = 0
         self.lives = 10
 
@@ -118,20 +134,21 @@ class Buzzer:
     def getStudents(self):
         return self.students
 
-    def increasePoints(self, p: int = 10):
-        self.points = self.points + p
+    def increasePoints(self):
+        self.points = self.points + self.increment
 
-    def decreasePoints(self, p: int = 3):
-        if self.points > 2:
-            self.points = self.points - p
+    def decreasePoints(self):
+        if self.points > (self.decrease - 1):
+            self.points = self.points - self.decrease
 
     def restLive(self):
         self.lives = self.lives - 1
 
     def setStudents(self, lst):
-        #TODO: handle the students here
-        # do an algorithm that puts only the new students
-        self.students = lst
+        if len(lst) > len(self.students):
+            for student in lst:
+                if student not in self.students:
+                    self.students.append(student)
 
 
 class State(Enum):
