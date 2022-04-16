@@ -115,15 +115,9 @@ function addStudentsInTable(){
             "            <div class=\"modal-dialog  modal-dialog-centered\">\n" +
             "                 <div class=\"modal-content\">\n" +
             "                      <div class=\"modal-header justify-content-end\" style=\"background-color: #5bc0de; height: 3rem;\">\n" +
-            "                          <button type=\"button\" class=\"btn\" data-bs-dismiss=\"modal\" aria-label=\"Close\">\n" +
-            "                               <script src=\"https://cdn.lordicon.com/lusqsztk.js\"></script>\n" +
-            "                               <lord-icon\n" +
-            "                                       src=\"https://cdn.lordicon.com/fdzomkrp.json\"\n" +
-            "                                       trigger=\"loop-on-hover\"\n" +
-            "                                       colors=\"black\"\n" +
-            "                                       style=\"width:30px;height:30px\">\n" +
-            "                               </lord-icon>\n" +
-            "                           </button>\n" +
+            "                          <button type=\"button\" class=\"btn close\" data-bs-dismiss=\"modal\" aria-label=\"Close\">\n" +
+            "                                <span aria-hidden=\"true\">&times;</span>\n" +
+            "                         </button>\n" +
             "                       </div>\n" +
             "                       <div class=\"modal-body\">\n" +
             "                            <h4 class=\"modal-title text-center\" id=\"ModalLabel_" + s_number + "\"> Edit entry </h4>\n" +
@@ -184,14 +178,8 @@ function addStudentsInTable(){
             "            <div class=\"modal-dialog  modal-dialog-centered\">\n" +
             "                <div class=\"modal-content\">\n" +
             "                    <div class=\"modal-header justify-content-end\" style=\"background-color: #5bc0de; height: 3rem;\">\n" +
-            "                         <button type=\"button\" class=\"btn\" data-bs-dismiss=\"modal\" aria-label=\"Close\">\n" +
-            "                                <script src=\"https://cdn.lordicon.com/lusqsztk.js\"></script>\n" +
-            "                                <lord-icon\n" +
-            "                                       src=\"https://cdn.lordicon.com/fdzomkrp.json\"\n" +
-            "                                       trigger=\"loop-on-hover\"\n" +
-            "                                       colors=\"black\"\n" +
-            "                                       style=\"width:30px;height:30px\">\n" +
-            "                                </lord-icon>\n" +
+            "                         <button type=\"button\" class=\"btn close\" data-bs-dismiss=\"modal\" aria-label=\"Close\">\n" +
+            "                                <span aria-hidden=\"true\">&times;</span>\n" +
             "                         </button>\n" +
             "                    </div>\n" +
             "                    <div class=\"modal-body\">\n" +
@@ -233,9 +221,10 @@ function addStudentRankInTable() {
         console.log(s_rank)
 
         const html = "" +
-            "<tr>\n" +
-            "    <th scope=\"row\">" + index + "</th>\n" +
-            "    <td> " + s_name + " <br> " + s_lastname + "</td>\n" +
+            "<tr class=\"border-5\" style=\"background-color:#5bc0de;\">\n" +
+            "    <td> " + s_name + " " + s_lastname + "</td>\n" +
+            "    <td> " + "</td>\n" +
+            "    <td> " + "</td>\n" +
             "    <td> " + s_rank + " </td>\n" +
             "</tr>\n"
 
@@ -264,9 +253,10 @@ function addCourseRankInTable() {
         c_rank = c_ranking['c_ranking'][x].c_rank
 
         const html = "" +
-            "<tr>\n" +
-            "    <th scope=\"row\">" + index + "</th>\n" +
+           "<tr class=\"border-5\" style=\"background-color:#5bc0de;\">\n" +
             "    <td> " + c_name + " </td>\n" +
+            "    <td> " + "</td>\n" +
+            "    <td> " + "</td>\n" +
             "    <td> " + c_rank + " </td>\n" +
             "</tr>\n"
 

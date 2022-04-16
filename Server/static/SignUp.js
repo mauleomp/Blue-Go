@@ -58,7 +58,7 @@ function show_password2() {
 var check = function() {
   if (document.getElementById('pass').value == document.getElementById('pass2').value) {
       document.getElementById('pass2').classList.remove("is-invalid");
-
+      document.getElementById('message').innerHTML = '';
   } else {
     document.getElementById('pass2').classList.add("is-invalid");
     document.getElementById('pass2').classList.remove("is-valid");

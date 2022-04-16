@@ -62,7 +62,7 @@
                         <!-- <small id="passwordHelpInline" class="text-muted"> Must be 8-20 characters long, and contain at least 1 capital letter. </small> -->
 
                         <label for="pass2" class="form-control-label" style="color:lightgrey; font-size: x-small;">CONFIRM PASSWORD </label>
-                        <div class="input-group mb-3">
+                        <div class="input-group">
                             <input id="pass2" name="pass2" type="password" class="form-control" placeholder="*******" required="true" aria-label="password" aria-describedby="basic-addon1" onkeyup='check();' />
                             <div class="input-group-append">
                             <span class="input-group-text" onclick="show_password2()">
@@ -71,8 +71,9 @@
                             </span>
                           </div>
                         </div>
-                        <small style="margin-top: -100rem;"><span id='message'></span></small>
+                        <small><span id='message'></span></small>
                         <div class="invalid-feedback"> Invalid password </div>
+                        <br>
                         <br>
                         <input id="submit" type="submit" class="btn btn-outline-primary btn-lg btn-block" style="font-weight: lighter;" value="Sign up"/>
                     </form>
