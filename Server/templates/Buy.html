@@ -28,24 +28,45 @@
              </div>
         </nav>
 
-        <div class="text-center" style="margin-top:5rem; margin-left: 50px; margin-right: 50px;">
-            <p> You will be able to order from Blue&GO! soon. Sign up below to be the first to know </p>
-             <form id="myForm" name="myForm">
-                <div class="mb-3" style="width: 300px;">
-                    <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> EMAIL ADDRESS </label>
-                    <input id="group_name" name="group_name" type="text" class="form-control" placeholder="Example email address">
-                </div>
-            </form>
-        </div>
+        <div class="container-fluid" style="margin-top: 0rem;">
+        <div class="row">
+            <div class="col-md-1"></div>
 
+            <div id="column1" class="col-md-5" style="height: 90vh;">
+               <div id="inside1" class="d-grid" style="height: 80vh; margin-left: 2rem; margin-right: 3rem; margin-top: 5rem; border-radius: 3%;">
+                    <img class="border rounded" src="{{ url_for('static', filename='images/buy.jpg') }}" style="width: 25rem; border-radius: 3%;">
+               </div>
+            </div>
+
+            <div id="column2" class="col-md-5" style="height: 90vh;">
+                <div id="inside2" class="d-grid" style="height: 80vh; margin-left: 2rem; margin-right: 3rem; margin-top: 5rem; border-radius: 3%;">
+                    <div style="margin-top: 1rem; margin-left:2rem;">
+                        <h1> Buy Blue&GO!</h1>
+                        <br>
+                        <p> Unfortunatelly, Blue&GO! is not yet available for purchase. But don't worry, you will be able to order Blue&GO! soon.
+                            <br> Sign up below to be the first to know! </p>
+                             <form id="myForm" name="myForm">
+                                <div class="mb-3" style="width: 300px;">
+                                    <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> EMAIL ADDRESS </label>
+                                    <input id="group_name" name="group_name" type="text" class="form-control" placeholder="Enter your email address here">
+                                </div>
+                            </form>
+                    </div>
+                </div>
+                <div class="float-end">
+                    <a href="/" class="btn btn-primary" style="margin-top:-225px;">
+                        Home Page
+                    </a>
+                </div>
+             </div>
+
+        </div>
+        </div>
 
         <div class="container-fluid p-4" style="background-color:white;"></div>
 
         <footer class="text-left text-black fixed-bottom" style="background-color: #F6F7FB;">
           <div class="container-fluid p-4">
-              <p style="font-size: small;"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
-              </svg> blue&go@gmail.com </p>
               © 2022 Blue&GO!
           </div>
         </footer>
