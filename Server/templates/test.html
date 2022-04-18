@@ -11,194 +11,21 @@
 </head>
 <body>
 
-<p>
-  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Link with href
-  </a>
-  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Button with data-bs-target
-  </button>
-</p>
-<div class="collapse" id="collapseExample">
-  <div class="card card-body" style="border: none">
-    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-  </div>
-</div>
+
+        <div id="buzzercontainer" class="card" style="margin-top: 2rem; margin: 8rem;">
+            <div class="col-2 container">
+              <div id="buzzer" class="card buzzer text-center" style="margin-bottom: 10px">
+                  <div class="card-body">
+                     <p class="card-text"> 1 </p>
+                  </div>
+              </div>
+              <div style="padding-left: 38px; padding-bottom: 20px">
+                  <label style="text-align: center" for="buzzer"> Team 2</label>
+              </div>
+            </div>
+        </div>
 
 
-<div class="row" style="margin-left: 2rem; margin-right:3rem; margin-top:2rem;">
-    <form id="form1">
-      <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-      </div>
-      <button id="submit" type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
-
-
-    <div class="row justify-content-end" style="margin-left: 2rem; margin-right:3rem; margin-top:2rem;">
-        <button id="insertRow" class="btn btn-primary" style="width: fit-content;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-            </svg>
-            Add New Row
-        </button>
-    </div>
-    <div class="row" style="margin-left: 2rem; margin-right:2rem;">
-    <div class="col">
-
-        <table id="table" class="table table-responsive table-striped table-hover"
-			 data-search="true"
-             data-toggle="table"
-             data-height="460"
-             data-pagination="true"
-             data-show-export="true"
-             data-export-data-type="all">
-            <thead>
-                <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">First name</th>
-                  <th scope="col">Last name</th>
-                  <th scope="col">Teams</th>
-                  <th scope="col">Actions</th>
-                </tr>
-          </thead>
-          <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>
-                      <button class="btn btn-primary rounded-pill"> Blue House </button> <button class="btn btn-light rounded-pill"> Team 1 </button>
-                  </td>
-                  <td>
-                      <button class="btn btn-link text-decoration-none" style="color: black;" data-bs-toggle="dropdown">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                              <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                          </svg>
-                      </button>
-                      <ul class="dropdown-menu dropdown-menu-end">
-                          <li><a class="dropdown-item" href="#">Edit</a></li>
-                          <div class="dropdown-divider"></div>
-                          <li><a class="dropdown-item" href="#">Remove</a></li>
-                      </ul>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>
-                      <button class="btn btn-success rounded-pill"> Green House </button>
-                  </td>
-                  <td>
-                      <button class="btn btn-link text-decoration-none" style="color: black;" data-bs-toggle="dropdown">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                              <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                          </svg>
-                      </button>
-                      <ul class="dropdown-menu dropdown-menu-end">
-                          <li><a class="dropdown-item" href="#">Edit</a></li>
-                          <div class="dropdown-divider"></div>
-                          <li><a class="dropdown-item" href="#">Remove</a></li>
-                      </ul>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td> </td>
-                  <td> </td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td> </td>
-                  <td> </td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td> </td>
-                  <td> </td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td> </td>
-                  <td> </td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td> </td>
-                  <td> </td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td> </td>
-                  <td> </td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td> </td>
-                  <td> </td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td> </td>
-                  <td> </td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td> </td>
-                  <td> </td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td> </td>
-                  <td> </td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td> </td>
-                  <td> </td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td> </td>
-                  <td> </td>
-                </tr>
-
-          </tbody>
-        </table>
-    </div>
-</div>
 
 
 <script src="{{ url_for('static', filename='test.js') }}"></script>

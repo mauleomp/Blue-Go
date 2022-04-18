@@ -220,3 +220,7 @@ def buy2(usr=None):
 @app.route('/help')
 def help(usr=None):
     return render_template('Help&Contact.html')
+
+@app.route('/test')
+def test(usr=None):
+    return render_template('Test.html')
