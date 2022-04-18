@@ -13,7 +13,7 @@
 
     <nav class="navbar fixed-top navbar-expand-sm p-2" style="background-color: #01253F ; border-bottom: 1px solid lightgrey;">
         <!-- Add the reference to the page -->
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href=" {{ url_for('main2') }}">
             <img src="{{ url_for('static', filename='images/white_logo.png') }}" height="25" alt="Blue&GO! Logo" loading="lazy"/>
            <img src="{{ url_for('static', filename='images/white_letter_logo.png') }}" height="15" onmouseover="hover()" alt="Blue&GO"/>
         </a>
@@ -138,8 +138,8 @@
     <div class="container-fluid" style="margin-bottom: 4rem;">
         <div id="row1" class="row" style="margin-left: 2rem; margin-right: 2rem;">
             <h1 class="display-6" style="font-size: large;"> Favourites</h1>
-            <div id="favourites" class="row row-cols-1 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-xs-1 g-4" style="margin-top: -1rem;">
 
+            <div id="favourites" class="row row-cols-1 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-xs-1 g-4" style="margin-top: -1rem;">
                 <div class="col">
                     <div class="card">
                         <img src="https://images.unsplash.com/photo-1642698166111-1e736132b0ee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" class="card-img" alt="...">
@@ -161,12 +161,11 @@
                         </div>
                     </div>
                 </div>
-
             </div>
+
        </div>
 
 
-        <!-- Quizas estaria bien hacer con pop up en lugar de nueva pagina -->
 
         <div id="row2" class="row" style="margin-left: 2rem; margin-right: 2rem; margin-top: 2rem;">
             <h1 class="display-6" style="font-size: large;margin-top: 2rem;"> All groups</h1>

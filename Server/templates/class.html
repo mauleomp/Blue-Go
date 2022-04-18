@@ -14,7 +14,7 @@
 
     <nav class="navbar fixed-top navbar-expand-sm p-2" style="background-color: #01253F ; border-bottom: 1px solid lightgrey;">
         <!-- Add the reference to the page -->
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href=" {{ url_for('main2') }}">
             <img src="{{ url_for('static', filename='images/white_logo.png') }}" height="25" alt="Blue&GO! Logo" loading="lazy"/>
             <img src="{{ url_for('static', filename='images/white_letter_logo.png') }}" height="15" onmouseover="hover()" alt="Blue&GO"/>
         </a>

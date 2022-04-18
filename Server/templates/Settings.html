@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -10,9 +11,9 @@
 </head>
 <body>
 
-        <nav class="navbar fixed-top navbar-expand-sm p-2" style="background-color: #01253F ; border-bottom: 1px solid lightgrey;">
+        <nav class="navbar fixed-top navbar-expand-sm p-2" style="background-color: #01253F ;">
         <!-- Add the reference to the page -->
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href=" {{ url_for('main2') }}">
             <img src="{{ url_for('static', filename='images/white_logo.png') }}" height="25" alt="Blue&GO! Logo" loading="lazy"/>
             <img src="{{ url_for('static', filename='images/white_letter_logo.png') }}" height="15" onmouseover="hover()" alt="Blue&GO"/>
         </a>
@@ -37,9 +38,10 @@
                         </svg>
                   </button>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Help and feedback</a></li>
+                    <li><a class="dropdown-item" href=" {{ url_for('profile') }}">Profile</a></li>
+                    <li><a class="dropdown-item" href=" {{ url_for('profile') }}">Settings</a></li>
+                    <li><a class="dropdown-item" href=" {{ url_for('help') }}">Contact</a></li>
+                    <li><a class="dropdown-item" href=" {{ url_for('help') }}">Help</a></li>
                     <div class="dropdown-divider"></div>
                     <li><a class="dropdown-item" href="#">Log out</a></li>
                   </ul>
@@ -50,24 +52,25 @@
 
     <div class="container-fluid" style="margin-top: 3rem;">
     <div class="row flex-nowrap">
-        <div class="col-2 px-0">
-            <div style="margin-top: 30px; margin-left: 2rem;">
-                <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
+        <div class="col-2 text-center" style="background-color: #01253F;">
+                <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100 text-center" style="margin-top: 2rem;">
                     <div class="d-flex">
                       <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <button class="btn btn-outline-secondary" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" style="border:0px;">Profile</button>
-                        <button class="btn btn-outline-secondary" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false" style="margin-top: 20px; border:0px;">Settings</button>
+                        <button class="btn" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" style="background-color:white; width: 100%; border:0px;">Profile</button>
+                        <button class="btn" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false" style="background-color:white;margin-top: 20px; border:0px;">Settings</button>
+                        <button class="btn" id="v-pills-contact-tab" data-bs-toggle="pill" data-bs-target="#v-pills-contact" type="button" role="tab" aria-controls="v-pills-contact" aria-selected="false" style="background-color:white;margin-top: 20px; border:0px;">Contact</button>
+                        <button class="btn" id="v-pills-help-tab" data-bs-toggle="pill" data-bs-target="#v-pills-help" type="button" role="tab" aria-controls="v-pills-help" aria-selected="false" style="background-color:white;margin-top: 20px; border:0px;">Help</button>
                       </div>
                     </div>
                 </div>
-            </div>
         </div>
         <main class="col ps-md-2 pt-2">
             <div class="row">
                 <div class="col-10">
-                    <div style="margin-left:4rem; margin-right:4rem;">
+                    <div style="margin-left:4rem; margin-right:4rem; margin-top: 2rem">
                         <div class="tab-content" id="v-pills-tabContent">
-                            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" style="margin-top: 30px;">
+                            <!-- Profile -->
+                            <div class="tab-pane active fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" style="margin-top: 30px;" >
                                 <p style="font-size:x-large"> <b> Profile </b></p>
                                 <form>
                                     <div class="mb-3">
@@ -128,6 +131,7 @@
                                     <a class="btn btn-primary rounded-pill" style="margin: 1rem;margin-bottom: 1rem;"> Save</a>
                                 </footer>
                             </div>
+                            <!--Settings-->
                             <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab" style="margin-top: 30px;">
                                 <p style="font-size:x-large"> <b> Settings </b></p>
                                 <br>
@@ -168,6 +172,60 @@
                                     <a class="btn btn-primary rounded-pill" style="margin: 1rem;margin-bottom: 1rem;"> Save</a>
                                 </footer>
                             </div>
+
+                            <!--Contact-->
+                            <div class="tab-pane fade" id="v-pills-contact" role="tabpanel" aria-labelledby="v-pills-contact-tab" style="margin-top: 30px;">
+                                <p style="font-size:x-large"> <b> Contact us </b></p>
+                                <p> We will try to get back to you as soon as possible </p>
+                                <br>
+                                <div class="row g-3">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <label for="first_name2" class="form-label" style="color:lightgrey; font-size: x-small; margin-top: 20px;">FIRST NAME</label>
+                                                    <input type="text" class="form-control" id="first_name2" value="" required>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <label for="last_name2" class="form-label" style="color:lightgrey; font-size: x-small; margin-top: 20px;">LAST NAME</label>
+                                                    <input type="text" class="form-control" id="last_name2" value="" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="email2" class="form-label" style="color:lightgrey; font-size: x-small; margin-top: 20px;">EMAIL ADDRESS</label>
+                                            <input type="email" class="form-control" id="email2" placeholder="you@example.com" required="">
+                                            <div class="invalid-feedback">
+                                                Please enter a valid email address for us to respond to.
+                                            </div>
+                                        </div>
+
+                                        <br>
+                                        <div class="col-12">
+                                            <label for="input" class="form-label" style="color:lightgrey; font-size: x-small; margin-top: 20px;">MESSAGE</label>
+                                            <textarea class="form-control" id="input" rows="5"></textarea>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <footer class="page-footer fixed-bottom font-small text-center justify-content-center align-items-center" style="background-color: #F6F7FB; border-top: 1px solid lightgrey;">
+                                    <a class="btn btn-primary rounded-pill" style="margin-top: 1rem; margin-bottom: 1rem;"> Submit</a>
+                                </footer>
+                            </div>
+
+                            <!--Help-->
+                            <div class="tab-pane fade" id="v-pills-help" role="tabpanel" aria-labelledby="v-pills-settings-tab" style="margin-top: 30px;">
+                                <p style="font-size:x-large"> <b> Help </b></p>
+                                <br>
+                                <footer class="page-footer fixed-bottom font-small text-center justify-content-center align-items-center" style="background-color: #F6F7FB; border-top: 1px solid lightgrey;">
+                                    <a class="btn btn-primary rounded-pill" style="margin-top: 1rem; margin-bottom: 1rem;"> Reset</a>
+                                    <a class="btn btn-primary rounded-pill" style="margin: 1rem;margin-bottom: 1rem;"> Save</a>
+                                </footer>
+                            </div>
+
                           </div>
                     </div>
                 </div>
@@ -176,10 +234,7 @@
     </div>
 </div>
 
-
-
-
-
+<script src="{{ url_for('static', filename='settings.js') }}"></script>
 
 </body>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>

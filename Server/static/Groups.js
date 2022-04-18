@@ -60,6 +60,7 @@ function removeFromFavourites(course_code){
 
 function addToFavourites(course_code){
 
+    document.getElementById("favourites").innerHTML = document.getElementById("favourites").innerHTML + innerHTML
 }
 
 function deleteCourse(course_code){

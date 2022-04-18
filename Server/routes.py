@@ -207,6 +207,14 @@ def buzzers(usr=None):
 def leaderboard(usr=None):
     return render_template('leaderboard.html')
 
+@app.route('/main2')
+def main2(usr=None):
+    return render_template('MainPage2.html')
+
+@app.route('/buy2')
+def buy2(usr=None):
+    return render_template('Buy2.html')
+
 
 @app.route('/help')
 def help(usr=None):

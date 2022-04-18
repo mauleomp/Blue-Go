@@ -5,26 +5,48 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-      <link rel="stylesheet" href="{{ url_for('static', filename='MainPage.css') }}">
-      <title>Main Page</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='MainPage2.css') }}">
+      <title>Main Page 2</title>
     </head>
     <body>
+
         <!-- Navbar -->
-        <nav class="navbar fixed-top navbar-expand-sm p-2" style="background-color: white; border-bottom: 1px solid lightgrey;">
-            <!-- Add the reference to the page -->
-            <a class="navbar-brand" href="/">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" height="25" alt="Blue&GO! Logo" loading="lazy"/>
-                <img src="{{ url_for('static', filename='images/letters_logo.png') }}" height="15" onmouseover="hover()" alt="Blue&GO"/>
-            </a>
-            <ul class="navbar-nav ml-auto">
-                <a  type="button" class="btn btn-link" href="{{ url_for('login') }}" >
-                    Login
-                </a>
-                <a type="button" class="btn btn-primary" href="{{ url_for('signUp') }}">
-                    Sign up
-                </a>
-            </ul>
-        </nav>
+       <nav class="navbar fixed-top navbar-expand-sm p-2" style="background-color: white; border-bottom: 1px solid lightgrey;">
+           <!-- Add the reference to the page -->
+           <a class="navbar-brand" href=" {{ url_for('main2') }}">
+               <img src="{{ url_for('static', filename='images/logo.png') }}" height="25" alt="Blue&GO! Logo" loading="lazy"/>
+               <img src="{{ url_for('static', filename='images/letters_logo.png') }}" height="15" onmouseover="hover()" alt="Blue&GO"/>
+           </a>
+           <ul class="navbar-nav">
+               <li class="nav-item">
+                   <a class="nav-link active" aria-current="page" href=" {{ url_for('teacher') }}" style="color: #0152C0"> Home </a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href=" {{ url_for('playPage') }}" style="color: #0152C0"> Play </a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href=" {{ url_for('courses') }}" style="color: #0152C0"> Courses </a>
+               </li>
+           </ul>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <div class="dropdown dropleft">
+                <button class="btn btn-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0152C0" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                    </svg>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href=" {{ url_for('profile') }}">Profile</a></li>
+                    <li><a class="dropdown-item" href=" {{ url_for('profile') }}">Settings</a></li>
+                    <li><a class="dropdown-item" href=" {{ url_for('help') }}">Contact</a></li>
+                    <li><a class="dropdown-item" href=" {{ url_for('help') }}">Help</a></li>
+                    <div class="dropdown-divider"></div>
+                    <li><a class="dropdown-item" href="#">Log out</a></li>
+                </div>
+            </div>
+        </div>
+    </nav>
 
         <div id="header_carousel" class="container-fluid p-5" style="margin-top: 50px;">
 
@@ -154,7 +176,7 @@
                         <h5> Empower your students</h5> <br>
                             <p>Help every student learn anything with confidence, no matter what they’re striving to achieve. Using Blue&GO!, you can motivate your students quickly. </p>
                     <br>
-                     <a href="{{ url_for('buy') }}" class="link-primary"> Bring Blue&GO! to your class </a>
+                     <a href="{{ url_for('buy2') }}" class="link-primary"> Bring Blue&GO! to your class </a>
                     </div>
                     <div class="col" style="margin: 2rem;">
                         <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="img-fluid rounded" alt="Responsive image">
@@ -167,7 +189,7 @@
                 <br>
                 <p style="font-size: 2em"> Get started with Blue&GO! </p>
                 Create your account today for better engagement during laboratories, lectures and practicals. <br> <br>
-                <a type="button" class="btn btn-primary" href="{{ url_for('buy') }}">
+                <a type="button" class="btn btn-primary" href="{{ url_for('buy2') }}">
                     Buy it today!
                 </a>
             </div>
@@ -184,7 +206,6 @@
           </div>
         </footer>
 
-        <script src="{{ url_for('static', filename='MainPage.js') }}"></script>
     </body>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>

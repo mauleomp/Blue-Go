@@ -10,5 +10,3 @@ function signup(){
 function hover(){
 
 };
-
-
