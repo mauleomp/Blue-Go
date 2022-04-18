@@ -7,6 +7,7 @@ from Server.game import Game, Buzzer, State
 # IMPORTS FOR IR CONTROLLER
 import RPi.GPIO as GPIO
 from time import time
+import timeit
 from threading import Thread
 
 pins = {"0xff18e7": "UP", "0xff4ab5": "DOWN", "0xff10ef": "LEFT", "0xff5aa5": "RIGHT", "0xff38c7": "OK"}
@@ -47,6 +48,7 @@ async def initiateServer(game):
                     await acceptClient(key.fileobj, game)
                 else:
                     await servConnexion(key, mask, game)
+            await asyncio.sleep(0.01)
     except KeyboardInterrupt:
         print("keyboard interruption. ")
         pass
@@ -64,7 +66,10 @@ async def acceptClient(sock, game):
     sel.register(client_sock, events, data=data)
     # TODO: get the information from the database and create a class
     group = len(game.getBuzzers.keys()) + 1
-    buzzer = Buzzer(client_sock, group, game.getPoints(), game.getRestPoints())
+    points = game.getPoints()
+    to_rest = game.getRestPoints()
+    lives = game.getLives()
+    buzzer = Buzzer(client_sock, group, points, to_rest, lives)
     game.appendBuzzer(client_info, buzzer)
     # TODO: send a notification to the server (WebApp)
 
@@ -102,12 +107,14 @@ def handleMessage(key, message, game):
     msg = bars[0].split(';')
     command = msg[0]
     ans = None
+
     if command == 'game_mode':
-        print(">>game mode received")
         if game.isAnon():
             ans = bytes('Y', 'utf-8')
+
         else:
             ans = bytes('N', 'utf-8')
+
 
     elif command == 'students':
         print(">>students received")
@@ -117,6 +124,7 @@ def handleMessage(key, message, game):
             buzz.setStudents(students)
             # TODO: INTERACT WITH THE SERVER
         ans = bytes('1', 'utf-8')
+        startQuestion(game)
 
     elif command == 'game_started':
         print(" >>game started received")
@@ -124,20 +132,11 @@ def handleMessage(key, message, game):
             ans = bytes('Y', 'utf-8')
         else:
             ans = bytes('N', 'utf-8')
+        correctAnswer(game)
+        print(game.updateRanking())
 
     elif command == 'signal':
-        print(">> signal received")
-        if game.getSate() == State.WAITING:
-            if checkQueue(key, game):
-                ans = bytes('Y', 'utf-8')
-            else:
-                ans = bytes('N', 'utf-8')
-            correctAnswer(game)
-        elif game.getSate() == State.VERIFYING:
-            if key not in game.getQueue():
-                game.joinQueue(key)
-        elif game.getSate() == State.ENDGAME:
-            ans = bytes(9)
+        ans = handleGameMode(key, game)
 
     elif command == 'question-finished':
         if game.getSate() == State.VERIFYING:
@@ -161,11 +160,41 @@ def handleMessage(key, message, game):
 
 
 
+def handleGameMode(key, game):
+    asn = bytes('0', 'utf-8')
+
+    if game.getMode() == 'FAST' or game.getMode() == 'FLives':
+        if game.getSate() == State.WAITING:
+            if checkQueue(key, game):
+                ans = bytes('Y', 'utf-8')
+            else:
+                ans = bytes('N', 'utf-8')
+            correctAnswer(game)
+        elif game.getSate() == State.VERIFYING:
+            if key not in game.getQueue():
+                game.joinQueue(key)
+        elif game.getSate() == State.ENDGAME:
+            ans = bytes('9', 'utf-8')
+    elif game.getMode() == 'RANDOM' or game.getMode() == 'RLIVES':
+        # TODO needs to be implemennted
+        if game.getSate() == State.WAITING:
+            tm = timeit.default_timer()
+            if (tm - game.getSt()) < game.getTime()*100:
+                game.joinQueue(key.data.addr)
+                ans  = bytes('N', 'utf-8')
+
+    return ans
+
+
+
+
+
 
 # check the message and respond to it using key.data.outb += response in a byte
 # this function should check if the person is the first
 # it will add it to the queue, otherwise
 def checkQueue(key, game):
+
     if not game.getQueue():
         game.joinQueue(key)
         game.setTurn(key.data.addr)
@@ -179,12 +208,21 @@ def checkQueue(key, game):
 # called when commands says that is a wrong answer
 def wrongAnswer(game):
     # Todo: check if the points decrease
-    next = nextInQueue(game)
-    if next != None:
-        game.setTurn(next)
-        return True
-    else:
-        return False
+    id = game.getTurn()
+    buzz = game.getBuzzers()[id]
+    buzz.decreasePoints()
+    if game.getMode() == 'RLIVES' or game.getMode() == 'FLIVES':
+        buzz.restLive()
+
+    if game.getMode() == 'FAST' or game.getMode() == 'FLIVES':
+        next = nextInQueue(game)
+        if next != None:
+            game.setTurn(next)
+        else:
+            game.setMode(State.QFINISHED)
+            # TODO: notify the front//
+
+
 
 
 # method to return the next socket in queue
@@ -199,14 +237,22 @@ def nextInQueue(game):
 
 # Method that is called when buzzer gives a good answer
 def correctAnswer(game):
-    id = game.getTurn().data.addr
+    id = game.getTurn()
     buzz = game.getBuzzers()[id]
     buzz.increasePoints()
-    game.setTurn(None)
+    nextQuestion(game)
 
 def nextQuestion(game):
-    game.setState(State.WAITING)
     game.setTurn(None)
+    game.setState(State.QFINISHED)
+    if game.getMode() == 'RANDOM' or game.getMode() == 'RLIVES':
+        game.setState(timeit.default_timer())
+
+def startQuestion(game):
+    game.setState(State.WAITING)
+    if game.getMode() == 'RANDOM' or game.getMode() == 'RLIVES':
+        game.setSt(timeit.default_timer())
+
 
 
 
@@ -219,7 +265,7 @@ def setup():
 
 
 # obtain the binary data from the ir remote
-async def binary_aquire(pin, duration):
+def binary_aquire(pin, duration):
     # aquires data as quickly as possible
     t0 = time()
     results = []
@@ -229,10 +275,10 @@ async def binary_aquire(pin, duration):
 
 
 # catch read the pulsation from the certain pin
-async def on_ir_receive(pinNo, bouncetime=150):
+def on_ir_receive(pinNo, bouncetime=150):
     # when edge detect is called (which requires less CPU than constant
     # data acquisition), we acquire data as quickly as possible
-    data = await binary_aquire(pinNo, bouncetime / 1000.0)
+    data = binary_aquire(pinNo, bouncetime / 1000.0)
     if len(data) < bouncetime:
         return
     rate = len(data) / (bouncetime / 1000.0)
@@ -308,7 +354,7 @@ async def activateIR(game):
         print("Starting IR Listener")
         while True:
             GPIO.wait_for_edge(11, GPIO.FALLING)
-            code = await on_ir_receive(11)
+            code = on_ir_receive(11)
             if code:
                 intCode = str(hex(code))
                 if intCode in pins:
@@ -318,6 +364,7 @@ async def activateIR(game):
 
             else:
                 print("Invalid code")
+            await asyncio.sleep(0.01)
     except KeyboardInterrupt:
         pass
     except RuntimeError as err:
@@ -334,15 +381,13 @@ MODE could be : 'FAST' 'RANDOM' 'LIVES'
 teams: array of the group of students
 settings: array of the settings
 '''
-def initiateGame(mode, teams):
-    game = Game(mode, teams)
-    asyncio.run(initiateServer(game))
-    # asyncio.run(activateIR(game))
+
+def initiateGame(game):
+    loop = asyncio.get_event_loop()
+    asyncio.ensure_future(initiateServer(game))
+    # asyncio.ensure_future(activateIR(game))
+    loop.run_forever()
     return game
-
-
-def startQuestion(game):
-    game.setState(State.WAITING)
 
 
 def finishGame(game):
@@ -350,6 +395,12 @@ def finishGame(game):
     sel.close()
 
 
+def generateGame(mode, team):
+    game = Game(mode, team)
+    return game
+
+
 if __name__ == "__main__":
-    game = initiateGame('FAST', None)
-    startQuestion(game)
+    game = generateGame("FAST", None)
+    test = initiateGame(game)
+    print(test)

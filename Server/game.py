@@ -1,22 +1,28 @@
+#from _tkinter import Tk
 from enum import Enum
+import random
 '''
 MODES:
 
 - FAST
 - RANDOM
-- LIVES
+- RLIVES
+- FLIVES
 '''
 
 class Game:
+
     # mode: is the mode of the game that could be NORMAL,RANDOM, LIFETIMES
     # buzzers: list of buzzers, clients of the game
 
+
     def __init__(self, mode, teams, conf: list = None):
         # --------SETTINGS OF THE GAME ----------------
-        self.plus_points = 10
-        self.rest_points = 5
-        self.time = 0
-        self.conf4 = 0
+        self.plus_points: int = 10
+        self.rest_points: int = 5
+        self.time: int = 10
+        self.lives: int = 10
+        self.st = None
 
         # -------- ATRIBUTES OF THE GAME ----------------
         self.ranking = list()
@@ -38,7 +44,7 @@ class Game:
                 self.time = conf[2]
             elif mode == "LIVES":
                 self.time = conf[2]
-                self.conf4 = conf[3]
+                self.lives = conf[3]
 
     # ----------------- GET PROPERTIES OF THE GAME --------------------
     @property
@@ -81,6 +87,15 @@ class Game:
     def getRestPoints(self):
         return self.rest_points
 
+    @property
+    def getSt(self):
+        return self.st
+
+    def setSt(self, time):
+        #root = Tk()
+        self.st = time
+        #root.after(self.time*100, self.toVerify())
+
     def getTime(self):
         return self.time
 
@@ -96,16 +111,39 @@ class Game:
     def setTurn(self, buzzer):
         self.turn = buzzer
 
+    def toVerify(self):
+        self.mode = State.VERIFYING
+
+        # TODO : inform the front end
+    def setRandomTurn(self):
+        if self.queue:
+            self.turn = random.choice(self.queue)
+        else:
+            self.mode = State.QFINISHED
+
+
     def updateRanking(self):
-        rank = list()
-        for k, buzzers in self.buzzers.items():
-            # TODO: create the algorithm to rank the buzzers
-            pass
-        return rank
+        if self.buzzers:
+            rank = self.buzzers.keys()
+            n = len(rank)
+            for i in range(n, 0, -1):
+                for j in range(n, n-1, -1):
+                    pres = rank[j]
+                    prev = rank[j-1]
+                    if self.buzzers[pres].getPoints() > self.buzzers[prev].getPoints():
+                        rank[j], rank[j-1] = rank[j-1], rank[j]
+
+            table = dict()
+            for b in rank:
+                points = self.buzzers[b].getPoints()
+                table[b] = points
+            return table
+        else:
+            return None
 
 
 class Buzzer:
-    def __init__(self, button, group, to_sum, to_rest):
+    def __init__(self, button, group, to_sum, to_rest, lives):
         self.button = button
         self.group = group
         self.students = list()
