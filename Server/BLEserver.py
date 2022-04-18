@@ -56,7 +56,6 @@ async def initiateServer(game):
         sel.close()
 
 
-# This function handles the new  clients connected to the server
 async def acceptClient(sock, game):
     client_sock, client_info = sock.accept()
     print("-----------------------------------------")

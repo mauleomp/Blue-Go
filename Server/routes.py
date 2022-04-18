@@ -1,8 +1,8 @@
 from Server import app
-
 from flask import render_template, request, url_for, redirect
 from Server.script import valid_login, matchPass, registerNewUser, errorMessage, connectDB, confirmationMessage \
     , getAllCourses, getStudentsC, getStudentsRank, getTeamsRank, getConnectedBuzzers, updateCourseNameS
+from Server.BLEserver import initiateGame, startQuestion, finishGame
 
 
 # new changes
@@ -120,6 +120,7 @@ def postCourseAndGameMode():
     course_code = request.form['course_code']
     print(course_code)
     game_mode = request.form['game_mode']
+    asyncio.run(initiateGame(game_mode))
     print(game_mode)
     game_settings = request.form['game_settings']
     print(game_settings)
