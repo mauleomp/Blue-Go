@@ -63,6 +63,55 @@ async function roundclassic(questionnumber) {
 }
 
 
+function displayNotification() {
+// Notification
+    (async () => {
+        // create and show the notification
+        const showNotification = () => {
+            // create a new notification
+            const notification = new Notification('Blue&GO!', {
+                //The body is the text that will go inside the notification
+                icon: 'static/images/logo.png',
+                body: 'Thank you for registering for Blue&GO'
+            });
+
+            // close the notification after 10 seconds
+            setTimeout(() => {
+                notification.close();
+            }, 10 * 1000);
+
+            // navigate to a URL when clicked
+            notification.addEventListener('click', () => {
+
+                window.parent.parent.focus();
+            });
+        }
+
+        // show an error message
+        const showError = () => {
+            const error = document.querySelector('.error');
+            error.style.display = 'block';
+            error.textContent = 'You blocked the notifications';
+        }
+
+        // check notification permission
+        let granted = false;
+
+        if (Notification.permission === 'granted') {
+            granted = true;
+        } else if (Notification.permission !== 'denied') {
+            let permission = await Notification.requestPermission();
+            granted = permission === 'granted' ? true : false;
+        }
+
+        // show notification or error
+        granted ? showNotification() : showError();
+
+    })();
+
+}
+
+
 
 //Displays rankings based on JSON input, formatting can be seen in example JSON.
 //Python still must determine how long the rankings are displayed.
