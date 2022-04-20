@@ -1,0 +1,40 @@
+body {
+    background-color: blue;
+    padding: 2vh;
+}
+
+.body {
+    height:100vh;
+}
+
+.bigbutton {
+    height: 44vh;
+    width: 100%;
+    margin: 2vh;
+    background-color: white;
+}
+
+h3 {
+    margin-bottom: 3vh;
+}
+
+.icon {
+    height: 20vh;
+    width: 20vh;
+}
+
+.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red;
+}
+
+.endgame {
+
+}
+
+.nextq {
+    color: lightskyblue;
+}

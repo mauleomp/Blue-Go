@@ -285,3 +285,7 @@ def help(usr=None):
 @app.route('/test')
 def test(usr=None):
     return render_template('Test.html')
+
+@app.route('/controller')
+def controller(usr=None):
+    return render_template('Controller.html')
