@@ -170,6 +170,41 @@ def connect():
         if conn is not None:
             conn.close()
             print('Database connection closed.')
+         
+
+# This method will update the database            
+def update(sentence):
+    conn = None
+    try:
+        # read the connection parameters
+        parser = ConfigParser()
+        parser.read('database.ini')
+        db = {}
+        if parser.has_section('postgresql'):
+            params = parser.items('postgresql')
+            for param in params:
+                db[param[0]] = param[1]
+        else:
+            raise Exception('Section {0} not found in the {1} file'.format('postgresql', 'database.ini'))
+
+        print("trying to connect with the Data Base")
+        conn = psycopg2.connect(**db)
+
+        # creating the cursor
+        cur = conn.cursor()
+
+        # execute a statement
+        cur.execute(sentence)
+        conn.commit()
+        cur.rowcount
+        # close the communication with the PostgreSQL
+    except Exception as err:
+        print(err)
+    finally:
+        cur.close()
+        if conn is not None:
+            conn.close()
+
 
 
 def newStudent(s_name, s_lastname, s_number, points):
@@ -318,3 +353,42 @@ def fetchTeam(teamid):
 
 def fetchScore(scid):
     connect('SELECT * FROM scores WHERE score_id = ' + scid + ';')
+    
+
+# ----------------------- METHODS FOR GAME IN DATABASE ------------------------
+
+
+# it is TRUE or FALSE
+def fetchStart(start):
+    return update('UPDATE game SET start = '+start+' WHERE n_game = \'1\';')
+
+
+def fetchState(state):
+    return update('UPDATE game SET state = \''+state+'\' WHERE n_game = \'1\';')
+
+
+# conf es una string como antes('10;10;10;10')
+def fetchConf(game_mode, conf):
+    return update('UPDATE game SET game_mode = \''+game_mode+'\', conf = \''+conf+'\' WHERE n_game = \'1\';')
+
+
+# TRUE or FALSE
+def fetchAnon(anon):
+    return update('UPDATE game SET isanon = '+anon+' WHERE n_game = \'1\';')
+
+
+# TRUE or FALSE
+def fetchFinished(finish):
+    return update('UPDATE game SET has_finished = '+finish+' WHERE n_game = \'1\';')
+
+'''
+the posibilities are:
+"correct" -> to validate an asnwer
+"wrong" -> to say that answer is wrong
+"no answer" -> if you change of question(new question) set it to no answer
+'''
+def fetchCorrect(question):
+    return update('UPDATE game SET correct = \''+question+'\' WHERE n_game = \'1\';')
+
+
+

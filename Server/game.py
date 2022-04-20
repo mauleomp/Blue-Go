@@ -47,47 +47,39 @@ class Game:
                 self.lives = conf[3]
 
     # ----------------- GET PROPERTIES OF THE GAME --------------------
-    @property
     def getMode(self):
         return self.mode
 
-    @property
     def getBuzzers(self):
         return self.buzzers
 
-    @property
     def getQueue(self):
         return self.queue
 
-    @property
     def getSate(self):
         return self.sate
 
-    @property
     def getRanking(self):
         return self.ranking
 
-    @property
     def getTurn(self):
         return self.turn
 
-    @property
     def isAnon(self):
         return self.anonymous
 
-    @property
+    def getLives(self):
+        return self.lives
+
     def getTeams(self):
         return self.teams
 
-    @property
     def getPoints(self):
         return self.plus_points
 
-    @property
     def getRestPoints(self):
         return self.rest_points
 
-    @property
     def getSt(self):
         return self.st
 
@@ -152,23 +144,18 @@ class Buzzer:
         self.points = 0
         self.lives = 10
 
-    @property
     def getButton(self):
         return self.button
 
-    @property
     def getGroup(self):
         return self.group
 
-    @property
     def getPoints(self):
         return self.points
 
-    @property
     def getLives(self):
         return self.lives
 
-    @property
     def getStudents(self):
         return self.students
 
@@ -196,7 +183,6 @@ class State(Enum):
     VERIFYING = 4
     QFINISHED = 5
     ENDGAME = 6
-
 
     '''
     CREATE = 1

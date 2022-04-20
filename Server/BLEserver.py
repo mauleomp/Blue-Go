@@ -3,17 +3,18 @@ import bluetooth
 import selectors
 import types
 import asyncio
-from Server.game import Game, Buzzer, State
+from game import Game, Buzzer, State
 # IMPORTS FOR IR CONTROLLER
 import RPi.GPIO as GPIO
 from time import time
+import time as t
 import timeit
-from threading import Thread
+from dbpi import *
 
 pins = {"0xff18e7": "UP", "0xff4ab5": "DOWN", "0xff10ef": "LEFT", "0xff5aa5": "RIGHT", "0xff38c7": "OK"}
 
 global sel
-
+ng = '\'1\''
 # VARIABLES FOR THE GAME AND THE SERVER
 sel = selectors.DefaultSelector()
 playing = False
@@ -22,7 +23,7 @@ playing = False
 # ----------------------- FUNCTIONS OF THE SERVER -------------------------------------
 # This function is in charge of creating the socket for connecting the bluetooth devices
 
-async def initiateServer(game):
+async def initiateServer():
     # unique uuid to connect with. used previously when connecting with BLE
     uuid = "ca52bb51-cab6-4122-ad2c-df2d5f733d04"
     # creation of the server socket with the mac and port
@@ -39,6 +40,16 @@ async def initiateServer(game):
     print("Listening on : ", server_sock.getsockname())
     # trying to handle different sockets within a selector
     sel.register(server_sock, selectors.EVENT_READ, data=None)
+    t.sleep(10)
+    while not fetchStart(ng)[0]:
+        print("Waiting the game for being Started...")
+        t.sleep(10)
+
+
+    print("################   GAME HAS STARTED  ##################")
+    s_game = fetchGame(ng)
+    game = Game(s_game[0])
+    print("GAME GENERATED")
 
     try:
         while True:
@@ -48,7 +59,7 @@ async def initiateServer(game):
                     await acceptClient(key.fileobj, game)
                 else:
                     await servConnexion(key, mask, game)
-            await asyncio.sleep(0.01)
+            await asyncio.sleep(0.1)
     except KeyboardInterrupt:
         print("keyboard interruption. ")
         pass
@@ -64,7 +75,10 @@ async def acceptClient(sock, game):
     events = selectors.EVENT_READ | selectors.EVENT_WRITE
     sel.register(client_sock, events, data=data)
     # TODO: get the information from the database and create a class
-    group = len(game.getBuzzers.keys()) + 1
+    group = 0
+    if game.getBuzzers():
+        group = len(game.getBuzzers().keys()) + 1
+
     points = game.getPoints()
     to_rest = game.getRestPoints()
     lives = game.getLives()
@@ -106,11 +120,11 @@ def handleMessage(key, message, game):
     msg = bars[0].split(';')
     command = msg[0]
     ans = None
+    print(command)
 
-    if command == 'game_mode':
+    if command == 'game-mode':
         if game.isAnon():
             ans = bytes('Y', 'utf-8')
-
         else:
             ans = bytes('N', 'utf-8')
 
@@ -121,23 +135,35 @@ def handleMessage(key, message, game):
         if addr in game.getBuzzers().keys():
             buzz = game.getBuzzers()[addr]
             buzz.setStudents(students)
-            # TODO: INTERACT WITH THE SERVER
         ans = bytes('1', 'utf-8')
-        startQuestion(game)
 
-    elif command == 'game_started':
+    elif command == 'game-started':
         print(" >>game started received")
+        state = fetchState(ng)
+        st = state[0]
+        if st == 'WAITING':
+            game.setState(State.WAITING)
+            print(">>game started")
+
         if game.getSate == State.WAITING:
             ans = bytes('Y', 'utf-8')
         else:
             ans = bytes('N', 'utf-8')
-        correctAnswer(game)
-        print(game.updateRanking())
 
     elif command == 'signal':
         ans = handleGameMode(key, game)
 
+
     elif command == 'question-finished':
+        turn = fetchTurn(ng)
+
+        state = turn[2]
+        if state == 'VERIFYING':
+            if turn[1] == 'correct':
+                correctAnswer(game)
+            elif turn[1] == 'wrong':
+                wrongAnswer(game)
+
         if game.getSate() == State.VERIFYING:
             if game.getTurn() == key.data.addr:
                 ans = bytes('5', 'utf-8')
@@ -148,6 +174,8 @@ def handleMessage(key, message, game):
         print(">> question finished received")
 
     elif command == 'game-finished':
+        if fetchState(ng) == '\'ENDGAME\'':
+            game.setState(State.ENDGAME)
         if game.getSate() == State.ENDGAME():
             ans = bytes('Y', 'utf-8')
         else:
@@ -168,7 +196,7 @@ def handleGameMode(key, game):
                 ans = bytes('Y', 'utf-8')
             else:
                 ans = bytes('N', 'utf-8')
-            correctAnswer(game)
+            #correctAnswer(game)
         elif game.getSate() == State.VERIFYING:
             if key not in game.getQueue():
                 game.joinQueue(key)
@@ -180,7 +208,7 @@ def handleGameMode(key, game):
             tm = timeit.default_timer()
             if (tm - game.getSt()) < game.getTime()*100:
                 game.joinQueue(key.data.addr)
-                ans  = bytes('N', 'utf-8')
+                ans = bytes('N', 'utf-8')
 
     return ans
 
@@ -196,8 +224,11 @@ def checkQueue(key, game):
 
     if not game.getQueue():
         game.joinQueue(key)
-        game.setTurn(key.data.addr)
+        buzz = game.getBuzzers()[key.data.addr]
+        game.setTurn(buzz )
         game.setState(State.VERIFYING)
+        updateState(ng, '\'VERIFYING\'')
+        updateCorrect(ng, '\'correct\'')
         return True
     else:
         game.joinQueue(key)
@@ -206,7 +237,6 @@ def checkQueue(key, game):
 
 # called when commands says that is a wrong answer
 def wrongAnswer(game):
-    # Todo: check if the points decrease
     id = game.getTurn()
     buzz = game.getBuzzers()[id]
     buzz.decreasePoints()
@@ -219,6 +249,8 @@ def wrongAnswer(game):
             game.setTurn(next)
         else:
             game.setMode(State.QFINISHED)
+            updateState(ng, '\'Q_FINISHED\'')
+            updateRanking(ng, game.getRanking())
             # TODO: notify the front//
 
 
@@ -244,6 +276,8 @@ def correctAnswer(game):
 def nextQuestion(game):
     game.setTurn(None)
     game.setState(State.QFINISHED)
+    updateState(ng, '\'Q_FINISHED\'')
+    updateRanking(ng, game.getRanking())
     if game.getMode() == 'RANDOM' or game.getMode() == 'RLIVES':
         game.setState(timeit.default_timer())
 
@@ -376,17 +410,32 @@ async def activateIR(game):
 # -------------------  FUNTIONS TO CALL FROM THE SERVER ----------------------
 
 '''
-MODE could be : 'FAST' 'RANDOM' 'LIVES'
+MODE could be : 'FAST' 'RANDOM' 'FLIVES' 'RLIVES'
 teams: array of the group of students
 settings: array of the settings
 '''
 
-def initiateGame(game):
-    loop = asyncio.get_event_loop()
-    asyncio.ensure_future(initiateServer(game))
+
+def initiateGame():
+    loop = ""
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        loop = None
+
+    if loop and loop.is_running():
+        print('Async event loop is running.')
+        tsk = loop.create_task(initiateServer())
+        # ^-- https://docs.python.org/3/library/asyncio-task.html#task-object
+        # Optionally, a callback function can be executed when the coroutine completes
+        tsk.add_done_callback(
+            lambda t: print(f'Task done with result={t.result()} << return val of main()')
+        )
+    else:
+        print('Starting new even loop')
+        asyncio.run(initiateServer())
+    #asyncio.ensure_future(initiateServer(game))
     # asyncio.ensure_future(activateIR(game))
-    loop.run_forever()
-    return game
 
 
 def finishGame(game):
@@ -394,12 +443,8 @@ def finishGame(game):
     sel.close()
 
 
-def generateGame(mode, team):
-    game = Game(mode, team)
-    return game
-
 
 if __name__ == "__main__":
-    game = generateGame("FAST", None)
-    test = initiateGame(game)
-    print(test)
+    initiateGame()
+
+
