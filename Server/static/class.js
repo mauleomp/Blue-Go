@@ -165,7 +165,7 @@ function updateStudentData(form){
 function addStudentToCourse(){
     const s_number = document.forms["newStudentForm"].s_number.value;
     const s_name = document.forms["newStudentForm"].s_name.value;
-    const s_lastname = document.forms["newStudentForm"]s_lastname.value;
+    const s_lastname = document.forms["newStudentForm"].s_lastname.value;
     const t_teams = document.forms["newStudentForm"].t_teams.value;
 
     var server = window.location.href
