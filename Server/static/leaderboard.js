@@ -245,7 +245,7 @@ function getRanking() {
 
             // After just received the data, return the json as a resolved promise
             return new Promise(function(resolve, reject) {
-              resolve(repsonse);
+              resolve(response);
             });
         }
     };

@@ -2,7 +2,7 @@ import json
 from Server.db_handler import signup, checkLoginWithUser, checkLoginWithEmail, getCoursesNames \
     , getStudentsFromCourseCode, getStudentRanking, getTeamRanking, updateCourseNameDB, setToFavouriteDB \
     , unsetToFavouriteDB, deleteCourseDB, updateStudentDetailsFromCourseDB, deleteStudentFromCourseDB \
-    , createStudentToCourseDB
+    , createStudentToCourseDB, createGame, startGame, changeState, isQuestionDone, isQuestionDone
 
 session_open = False
 images_set = ["https://images.unsplash.com/photo-1639815189096-f75717eaecfe?ixlib=rb-1.2.1&ixid"
@@ -203,15 +203,35 @@ def getTeamsRank(course_code):
 counter = 0
 
 
+def createGameS(game_mode, conf, course_code):
+
+    if createGame(game_mode, conf, course_code):
+        return confirmationMessage("SQL transaction was submitted successfully.")
+    else:
+        return errorMessage("There is an error in SQL syntax.")
+
+
+def startGameS():
+
+    if startGame():
+        return confirmationMessage("SQL transaction was submitted successfully.")
+    else:
+        return errorMessage("There is an error in SQL syntax.")
+
+
+def changeStateS():
+
+    if changeState():
+        return confirmationMessage("SQL transaction was submitted successfully.")
+    else:
+        return errorMessage("There is an error in SQL syntax.")
+
+
+def isQuestionDoneS():
+    return isQuestionDone()
+
+
 def getConnectedBuzzers():
-    temp1 = "{ buzzers: [ { \"buzzerID\": 0, \"teamConnected\": true, \"teamName\": \"Team0\"}, { \"buzzerID\": 1, \"teamConnected\": true, \"teamName\": \"Team1\"}, { \"buzzerID\": 2, \"teamConnected\": false, \"teamName\": undefined}]}"
-    temp2 = "{ buzzers: [ { \"buzzerID\": 0, \"teamConnected\": true, \"teamName\": \"Team0\"}, { \"buzzerID\": 1, \"teamConnected\": true, \"teamName\": \"Team1\"}, { \"buzzerID\": 2, \"teamConnected\": false, \"teamName\": undefined}]}"
-    temp3 = "{ buzzers: [ { \"buzzerID\": 0, \"teamConnected\": true, \"teamName\": \"Team0\"}, { \"buzzerID\": 1, \"teamConnected\": true, \"teamName\": \"Team1\"}, { \"buzzerID\": 2, \"teamConnected\": false, \"teamName\": undefined}]}"
-    temp4 = "{ buzzers: [ { \"buzzerID\": 0, \"teamConnected\": true, \"teamName\": \"Team0\"}, { \"buzzerID\": 1, \"teamConnected\": true, \"teamName\": \"Team1\"}, { \"buzzerID\": 2, \"teamConnected\": false, \"teamName\": undefined}]}"
-
-    buzzers = [temp1, temp2, temp3, temp4]
-
-    buzz = buzzers[counter]
 
     temp = {'buzzers': []}
     y = {"buzzerID": "0",

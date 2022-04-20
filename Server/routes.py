@@ -3,7 +3,7 @@ from flask import render_template, request, url_for, redirect
 from Server.script import valid_login, matchPass, registerNewUser, errorMessage, connectDB, confirmationMessage \
     , getAllCourses, getStudentsC, getStudentsRank, getTeamsRank, getConnectedBuzzers, updateCourseNameS \
     , setToFavouriteS, unsetToFavouriteS, deleteCourseS, updateStudentDetailsFromCourseS, deleteStudentFromCourseS \
-    , createStudentToCourseS
+    , createStudentToCourseS, createGameS, startGameS, isQuestionDoneS
 
 # from Server.BLEserver import initiateGame, startQuestion, finishGame
 
@@ -184,9 +184,10 @@ def postCourseAndGameMode():
     #asyncio.run(initiateGame(game_mode))
     print(game_mode)
     game_settings = request.form['game_settings']
-    print(game_settings)
+    print(">" + str(game_settings) + "<")
 
-    # TODO: check the values, and return a response
+    # bs12
+    response = createGameS(game_mode, conf, course_code)
 
     return confirmationMessage("Game settings updated")
 
@@ -200,11 +201,13 @@ def getConnectedBuzzersS():
 def postStartGame():
     # TODO: call function startGame(game_mode)
     return confirmationMessage("Game has started properly.")
+    #return startGameS()
 
 
 @app.route('/leaderboard/isAnswerCorrect', methods=['GET'])
 def getIsAnswerCorrectL():
-    return '{"iscorrect": true, "nextname":"Bas"}'
+    return isQuestionDoneS()
+    #return '{"iscorrect": true, "nextname":"Bas"}'
 
 
 @app.route('/leaderboard/getRanking', methods=['GET'])

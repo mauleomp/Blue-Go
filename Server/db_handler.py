@@ -411,6 +411,16 @@ def startGame():
     return update('UPDATE game SET state = \'WAITING\', correct = \'no answer\' WHERE n_game = \'1\';')
 
 
+def changeState():
+    # To be implemented MAU
+    return False
+
+
+def isQuestionDone():
+    # To be implemented MAU
+    return '{"iscorrect": true, "nextname":"Bas"}'
+
+
 # TRUE or FALSE
 def finishGame():
     return update('UPDATE game SET has_finished = false, has_start = FALS False n_game = \'1\';')
