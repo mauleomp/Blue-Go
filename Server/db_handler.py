@@ -30,7 +30,7 @@ c_teacher = ["Bryan"]
 t_team_name = ["Team1", "Team2"]
 t_students = ["[{\"s_name\": Mauricio}, {\"s_name\": Mark}]", "[{\"s_name\": Jacob}, {\"s_name\": Maria}]"]
 t_ranking = ["1", "2"]
-t_last_score = ["15", "11"]   # should be renamed to total_score
+t_last_score = ["15", "11"]  # should be renamed to total_score
 t_course_name = ["Academic Skills", "Academic Skills"]
 
 # Scores Table
@@ -67,7 +67,7 @@ def checkLoginWithEmail(email, password):
     except ValueError:
         print("User [" + email + "] was not logged in. Credentials are incorrect.")
         return False
-    
+
 
 def getCoursesNames():
     temp = []
@@ -82,7 +82,6 @@ def getCoursesNames():
 
 
 def getStudentsFromCourseCode(course_code):
-
     """
     try:
         index = c_course_code.index(course_code)
@@ -112,14 +111,12 @@ def getStudentsFromCourseCode(course_code):
 
 
 def getStudentRanking(course_code):
-
     return [["Mark", "Otto", "10"],
             ["Maria", "Perez", "7"],
             ["Mauricio", "Merchan", "5"]]
 
 
 def getTeamRanking(course_code):
-
     return [["Team1", "15"],
             ["Team2", "11"]]
 
@@ -221,9 +218,9 @@ def connect(sentence):
     db_version = None
     try:
         # read connection parameters
-        #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        #print(BASE_DIR)
-        #params = config(filename=BASE_DIR + '/Server/database.ini', section='postgresql')
+        # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        # print(BASE_DIR)
+        # params = config(filename=BASE_DIR + '/Server/database.ini', section='postgresql')
         params = config()
 
         # connect to the PostgreSQL server
@@ -241,7 +238,7 @@ def connect(sentence):
 
         # close the communication with the PostgreSQL
         cur.close()
-    except (Exception) as error: #, psycopg2.DatabaseError) as error:
+    except (Exception) as error:  # , psycopg2.DatabaseError) as error:
         print(error)
     finally:
         if conn is not None:
@@ -249,8 +246,8 @@ def connect(sentence):
             print('Database connection closed.')
 
     return db_version
-            
-            
+
+
 # This method will update the database
 def update(sentence):
     conn = None
@@ -277,28 +274,29 @@ def update(sentence):
     return ans
 
 
-
 def newStudent(s_name, s_lastname, s_number, points):
-    connect('PREPARE newStudent(text, text, text, text) AS INSERT INTO students VALUES($1, $2, $3, $4); EXECUTE newStudent('+s_name+', '+s_lastname+', '+s_number+', '+points +');')
+    connect(
+        'PREPARE newStudent(text, text, text, text) AS INSERT INTO students VALUES($1, $2, $3, $4); EXECUTE newStudent(' + s_name + ', ' + s_lastname + ', ' + s_number + ', ' + points + ');')
 
 
 def newTeacher(t_name, t_lastname, t_email, t_password):
     connect(
-        f'PREPARE newTeacher(text, text, text, text) AS INSERT INTO teachers VALUES($1, $2, $3, $4); EXECUTE newTeacher('+t_name+', '+t_lastname+', '+t_email+', '+t_password +');')
+        f'PREPARE newTeacher(text, text, text, text) AS INSERT INTO teachers VALUES($1, $2, $3, $4); EXECUTE newTeacher(' + t_name + ', ' + t_lastname + ', ' + t_email + ', ' + t_password + ');')
 
 
 def newCourse(c_code, c_name, s_set, ranking):
     connect(
-        f'PREPARE newCourse(text, text, text, integer) AS INSERT INTO courses AS($1, $2, $3, $4); EXECUTE newCourse('+c_code+', '+c_name+', '+s_set+', '+ranking +');')
+        f'PREPARE newCourse(text, text, text, integer) AS INSERT INTO courses AS($1, $2, $3, $4); EXECUTE newCourse(' + c_code + ', ' + c_name + ', ' + s_set + ', ' + ranking + ');')
 
 
 def newTeam(team_name, t_students, t_ranking, last_score):
     connect(
-        f'PREPARE newTeam(text, text, integer, integer) AS INSERT INTO teams AS($1, $2, $3, $4); EXECUTE newTeam('+team_name+', '+t_students+', '+t_ranking+', '+last_score +');')
+        f'PREPARE newTeam(text, text, integer, integer) AS INSERT INTO teams AS($1, $2, $3, $4); EXECUTE newTeam(' + team_name + ', ' + t_students + ', ' + t_ranking + ', ' + last_score + ');')
 
 
 def newScore(date, score):
-    connect(f'PREPARE newScore(text, integer) AS INSERT INTO scores AS($1, $2); EXECUTE newScore('+date+', '+score+');')
+    connect(
+        f'PREPARE newScore(text, integer) AS INSERT INTO scores AS($1, $2); EXECUTE newScore(' + date + ', ' + score + ');')
 
 
 def deleteStudent(sid):
@@ -367,7 +365,8 @@ def updateTeams(tm_name, tstudents, ranking, lscore, cid, teamid, change, tid):
     if change == 1:
         connect('UPDATE teams SET team_name = ' + tm_name + ' WHERE team_id = ' + teamid + ' AND c_id = ' + cid + ';')
     elif change == 2:
-        connect('UPDATE teams SET t_students = ' + tstudents + ' WHERE team_id = ' + teamid + ' AND c_id = ' + cid + ';')
+        connect(
+            'UPDATE teams SET t_students = ' + tstudents + ' WHERE team_id = ' + teamid + ' AND c_id = ' + cid + ';')
     elif change == 3:
         connect('UPDATE teams SET ranking = ' + ranking + ' WHERE team_id = ' + teamid + ' AND c_id = ' + cid + ';')
     elif change == 4:
@@ -383,7 +382,8 @@ def updateScores(date, score, teamid, scid, cid, change):
     elif change == 2:
         connect('UPDATE scores SET score = ' + score + ' WHERE team_id = ' + teamid + ' AND c_id = ' + cid + ';')
     else:
-        connect('UPDATE scores SET date = ' + date + ', score = ' + score + ' WHERE team_id = ' + teamid + ' AND score_id = ' + scid + ';')
+        connect(
+            'UPDATE scores SET date = ' + date + ', score = ' + score + ' WHERE team_id = ' + teamid + ' AND score_id = ' + scid + ';')
 
 
 def fetchStudents():
@@ -431,7 +431,7 @@ def fetchScore(scid):
 
 def createGame(game_mode, conf, course_code):
     update('UPDATE game SET has_start = True , state = \'WAITING\', game_mode = \'' +
-           game_mode + '\', conf = \'' + conf + '\', ranking = null, has_finished = False, correct = \'no answer\', course_code = \''+course_code+'\'WHERE n_game = \'1\';')
+           game_mode + '\', conf = \'' + conf + '\', ranking = null, has_finished = False, correct = \'no answer\', course_code = \'' + course_code + '\'WHERE n_game = \'1\';')
 
 
 def startGame():
@@ -440,7 +440,7 @@ def startGame():
 
 def changeState(state):
     # To be implemented MAU
-    return update('UPDATE game SET state = \''+state +'\' WHERE n_game = \'1\';')
+    return update('UPDATE game SET state = \'' + state + '\' WHERE n_game = \'1\';')
 
 
 def isQuestionDone():
@@ -459,6 +459,7 @@ def getBuzzers():
 def finishGame():
     return update('UPDATE game SET has_finished = false, has_start = FALS False n_game = \'1\';')
 
+
 '''
 the posibilities are:
 "correct" -> to validate an asnwer
@@ -466,8 +467,10 @@ the posibilities are:
 "no answer" -> if you change of question(new question) set it to no answer
 
 '''
+
+
 def isCorrect(question):
-    return update('UPDATE game SET correct = \''+question+'\' WHERE n_game = \'1\';')
+    return update('UPDATE game SET correct = \'' + question + '\' WHERE n_game = \'1\';')
 
 
 def fetchRank():
@@ -476,3 +479,22 @@ def fetchRank():
 
 def fetchState():
     return update('SELECT state, turn FROM game WHERE n_game = \'1\';')
+
+
+#### Controller functions
+
+
+def signalCorrectAnswer():
+    return ""
+
+
+def signalIncorrectAnswer():
+    return ""
+
+
+def signalNextQuestion():
+    return ""
+
+
+def signalEndGame():
+    return ""

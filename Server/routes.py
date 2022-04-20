@@ -3,7 +3,8 @@ from flask import render_template, request, url_for, redirect
 from Server.script import valid_login, matchPass, registerNewUser, errorMessage, connectDB, confirmationMessage \
     , getAllCourses, getStudentsC, getStudentsRank, getTeamsRank, getConnectedBuzzers, updateCourseNameS \
     , setToFavouriteS, unsetToFavouriteS, deleteCourseS, updateStudentDetailsFromCourseS, deleteStudentFromCourseS \
-    , createStudentToCourseS, createGameS, startGameS, isQuestionDoneS
+    , createStudentToCourseS, createGameS, startGameS, isQuestionDoneS, signalCorrectAnswerS, signalIncorrectAnswerS \
+    , signalNextQuestionS, signalEndGameS
 
 # from Server.BLEserver import initiateGame, startQuestion, finishGame
 
@@ -325,3 +326,23 @@ def test(usr=None):
 @app.route('/controller')
 def controller(usr=None):
     return render_template('Controller.html')
+
+
+@app.route('/controller/signalCorrectAnswer', methods=['POST'])
+def signalCorrectAnswerR():
+    return signalCorrectAnswerS()
+
+
+@app.route('/controller/signalIncorrectAnswer', methods=['POST'])
+def signalIncorrectAnswerR():
+    return signalIncorrectAnswerS()
+
+
+@app.route('/controller/signalNextQuestion', methods=['POST'])
+def signalNextQuestionR():
+    return signalNextQuestionS()
+
+
+@app.route('/controller/signalEndGame', methods=['POST'])
+def signalEndGameR():
+    return signalEndGameS()

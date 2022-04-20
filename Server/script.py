@@ -2,7 +2,9 @@ import json
 from Server.db_handler import signup, checkLoginWithUser, checkLoginWithEmail, getCoursesNames \
     , getStudentsFromCourseCode, getStudentRanking, getTeamRanking, updateCourseNameDB, setToFavouriteDB \
     , unsetToFavouriteDB, deleteCourseDB, updateStudentDetailsFromCourseDB, deleteStudentFromCourseDB \
-    , createStudentToCourseDB, createGame, startGame, changeState, isQuestionDone, isQuestionDone,getBuzzers
+    , createStudentToCourseDB, createGame, startGame, changeState, isQuestionDone, isQuestionDone,getBuzzers \
+    , signalCorrectAnswer, signalIncorrectAnswer, signalNextQuestion, signalEndGame
+
 
 session_open = False
 images_set = ["https://images.unsplash.com/photo-1639815189096-f75717eaecfe?ixlib=rb-1.2.1&ixid"
@@ -244,3 +246,39 @@ def getConnectedBuzzers():
     '''
     return getBuzzers()
 
+
+def signalCorrectAnswerS():
+
+    response = signalCorrectAnswer()
+
+    if changeState(state):
+        return confirmationMessage("SQL transaction was submitted successfully.")
+    else:
+        return errorMessage("There is an error in SQL syntax.")
+
+
+def signalIncorrectAnswerS():
+    response = signalIncorrectAnswer()
+
+    if changeState(state):
+        return confirmationMessage("SQL transaction was submitted successfully.")
+    else:
+        return errorMessage("There is an error in SQL syntax.")
+
+
+def signalNextQuestionS():
+    response = signalNextQuestion()
+
+    if changeState(state):
+        return confirmationMessage("SQL transaction was submitted successfully.")
+    else:
+        return errorMessage("There is an error in SQL syntax.")
+
+
+def signalEndGameS():
+    response = signalEndGame()
+
+    if changeState(state):
+        return confirmationMessage("SQL transaction was submitted successfully.")
+    else:
+        return errorMessage("There is an error in SQL syntax.")
