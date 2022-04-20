@@ -112,14 +112,13 @@ function createNewRandomTeam(students_number){
                   document.getElementById("ResponseModalLabel").innerText = "Action made successfully";
                   document.getElementById("serverMessage").innerText = response.confirmation[0].message;
 
-              } else {
-                  $('#ResponseModal').modal('show');
-                  document.getElementById("ResponseModalLabel").innerText = "Error in action";
-                  document.getElementById("serverMessage").innerText = response.error[0].message;
-
-                  document.getElementById("modalButtonClose").removeAttribute("href");
-                  return false;
-              }
+            } else {
+                $('#ResponseModal').modal('show');
+                document.getElementById("ResponseModalLabel").innerText = "Error in action";
+                document.getElementById("serverMessage").innerText = response.error[0].message;
+                document.getElementById("modalButtonClose").removeAttribute("href");
+                return false;
+            }
         }
     }
     http.send(params)

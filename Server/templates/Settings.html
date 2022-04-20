@@ -70,9 +70,9 @@
                     <div style="margin-left:4rem; margin-right:4rem; margin-top: 2rem">
                         <div class="tab-content" id="v-pills-tabContent">
                             <!-- Profile -->
-                            <div class="tab-pane active fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" style="margin-top: 30px;" >
+                            <div class="tab-pane active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" style="margin-top: 30px;" >
                                 <p style="font-size:x-large"> <b> Profile </b></p>
-                                <form>
+                                <form id="profileDetailsForm" name="profileDetailsForm">
                                     <div class="mb-3">
                                         <p style="color:lightgrey; font-size: x-small; margin-top: 20px;"> PHOTO </p>
                                         <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" class="img-fluid rounded-circle" alt="Profile-picture" style="width: 5rem; height: 5rem;"> <a class="btn btn-light rounded-pill" style="margin: 1rem;margin-bottom: 1rem;"> Change</a>
@@ -81,13 +81,13 @@
                                         <div class="col">
                                             <div class="mb-3">
                                                 <label for="first_name" class="form-label" style="color:lightgrey; font-size: x-small; margin-top: 20px;">FIRST NAME</label>
-                                                <input type="text" class="form-control" id="first_name" value="Mark" required>
+                                                <input type="text" class="form-control" id="first_name" name="first_name" value="Mark" required>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="mb-3">
                                                 <label for="last_name" class="form-label" style="color:lightgrey; font-size: x-small; margin-top: 20px;">LAST NAME</label>
-                                                <input type="text" class="form-control" id="last_name" value="Díaz" required>
+                                                <input type="text" class="form-control" id="last_name" name="last_name" value="Díaz" required>
                                             </div>
                                         </div>
                                     </div>
@@ -95,13 +95,15 @@
                                         <div class="col">
                                             <div class="mb-3">
                                                 <label for="email" style="color:lightgrey; font-size: x-small; margin-top: 20px;">EMAIL ADDRESS</label>
-                                                <input type="text" class="form-control" id="email" aria-describedby="emailHelp" value="test@example.com">
+                                                <input type="text" class="form-control" id="email" name="email"
+                                                       aria-describedby="emailHelp" value="test@example.com">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="mb-3">
                                                 <label for="university" style="color:lightgrey; font-size: x-small; margin-top: 20px;">UNIVERSITY/COLLEGE</label>
-                                                <input type="text" class="form-control" id="university" value="University of Twente">
+                                                <input type="text" class="form-control" id="university"
+                                                       name="university" value="University of Twente">
                                             </div>
                                         </div>
                                     </div>
@@ -109,19 +111,19 @@
                                         <div class="col">
                                             <div class="mb-3">
                                                 <label for="password" style="color:lightgrey; font-size: x-small; margin-top: 20px;" class="form-label"> CURRENT PASSWORD</label>
-                                                <input type="password" class="form-control" id="password" value="Peter1234">
+                                                <input type="password" class="form-control" id="password" name="password" value="Peter1234">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="mb-3">
                                                 <label for="n_password" style="color:lightgrey; font-size: x-small; margin-top: 20px;" class="form-label"> NEW PASSWORD</label>
-                                                <input type="password" class="form-control" id="n_password">
+                                                <input type="password" class="form-control" id="n_password" name="n_password">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="mb-3">
                                                 <label for="c_password" style="color:lightgrey; font-size: x-small; margin-top: 20px;" class="form-label"> CONFIRM NEW PASSWORD</label>
-                                                <input type="password" class="form-control" id="c_password">
+                                                <input type="password" class="form-control" id="c_password" name="c_password">
                                             </div>
                                         </div>
                                     </div>
@@ -140,8 +142,8 @@
                                 <div class="row">
                                      <div class="col">
                                          <div class="form-check">
-                                              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                              <label class="form-check-label" for="flexCheckDefault">
+                                              <input class="form-check-input" type="checkbox" value="" id="flexCheckLogIn">
+                                              <label class="form-check-label" for="flexCheckLogIn">
                                                   Use your Google account to log in
                                               </label>
                                         </div>

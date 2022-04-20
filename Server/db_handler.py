@@ -194,7 +194,7 @@ def createStudentToCourseDB(course_code, s_number2, s_name2, s_lastname2, t_team
 
         return "OK"
     except ValueError:
-        return "-1"createStudentToCourseDB
+        return "-1"
 
 
 def deleteStudentFromCourseDB(course_code, s_number2):

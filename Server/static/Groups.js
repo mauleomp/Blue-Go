@@ -59,14 +59,14 @@ function updateCourseName(course_code, course_name){
                   document.getElementById("ResponseModalLabel").innerText = "Action made successfully";
                   document.getElementById("serverMessage").innerText = response.confirmation[0].message;
 
-              } else {
-                  $('#ResponseModal').modal('show');
-                  document.getElementById("ResponseModalLabel").innerText = "Error in action";
-                  document.getElementById("serverMessage").innerText = response.error[0].message;
+            } else {
+                $('#ResponseModal').modal('show');
+                document.getElementById("ResponseModalLabel").innerText = "Error in action";
+                document.getElementById("serverMessage").innerText = response.error[0].message;
 
-                  document.getElementById("modalButtonClose").removeAttribute("href");
-                  return false;
-              }
+                document.getElementById("modalButtonClose").removeAttribute("href");
+                return false;
+            }
         }
     }
     http.send(params)
@@ -94,14 +94,14 @@ function removeFromFavourites(course_code){
                   document.getElementById("ResponseModalLabel").innerText = "Action made successfully";
                   document.getElementById("serverMessage").innerText = response.confirmation[0].message;
 
-              } else {
-                  $('#ResponseModal').modal('show');
-                  document.getElementById("ResponseModalLabel").innerText = "Error in action";
-                  document.getElementById("serverMessage").innerText = response.error[0].message;
+            } else {
+                $('#ResponseModal').modal('show');
+                document.getElementById("ResponseModalLabel").innerText = "Error in action";
+                document.getElementById("serverMessage").innerText = response.error[0].message;
 
-                  document.getElementById("modalButtonClose").removeAttribute("href");
-                  return false;
-              }
+                document.getElementById("modalButtonClose").removeAttribute("href");
+                return false;
+            }
         }
     }
     http.send(params)
@@ -122,18 +122,18 @@ function addToFavourites(course_code){
             const response = JSON.parse(this.responseText);
 
             if ('confirmation' in response){
-                  $('#ResponseModal').modal('show');
-                  document.getElementById("ResponseModalLabel").innerText = "Action made successfully";
-                  document.getElementById("serverMessage").innerText = response.confirmation[0].message;
+                $('#ResponseModal').modal('show');
+                document.getElementById("ResponseModalLabel").innerText = "Action made successfully";
+                document.getElementById("serverMessage").innerText = response.confirmation[0].message;
 
-              } else {
-                  $('#ResponseModal').modal('show');
-                  document.getElementById("ResponseModalLabel").innerText = "Error in action";
-                  document.getElementById("serverMessage").innerText = response.error[0].message;
+            } else {
+                $('#ResponseModal').modal('show');
+                document.getElementById("ResponseModalLabel").innerText = "Error in action";
+                document.getElementById("serverMessage").innerText = response.error[0].message;
 
-                  document.getElementById("modalButtonClose").removeAttribute("href");
-                  return false;
-              }
+                document.getElementById("modalButtonClose").removeAttribute("href");
+                return false;
+            }
         }
     }
     http.send(params)
