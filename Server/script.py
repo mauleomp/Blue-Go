@@ -219,9 +219,9 @@ def startGameS():
         return errorMessage("There is an error in SQL syntax.")
 
 
-def changeStateS():
+def changeStateS(state):
 
-    if changeState():
+    if changeState(state):
         return confirmationMessage("SQL transaction was submitted successfully.")
     else:
         return errorMessage("There is an error in SQL syntax.")

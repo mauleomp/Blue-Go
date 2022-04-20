@@ -411,7 +411,7 @@ def startGame():
     return update('UPDATE game SET state = \'WAITING\', correct = \'no answer\' WHERE n_game = \'1\';')
 
 
-def changeState():
+def changeState(state):
     # To be implemented MAU
     return False
 

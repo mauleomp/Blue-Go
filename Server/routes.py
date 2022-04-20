@@ -222,7 +222,9 @@ questionnumber = 1
 @app.route('/leaderboard/status', methods=['GET'])
 def getStatus(usr=None):
     global questionnumber
-    return '{"questionnumber": ' + str(questionnumber) + ', "status": "nextround"}'
+    return '{"questionnumber": ' + str(questionnumber) + ', "status": "waiting"}'
+    # return '{"questionnumber": 1, "status": "waiting"}'
+    # return '{"questionnumber": 1, "status": "nextround"}'
     # return '{"questionnumber": 1, "status": "endgame"}'
 
 
@@ -232,7 +234,12 @@ def getStatus(usr=None):
 def postStatus(usr=None):
     global questionnumber
     questionnumber += 1
+
+    # Should call this function, so the server will know that a next round of questions has started
+    # changeStateS("WAITING")        # it will return a JSON with a confirmation, or error
+
     return 'OK'
+
 
 
 '''
