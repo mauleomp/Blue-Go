@@ -418,7 +418,7 @@ def changeState():
 
 def isQuestionDone():
     # To be implemented MAU
-    return '{"iscorrect": true, "nextname":"Bas"}'
+    return '{"iscorrect": true}'
 
 
 # TRUE or FALSE

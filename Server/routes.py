@@ -207,12 +207,32 @@ def postStartGame():
 @app.route('/leaderboard/isCorrect', methods=['GET'])
 def getIsAnswerCorrectL():
     return isQuestionDoneS()
-    #return '{"iscorrect": true, "nextname":"Bas"}'
+    # return '{"iscorrect": true}'
+    # return '{"iscorrect": false, "nextname":"Bryan"}'
 
 
 @app.route('/leaderboard/getRanking', methods=['GET'])
 def getRankingLeaderBoard():
     return '{"totalpoints": 100, "ranking": [{"name": "Fatima", "points": 75, "pointsdifference": 10},{"name": "Bas", "points": 60, "pointsdifference": 5},{"name": "Judith", "points": 60, "pointsdifference": -10}]}';
+
+
+questionnumber = 1
+
+
+@app.route('/leaderboard/status', methods=['GET'])
+def getStatus(usr=None):
+    global questionnumber
+    return '{"questionnumber": ' + str(questionnumber) + ', "status": "nextround"}'
+    # return '{"questionnumber": 1, "status": "endgame"}'
+
+
+# receives: "questionnumber": questionnumber, "status": "nextround"}
+# or: {"status": "endgame"}
+@app.route('/leaderboard/status', methods=['POST'])
+def postStatus(usr=None):
+    global questionnumber
+    questionnumber += 1
+    return 'OK'
 
 
 '''
