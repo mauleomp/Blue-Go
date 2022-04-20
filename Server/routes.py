@@ -204,7 +204,7 @@ def postStartGame():
     #return startGameS()
 
 
-@app.route('/leaderboard/isAnswerCorrect', methods=['GET'])
+@app.route('/leaderboard/isCorrect', methods=['GET'])
 def getIsAnswerCorrectL():
     return isQuestionDoneS()
     #return '{"iscorrect": true, "nextname":"Bas"}'
