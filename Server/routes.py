@@ -1,7 +1,9 @@
 from Server import app
 from flask import render_template, request, url_for, redirect
 from Server.script import valid_login, matchPass, registerNewUser, errorMessage, connectDB, confirmationMessage \
-    , getAllCourses, getStudentsC, getStudentsRank, getTeamsRank, getConnectedBuzzers, updateCourseNameS
+    , getAllCourses, getStudentsC, getStudentsRank, getTeamsRank, getConnectedBuzzers, updateCourseNameS \
+    , setToFavouriteS, unsetToFavouriteS, deleteCourseS, updateStudentDetailsFromCourseS, deleteStudentFromCourseS \
+
 # from Server.BLEserver import initiateGame, startQuestion, finishGame
 
 
@@ -26,27 +28,26 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/signUp', methods=['POST', 'GET'])
+@app.route('/signUp', methods=['GET'])
 def signUp():
-    if request.method == 'POST':
-        if matchPass(request.form['pass'], request.form['pass2']):
-            response = registerNewUser(request.form['email'],
-                                       request.form['username'],
-                                       request.form['pass'])
+    return render_template('SignUp.html')
 
-            if response:
-                message = 'Thank you for registering! User was registered correctly.'
-                return render_template('SignUp.html', message=message)
-            else:
-                message = 'User could not be registered. Please try again.'
-                return render_template('SignUp.html', message=message)
+
+@app.route('/signUp/registerUser', methods=['POST'])
+def registerNewUserS():
+    if matchPass(request.form['pass'], request.form['pass2']):
+        response = registerNewUser(request.form['email'],
+                                   request.form['username'],
+                                   request.form['pass'])
+
+        if response:
+            return confirmationMessage('Thank you for registering! User was registered correctly.')
 
         else:
-            message = 'Passwords do not match. Please try again.'
-            return render_template('SignUp.html', message=message)
-    elif request.method == 'GET':
-        print('sign')
-    return render_template('SignUp.html')
+            return confirmationMessage('User could not be registered. Please try again.')
+
+    else:
+        return errorMessage('Passwords do not match. Please try again.')
 
 
 # log the user in using the email.
@@ -74,6 +75,27 @@ def getCoursesAll():
     return getAllCourses()
 
 
+@app.route('/courses/setToFavorite', methods=['POST'])
+def setToFavouriteR():
+    course_code = request.form['course_code']
+
+    return setToFavouriteS(course_code)
+
+
+@app.route('/courses/unsetToFavorite', methods=['POST'])
+def unsetToFavouriteR():
+    course_code = request.form['course_code']
+
+    return unsetToFavouriteS(course_code)
+
+
+@app.route('/courses/deleteCourse', methods=['POST'])
+def deleteCourseR():
+    course_code = request.form['course_code']
+
+    return deleteCourseS(course_code)
+
+
 # Returns all the courses.
 @app.route('/courses/class/<course_code>/getStudents', methods=['GET'])
 def getStudentsFromCourse(course_code):
@@ -89,6 +111,35 @@ def getStudentsFromCourse(course_code):
     return getStudentsC(course_code)
 
 
+@app.route('/courses/class/<course_code>/updateStudentDetails', methods=['POST'])
+def updateStudentDetailsFromCourseR(course_code):
+
+    s_number = request.form['s_number']
+    s_name = request.form['s_name']
+    s_lastname = request.form['s_lastname']
+    t_teams = request.form['t_teams']
+
+    return updateStudentDetailsFromCourseS(course_code, s_number, s_name, s_lastname, t_teams)
+
+
+@app.route('/courses/class/<course_code>/createRandomTeam', methods=['POST'])
+def createRandomTeamR(course_code):
+    students_number = request.form['students_number']
+
+    # TODO: implement this function
+
+    return errorMessage("There is no method to implement this function for " + students_number + " students.")
+
+
+@app.route('/courses/class/<course_code>/deleteStudent', methods=['POST'])
+def deleteStudentFromCourseR(course_code):
+    s_number = request.form['s_number']
+
+    # TODO: implement this function
+
+    return deleteStudentFromCourseS(course_code, s_number)
+
+
 # Returns the student ranking from this course
 @app.route('/courses/class/<course_code>/getStudentsRanking', methods=['GET'])
 def getStudentsRankingC(course_code):
@@ -96,8 +147,6 @@ def getStudentsRankingC(course_code):
 
 
 # Returns the student ranking from this course
-
-
 @app.route('/courses/class/<course_code>/getTeamsRanking', methods=['GET'])
 def getTeamsRankingC(course_code):
     return getTeamsRank(course_code)

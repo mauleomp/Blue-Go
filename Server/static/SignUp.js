@@ -9,7 +9,7 @@ document.getElementById("login").addEventListener("click", function() {
 
 /*document.getElementById("submit").addEventListener("click", function() {
     window.location.href = 'TeacherSide.html';
-});*/
+});
 
 document.addEventListener("DOMContentLoaded", function(){
   const messasge = document.getElementById("serverMesssage").innerText;
@@ -20,7 +20,48 @@ document.addEventListener("DOMContentLoaded", function(){
     $('ResponseModal').modal('show')
   }
 
-});
+});*/
+
+function registerNewUser(){
+  const form = document.forms["signUpForm"];
+
+  if(form.checkValidity()){
+      const email = form.email.value;
+      const username = form.username.value;
+      const pass = form.pass.value
+      const pass2 = form.pass2.value
+
+      var server = window.location.href
+      var http = new XMLHttpRequest();
+      var params = 'email=' + email + '&username=' + username
+                  + '&pass=' + pass + '&pass2=' + pass2;
+      http.open("POST", server + '/registerUser', true);
+      http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      http.onreadystatechange = function() {
+          if(http.readyState == 4 && http.status == 200) {
+              const response = JSON.parse(this.responseText);
+
+              if ('confirmation' in response){
+                  $('#ResponseModal').modal('show');
+                  document.getElementById("ResponseModalLabel").innerText = "Registration Successful";
+                  document.getElementById("serverMessage").innerText = response.confirmation[0].message;
+
+              } else {
+                  $('#ResponseModal').modal('show');
+                  document.getElementById("ResponseModalLabel").innerText = "Registration Unsuccessful";
+                  document.getElementById("serverMessage").innerText = response.error[0].message;
+
+                  document.getElementById("modalButtonClose").removeAttribute("href");
+                  return false;
+              }
+
+          }
+      }
+      http.send(params)
+  } else {
+      // TODO: display the invalid-feedback of the worng inputs
+  }
+}
 
 
 function show_password() {
@@ -28,10 +69,12 @@ function show_password() {
   var show_eye = document.getElementById("show");
   var hide_eye = document.getElementById("hide");
   hide_eye.classList.remove("d-none");
+
   if (x.type === "password") {
     x.type = "text";
     show_eye.style.display = "none";
     hide_eye.style.display = "block";
+
   } else {
     x.type = "password";
     show_eye.style.display = "block";

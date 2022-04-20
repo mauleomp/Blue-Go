@@ -96,6 +96,103 @@ function getTeamRanking(){
    http.send();
 }
 
+function createNewRandomTeam(students_number){
+
+    var server = window.location.href
+    var	http = new XMLHttpRequest();
+    var params = "students_number=" + students_number;
+    http.open("POST", server + "/createRandomTeam", true);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            const response = JSON.parse(this.responseText);
+
+            if ('confirmation' in response){
+                  $('#ResponseModal').modal('show');
+                  document.getElementById("ResponseModalLabel").innerText = "Action made successfully";
+                  document.getElementById("serverMessage").innerText = response.confirmation[0].message;
+
+              } else {
+                  $('#ResponseModal').modal('show');
+                  document.getElementById("ResponseModalLabel").innerText = "Error in action";
+                  document.getElementById("serverMessage").innerText = response.error[0].message;
+
+                  document.getElementById("modalButtonClose").removeAttribute("href");
+                  return false;
+              }
+        }
+    }
+    http.send(params)
+
+}
+
+function updateStudentData(form){
+
+    console.log(form);
+
+    const s_number = document.forms[form].s_number.value;
+    const s_name = document.forms[form].s_name.value;
+    const s_lastname = document.forms[form].s_lastname.value;
+    const t_teams = document.forms[form].t_teams.value;
+
+    var server = window.location.href
+    var	http = new XMLHttpRequest();
+    var params = "s_number=" + s_number + "&s_name=" + s_name + "&s_lastname=" + s_lastname + "&t_teams=" + t_teams;
+    http.open("POST", server + "/updateStudentDetails", true);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            const response = JSON.parse(this.responseText);
+
+            if ('confirmation' in response){
+                $('#ResponseModal').modal('show');
+                document.getElementById("ResponseModalLabel").innerText = "Action made successfully";
+                document.getElementById("serverMessage").innerText = response.confirmation[0].message;
+                document.getElementById("modalButtonClose").href = "/courses/class/" + course_code
+            } else {
+                $('#ResponseModal').modal('show');
+                document.getElementById("ResponseModalLabel").innerText = "Error in action";
+                document.getElementById("serverMessage").innerText = response.error[0].message;
+                document.getElementById("modalButtonClose").href = "/courses/class/" + course_code
+                //document.getElementById("modalButtonClose").removeAttribute("href");
+                return false;
+            }
+        }
+    }
+    http.send(params)
+
+}
+
+function deleteStudent(s_number){
+
+    var server = window.location.href
+    var	http = new XMLHttpRequest();
+    var params = "s_number=" + s_number;
+    http.open("POST", server + "/deleteStudent", true);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            const response = JSON.parse(this.responseText);
+
+            if ('confirmation' in response){
+                  $('#ResponseModal').modal('show');
+                  document.getElementById("ResponseModalLabel").innerText = "Action made successfully";
+                  document.getElementById("serverMessage").innerText = response.confirmation[0].message;
+
+              } else {
+                  $('#ResponseModal').modal('show');
+                  document.getElementById("ResponseModalLabel").innerText = "Error in action";
+                  document.getElementById("serverMessage").innerText = response.error[0].message;
+
+                  document.getElementById("modalButtonClose").removeAttribute("href");
+                  return false;
+              }
+        }
+    }
+    http.send(params)
+
+}
+
 function addStudentsInTable(){
 
     table = document.getElementById("tableBody")
@@ -178,7 +275,7 @@ function addStudentsInTable(){
             "                            </form>\n" +
             "                       </div>\n" +
             "                       <div class=\"modal-footer justify-content-center\">\n" +
-            "                           <a id=\"submit_form_" + s_number + "\" type=\"button\" class=\"btn rounded-pill\" style=\"background-color: #5bc0de\" href=\"/courses/class/" + course_code + "\">Update</a>\n" +
+            "                           <a onclick=\"updateStudentData('editForm_" + s_number + "')\" type=\"button\" class=\"btn rounded-pill\" style=\"background-color: #5bc0de\">Update</a>\n" +
             "                       </div>\n" +
             "                 </div>\n" +
             "            </div>\n" +
@@ -203,7 +300,7 @@ function addStudentsInTable(){
             "                        <p class=\"text-center\" id=\"ModalLabelDelete_" + s_number + "\"> Are you sure you want to delete this entry? </p>\n" +
             "                    </div>\n" +
             "                    <div class=\"modal-footer justify-content-center\">\n" +
-            "                        <a id=\"submit_form_delete_" + s_number + "\" type=\"button\" class=\"btn rounded-pill delete\" style=\"background-color: #5bc0de\" href=\"/courses/class/" + course_code + "\"> Delete </a>\n" +
+            "                        <a onclick=\"deleteStudent('" + s_number + "')\" type=\"button\" class=\"btn rounded-pill delete\" style=\"background-color: #5bc0de\"> Delete </a>\n" +
             "                    </div>\n" +
             "                </div>\n" +
             "            </div>\n" +

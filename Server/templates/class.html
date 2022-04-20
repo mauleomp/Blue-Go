@@ -52,6 +52,67 @@
         </div>
     </nav>
 
+    <!-- Modal random groups -->
+    <div class="modal fade" id="newGroup" tabindex="-1" aria-labelledby="newGroupLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title text-center" id="newGroupModalLabel"> Create random teams</h4>
+                    <br>
+                    <form id="groupForm" name="groupForm">
+                        <label for="st_number" class="form-label" style="color:darkgrey; font-size: x-small;"> NUMBER OF STUDENTS </label>
+                        <input type="number" required="true" class="form-control" id="st_number" aria-describedby="st_number" name="st_number" placeholder="Number of students in each group" onkeyup='check();'>
+                    </form>
+                    <small><span id='message'></span></small>
+                    <br>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a id="newGroup_SubmitForm" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href="{{ url_for('classroom', course_code='0') }}">Save changes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+            <!-- Modal new student -->
+    <div class="modal fade" id="newStudentModal" tabindex="-1" aria-labelledby="newStudentModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title text-center" id="newStudentModalLabel"> Add a student to the group</h4>
+                    <br>
+                    <form id="newStudentForm" name="newStudentForm">
+                        <div class="mb-3">
+                            <label for="add_s_number" class="form-label" style="color:darkgrey; font-size: x-small;"> STUDENT ID </label>
+                            <input id="add_s_number" name="s_number" type="text" class="form-control" placeholder="s1234567">
+                        </div>
+                        <div class="mb-3">
+                            <label for="add_s_name" class="form-label" style="color:darkgrey; font-size: x-small;"> FIRST NAME </label>
+                            <input id="add_s_name" name="s_name" type="text" class="form-control" placeholder="First name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="add_s_lastname" class="form-label" style="color:darkgrey; font-size: x-small;"> LAST NAME </label>
+                            <input id="add_s_lastname" name="s_lastname" type="text" class="form-control" placeholder="Last name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="new_t_teams" class="form-label" style="color:darkgrey; font-size: x-small;"> TEAMS </label>
+                            <input id="new_t_teams" name="t_teams" type="text" class="form-control" placeholder="Team X">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a id="newStudentSubmit_form" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href="{{ url_for('classroom', course_code='0') }}">Save changes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container-fluid min-vh-100 d-flex flex-column">
         <div class="row flex-grow-1" style="margin-right:1rem;">
             <div class="col col-9">
@@ -67,69 +128,8 @@
                           <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                         </svg> NEW STUDENT
                     </button>
-
-                    <!-- Modal random groups -->
-            <div class="modal fade" id="newGroup" tabindex="-1" aria-labelledby="newGroupLabel" aria-hidden="true">
-                <div class="modal-dialog  modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <h4 class="modal-title text-center" id="newGroupModalLabel"> Create random teams</h4>
-                            <br>
-                            <form id="groupForm" name="groupForm">
-                                <label for="st_number" class="form-label" style="color:darkgrey; font-size: x-small;"> NUMBER OF STUDENTS </label>
-                                <input type="number" required="true" class="form-control" id="st_number" aria-describedby="st_number" name="st_number" placeholder="Number of students in each group" onkeyup='check();'>
-                            </form>
-                            <small><span id='message'></span></small>
-                            <br>
-                        </div>
-                        <div class="modal-footer justify-content-center">
-                            <a id="newGroup_SubmitForm" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href="{{ url_for('classroom', course_code='0') }}">Save changes</a>
-                        </div>
-                    </div>
                 </div>
-            </div>
 
-
-                    <!-- Modal new student -->
-            <div class="modal fade" id="newStudentModal" tabindex="-1" aria-labelledby="newStudentModalLabel" aria-hidden="true">
-                <div class="modal-dialog  modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header justify-content-end" style="background-color: #5bc0de; height: 3rem;">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <h4 class="modal-title text-center" id="newStudentModalLabel"> Add a student to the group</h4>
-                            <br>
-                            <form id="newStudentForm" name="newStudentForm">
-                                <div class="mb-3">
-                                    <label for="add_s_number" class="form-label" style="color:darkgrey; font-size: x-small;"> STUDENT ID </label>
-                                    <input id="add_s_number" name="s_number" type="text" class="form-control" placeholder="s1234567">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="add_s_name" class="form-label" style="color:darkgrey; font-size: x-small;"> FIRST NAME </label>
-                                    <input id="add_s_name" name="s_name" type="text" class="form-control" placeholder="First name">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="add_s_lastname" class="form-label" style="color:darkgrey; font-size: x-small;"> LAST NAME </label>
-                                    <input id="add_s_lastname" name="s_lastname" type="text" class="form-control" placeholder="Last name">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="new_t_teams" class="form-label" style="color:darkgrey; font-size: x-small;"> TEAMS </label>
-                                    <input id="new_t_teams" name="t_teams" type="text" class="form-control" placeholder="Team X">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer justify-content-center">
-                            <a id="newStudentSubmit_form" type="button" class="btn rounded-pill" style="background-color: #5bc0de" href="{{ url_for('classroom', course_code='0') }}">Save changes</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-                </div>
                 <div style="margin_right:2rem;">
                     <table id="table" class="table table-responsive table-hover"
                          data-search="true"
@@ -165,7 +165,7 @@
                     </div>
 
                     <div class="accordion-group">
-                        <div class="collapse" id="collapse_overall" data-bs-parent="#tabla">
+                        <div class="collapse show" id="collapse_overall" data-bs-parent="#tabla">
                           <div class="card card-body" style="border: none;">
                             <table class="table table-responsive table-border border-white" style="margin-top: 20px;">
                               <tbody id="studentRankingTableBody">
@@ -222,6 +222,26 @@
             </div>
         </div>
 
+    </div>
+
+        <!-- Modal -->
+    <div class="modal fade" id="ResponseModal" tabindex="-1" role="dialog" aria-labelledby="ResponseModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #B7BAED; height: 3rem;">
+
+                </div>
+                <div class="modal-body text-center">
+                    <h4 class="modal-title" id="ResponseModalLabel"> Registration </h4>
+                    <br> <br>
+                    <p id="serverMessage">{{message}}</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a type="button" class="btn rounded-pill" style="background-color: #B7BAED"
+                       id="modalButtonClose" > Close</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

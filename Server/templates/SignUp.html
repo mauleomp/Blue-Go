@@ -35,7 +35,7 @@
                     <div class="divider d-flex align-items-center my-4">
                         <p class="text-center fw-bold mx-3 mb-0"> Or email</p>
                     </div>
-                    <form action="" method="POST" novalidatclass="needs-validation" novalidate>
+                    <form id="signUpForm" >
                         <div class="form-outline">
                              <label for="email" class="form-control-label" style="color:lightgrey; font-size: x-small;">EMAIL</label>
                             <input id="email" name="email" type="email" class="form-control" placeholder="user@blue&go.com" required="true"/>
@@ -45,7 +45,7 @@
 
                         <div class="form-outline" style="margin-top: 20px;">
                             <label for="username" class="form-control-label" style="color:lightgrey; font-size: x-small;">USERNAME </label>
-                            <input id="username" name="username" type="email" class="form-control" placeholder="blue&go!123" required="true" />
+                            <input id="username" name="username" type="text" class="form-control" placeholder="blue&go!123" required="true" />
                         </div>
 
                         <label for="pass" class="form-control-label" style="color:lightgrey; font-size: x-small; margin-top: 20px;">PASSWORD </label>
@@ -75,7 +75,8 @@
                         <div class="invalid-feedback"> Invalid password </div>
                         <br>
                         <br>
-                        <input id="submit" type="submit" class="btn btn-outline-primary btn-lg btn-block" style="font-weight: lighter;" value="Sign up"/>
+                        <input id="submit" type="button" onclick="registerNewUser()"
+                               class="btn btn-outline-primary btn-lg btn-block" style="font-weight: lighter;" value="Sign up"/>
                     </form>
                     <br>
                     <a type="button" class="btn border btn-light border-secondary btn-lg btn-block" style="font-weight: lighter;" href="{{ url_for('login') }}"> Already have an account? Log in</a>
@@ -101,7 +102,8 @@
                     <p style="color:slategrey"> All the best, <br> The Blue&GO! Team  </p>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <a type="button" class="btn rounded-pill" style="background-color: #B7BAED" href="{{ url_for('login') }}"> Close</a>
+                    <a type="button" class="btn rounded-pill" style="background-color: #B7BAED"
+                       id="modalButtonClose" href="{{ url_for('login') }}"> Close</a>
                 </div>
             </div>
         </div>

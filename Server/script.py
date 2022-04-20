@@ -1,6 +1,7 @@
 import json
 from Server.db_handler import signup, checkLoginWithUser, checkLoginWithEmail, getCoursesNames \
-    , getStudentsFromCourseCode, getStudentRanking, getTeamRanking, updateCourseNameDB
+    , getStudentsFromCourseCode, getStudentRanking, getTeamRanking, updateCourseNameDB, setToFavouriteDB \
+    , unsetToFavouriteDB, deleteCourseDB, updateStudentDetailsFromCourseDB, deleteStudentFromCourseDB
 
 session_open = False
 images_set = ["https://images.unsplash.com/photo-1639815189096-f75717eaecfe?ixlib=rb-1.2.1&ixid"
@@ -13,6 +14,7 @@ images_set = ["https://images.unsplash.com/photo-1639815189096-f75717eaecfe?ixli
               "=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80",
               "https://images.unsplash.com/photo-1639815189096-f75717eaecfe?ixlib=rb-1.2.1&ixid"
               "=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"]
+
 
 def connectDB():
     print("########")
@@ -71,7 +73,7 @@ def getAllCourses():
     for x in courses:
         if index >= len(images_set):
             index = 0
-        y = {"name": str(x[0]), "code": str(x[1]), "img": str(images_set[index])}
+        y = {"name": str(x[0]), "code": str(x[1]), "img": str(images_set[index]), "favorite": str(x[2])}
         temp['courses'].append(y)
         index = index + 1
 
@@ -86,7 +88,57 @@ def updateCourseNameS(course_code, course_name):
         return confirmationMessage("Course name \'" + course_name + "\' with course code \'"
                                    + course_code + "\' was updated successfully.")
     else:
-        errorMessage("Course name could not be changed.")
+        return errorMessage("Course name could not be changed.")
+
+
+def setToFavouriteS(course_code):
+    response = setToFavouriteDB(course_code)
+
+    if response != "-1":
+        return confirmationMessage("Course name \'" + response + "\' with course code \'"
+                                   + course_code + "\' was set to favourite.")
+    else:
+        return errorMessage("Course name could not be set to favourite.")
+
+
+def unsetToFavouriteS(course_code):
+    response = unsetToFavouriteDB(course_code)
+
+    if response != "-1":
+        return confirmationMessage("Course name \'" + response + "\' with course code \'"
+                                   + course_code + "\' was unset to favourite.")
+    else:
+        return errorMessage("Course name could not be unset to favourite.")
+
+
+def deleteCourseS(course_code):
+    response = deleteCourseDB(course_code)
+
+    if response != "-1":
+        return confirmationMessage("Course name \'" + response + "\' with course code \'"
+                                   + course_code + "\' was deleted successfully.")
+    else:
+        return errorMessage("Course name could not be deleted.")
+
+
+def updateStudentDetailsFromCourseS(course_code, s_number, s_name, s_lastname, t_teams):
+    response = updateStudentDetailsFromCourseDB(course_code, s_number, s_name, s_lastname, t_teams)
+
+    if response != "-1":
+        return confirmationMessage("Student \'" + s_name + " " + s_lastname + "\' in course \'"
+                                   + course_code + "\' was updated successfully.")
+    else:
+        return errorMessage("This student could not be updated.")
+
+
+def deleteStudentFromCourseS(course_code, s_number):
+    response = deleteStudentFromCourseDB(course_code, s_number)
+
+    if response != "-1":
+        return confirmationMessage("Student \'" + response + "\' in course \'"
+                                   + course_code + "\' was deleted successfully.")
+    else:
+        return errorMessage("This student could not be deleted.")
 
 
 def getStudentsC(course_code):

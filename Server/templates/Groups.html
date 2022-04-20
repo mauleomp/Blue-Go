@@ -124,6 +124,7 @@
                 </div>
             </div>
 
+            <!--    Search Input and button  ==>  Delete due to that there is no javascript for this
             <div class="input-group input-group-md mb-3" style="margin-bottom:2rem; width: fit-content";>
                 <input type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
                 <button class="btn btn-link btn-light btn-outline-secondary">
@@ -132,6 +133,7 @@
                     </svg>
                 </button>
             </div>
+            -->
         </div>
     </div>
 
@@ -140,27 +142,7 @@
             <h1 class="display-6" style="font-size: large;"> Favourites</h1>
 
             <div id="favourites" class="row row-cols-1 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-xs-1 g-4" style="margin-top: -1rem;">
-                <div class="col">
-                    <div class="card">
-                        <img src="https://images.unsplash.com/photo-1642698166111-1e736132b0ee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" class="card-img" alt="...">
-                        <div class="card-img-overlay text-end" style="margin-top: -1rem; margin-right: -1rem;">
-                            <button class="btn btn-link" style="color:white" data-bs-toggle="dropdown">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16" >
-                                  <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                                </svg>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><button class="dropdown-item" onclick="removeFromFavourites('')">Remove from favourites</button></li>
-                                <li><button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#rename_">Rename</button></li>
-                                <div class="dropdown-divider"></div>
-                                <li><button class="dropdown-item" onclick="deleteCourse('')">Delete</button></li>
-                            </ul>
-                        </div>
-                        <div class="card-body" style="transform: rotate(0);">
-                            <a href="{{ url_for('classroom', course_code='12456') }}" class="stretched-link text-decoration-none" style="color:black;"> <h5 class="card-title"> TCS Year 3</h5> </a>
-                        </div>
-                    </div>
-                </div>
+
             </div>
 
        </div>
@@ -173,9 +155,35 @@
                 <!-- This part is filled with the server response-->
             </div>
         </div>
-</div>
+    </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="ResponseModal" tabindex="-1" role="dialog" aria-labelledby="ResponseModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #B7BAED; height: 3rem;">
 
+                </div>
+                <div class="modal-body text-center">
+                    <h4 class="modal-title" id="ResponseModalLabel"> Response from server </h4>
+                    <br> <br>
+                    <p id="serverMessage">{{message}}</p>
+                    <br>
+
+                    <div id="responseModalBottomText">
+                        <br>
+                        <b>If you have any further questions, please contact us.</b>
+                        <br> <br>
+                        <p style="color:slategrey"> All the best, <br> The Blue&GO! Team  </p>
+                    </div>
+
+                </div>
+                <div id="responseModelFooter" class="modal-footer justify-content-center">
+                    <a type="button" class="btn rounded-pill" style="background-color: #B7BAED"
+                       id="modalButtonClose" href="{{ url_for('courses') }}"> Close</a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="{{ url_for('static', filename='Groups.js') }}"></script>

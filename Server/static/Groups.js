@@ -1,6 +1,7 @@
 var all_courses = []
 var courses_names = []
 var courses_codes = []
+var favorite_courses = []
 
 document.addEventListener("DOMContentLoaded", function(){
     getAllCourses()
@@ -25,8 +26,17 @@ function getAllCourses(){
            for (x in all_courses['courses']){
                courses_names.push(all_courses['courses'][x].name.toString());
                courses_codes.push(all_courses['courses'][x].code.toString());
+
+               const tempX = all_courses['courses'][x].favorite.toString();
+
+               if (tempX === 'true'){
+                   favorite_courses.push(all_courses['courses'][x]);
+               }
            }
-           addAllCourseHtml()
+
+           addAllCourseHtml(favorite_courses, 1)
+           addAllCourseHtml(all_courses['courses'], 2)
+
        }
    };
    const link = server + "/getAllCourses"
@@ -42,7 +52,21 @@ function updateCourseName(course_code, course_name){
     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     http.onreadystatechange = function() {
         if(http.readyState == 4 && http.status == 200) {
-            alert(http.responseText);
+            const response = JSON.parse(this.responseText);
+
+            if ('confirmation' in response){
+                  $('#ResponseModal').modal('show');
+                  document.getElementById("ResponseModalLabel").innerText = "Action made successfully";
+                  document.getElementById("serverMessage").innerText = response.confirmation[0].message;
+
+              } else {
+                  $('#ResponseModal').modal('show');
+                  document.getElementById("ResponseModalLabel").innerText = "Error in action";
+                  document.getElementById("serverMessage").innerText = response.error[0].message;
+
+                  document.getElementById("modalButtonClose").removeAttribute("href");
+                  return false;
+              }
         }
     }
     http.send(params)
@@ -51,33 +75,162 @@ function updateCourseName(course_code, course_name){
 function submitRenameForm(form){
     var course_name = document.forms[form].course_name.value
     var course_code = form.split('_')[1]
-    updateCourseName(course_code, course_name)
+    updateCourseName(course_code, course_name);
 }
 
 function removeFromFavourites(course_code){
+
+    var server = window.location.href
+    var	http = new XMLHttpRequest();
+    var params = "course_code=" + course_code;
+    http.open("POST", server + "/unsetToFavorite", true);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            const response = JSON.parse(this.responseText);
+
+            if ('confirmation' in response){
+                  $('#ResponseModal').modal('show');
+                  document.getElementById("ResponseModalLabel").innerText = "Action made successfully";
+                  document.getElementById("serverMessage").innerText = response.confirmation[0].message;
+
+              } else {
+                  $('#ResponseModal').modal('show');
+                  document.getElementById("ResponseModalLabel").innerText = "Error in action";
+                  document.getElementById("serverMessage").innerText = response.error[0].message;
+
+                  document.getElementById("modalButtonClose").removeAttribute("href");
+                  return false;
+              }
+        }
+    }
+    http.send(params)
 
 }
 
 function addToFavourites(course_code){
 
-    document.getElementById("favourites").innerHTML = document.getElementById("favourites").innerHTML + innerHTML
+    //document.getElementById("favourites").innerHTML = document.getElementById("favourites").innerHTML + innerHTML
+
+    var server = window.location.href
+    var	http = new XMLHttpRequest();
+    var params = "course_code=" + course_code;
+    http.open("POST", server + "/setToFavorite", true);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            const response = JSON.parse(this.responseText);
+
+            if ('confirmation' in response){
+                  $('#ResponseModal').modal('show');
+                  document.getElementById("ResponseModalLabel").innerText = "Action made successfully";
+                  document.getElementById("serverMessage").innerText = response.confirmation[0].message;
+
+              } else {
+                  $('#ResponseModal').modal('show');
+                  document.getElementById("ResponseModalLabel").innerText = "Error in action";
+                  document.getElementById("serverMessage").innerText = response.error[0].message;
+
+                  document.getElementById("modalButtonClose").removeAttribute("href");
+                  return false;
+              }
+        }
+    }
+    http.send(params)
 }
 
 function deleteCourse(course_code){
 
+    $('#ResponseModal').modal('show');
+    document.getElementById("ResponseModalLabel").innerText = "Confirm action";
+    document.getElementById("serverMessage").innerText = "Are you sure to delete this course?. " +
+        "This action cannot be reverted.";
+
+    var tempInnerHTML = '' +
+        '<a type="button" class="btn rounded-pill" style="background-color: #B7BAED"\n' +
+        '                       onclick="sendDeleteCourse(\'' + course_code + '\')">Yes</a>' +
+        '\n' +
+        '<a type="button" class="btn rounded-pill" style="background-color: #F0B6B6"\n' +
+        '                       href="\courses">No</a>';
+
+    document.getElementById("responseModelFooter").innerHTML = tempInnerHTML;
+
+    document.getElementById("responseModalBottomText").innerHTML = '';
+
+
 }
 
-function addAllCourseHtml() {
+function sendDeleteCourse(course_code){
+    var server = window.location.href
+    var	http = new XMLHttpRequest();
+    var params = "course_code=" + course_code;
+    http.open("POST", server + "/deleteCourse", true);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            const response = JSON.parse(this.responseText);
 
-    innerHTML = ""
+            var temp2 ='' +
+                    '<a type="button" class="btn rounded-pill" style="background-color: #B7BAED"\n' +
+                    '       id="modalButtonClose" href="\courses"> Close</a>'
 
-    for (x in all_courses['courses']) {
-        temp_course_name = all_courses['courses'][x].name.toString()
-        temp_course_code = all_courses['courses'][x].code.toString()
+            if ('confirmation' in response){
+                  $('#ResponseModal').modal('show');
+                  document.getElementById("ResponseModalLabel").innerText = "Action made successfully";
+                  document.getElementById("serverMessage").innerText = response.confirmation[0].message;
+                  document.getElementById("responseModelFooter").innerHTML = temp2;
+
+            } else {
+                $('#ResponseModal').modal('show');
+                document.getElementById("ResponseModalLabel").innerText = "Error in action";
+                document.getElementById("serverMessage").innerText = response.error[0].message;
+                document.getElementById("modalButtonClose").removeAttribute("href");
+
+                var temp1 = '' +
+                    '<br>\n' +
+                    '<b>If you have any further questions, please contact us.</b>\n' +
+                    '<br> <br>\n' +
+                    '<p style="color:slategrey"> All the best, <br> The Blue&GO! Team  </p>';
+
+                document.getElementById("responseModalBottomText").innerHTML = temp1;
+                document.getElementById("responseModelFooter").innerHTML = temp2;
+
+
+                return false;
+            }
+        }
+    }
+    http.send(params)
+}
+
+function addAllCourseHtml(courses, set) {
+
+    var section = '';
+    var favourite = '';
+    var functionName = '';
+
+    if (set === 1){
+        section = 'favourites';
+        favourite = 'Remove ';
+        functionName = 'removeFromFavourites';
+    } else {
+        section = "groups";
+        favourite = 'Add ';
+        functionName = 'addToFavourites';
+    }
+
+    var innerHTML = ""
+
+    for (x in courses) {
+
+        console.log(courses[x]);
+
+        temp_course_name = courses[x].name.toString()
+        temp_course_code = courses[x].code.toString()
 
         const course_HTML = "" +
             "<div class=\"col\">\n" +
-            "     <div class=\"card position-relative\" id=\"class\">\n" +
+            "     <div class=\"card position-relative\" id=\"class" + temp_course_code + "\">\n" +
             "          <img src=\"https://images.unsplash.com/photo-1627637819848-7074cb1565e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80\" class=\"card-img\" alt=\"...\">\n" +
             "          <div class=\"card-img-overlay text-end\" style=\"margin-top: -1rem; margin-right: -1rem;\">\n" +
             "               <button class=\"btn btn-link\" style=\"color:white\" data-bs-toggle=\"dropdown\">\n" +
@@ -86,7 +239,7 @@ function addAllCourseHtml() {
             "                   </svg>\n" +
             "               </button>\n" +
             "               <ul class=\"dropdown-menu dropdown-menu-end\">\n" +
-            "                   <li><button class=\"dropdown-item\" onclick=\"addToFavourites('" + temp_course_code +  "')\">Add to favourites</button></li>\n" +
+            "                   <li><button class=\"dropdown-item\" onclick=\"" + functionName + "('" + temp_course_code +  "')\">" + favourite + "to favourites</button></li>\n" +
             "                   <li><button class=\"dropdown-item\" data-bs-toggle=\"modal\" data-bs-target=\"#rename_" + temp_course_code +  "\">Rename</button></li>\n" +
             "                   <div class=\"dropdown-divider\"></div>\n" +
             "                   <li><button class=\"dropdown-item\" onclick=\"deleteCourse('" + temp_course_code +  "')\">Delete</button></li>\n" +
@@ -135,6 +288,7 @@ function addAllCourseHtml() {
         innerHTML = innerHTML + course_HTML
     }
 
-    document.getElementById("groups").innerHTML = document.getElementById("groups").innerHTML + innerHTML
+    document.getElementById(section).innerHTML = document.getElementById("groups").innerHTML + innerHTML
 
+    innerHTML = ""
 }

@@ -21,6 +21,7 @@ s_points = ["5", "10", "4", "7"]
 # Courses Table
 c_course_code = ["c123456"]
 c_course_name = ["Academic Skills"]
+c_course_favorite = ["true"]
 c_students_set = ["[{\"s_name\": Mauricio}, {\"s_name\": Mark}, {\"s_name\": Jacob}, {\"s_name\": Maria}]"]
 c_ranking = ["1"]
 c_teacher = ["Bryan"]
@@ -73,7 +74,7 @@ def getCoursesNames():
 
     index = 0
     while index < len(c_course_name):
-        item = [c_course_name[index], c_course_code[index]]
+        item = [c_course_name[index], c_course_code[index], c_course_favorite[index]]
         temp.append(item)
         index += 1
 
@@ -129,6 +130,72 @@ def updateCourseNameDB(course_code, course_name):
 
         c_course_name[index] = course_name
         return "OK"
+    except ValueError:
+        return "-1"
+
+
+def setToFavouriteDB(course_code):
+    try:
+        index = c_course_code.index(course_code)
+
+        c_course_favorite[index] = 'true'
+        return c_course_name[index]
+    except ValueError:
+        return "-1"
+
+
+def unsetToFavouriteDB(course_code):
+    try:
+        index = c_course_code.index(course_code)
+
+        c_course_favorite[index] = 'false'
+        return c_course_name[index]
+    except ValueError:
+        return "-1"
+
+
+def deleteCourseDB(course_code):
+    try:
+        index = c_course_code.index(course_code)
+
+        name = c_course_name[index]
+
+        c_course_code.pop(index)
+        c_course_name.pop(index)
+        c_course_favorite.pop(index)
+        c_students_set.pop(index)
+        c_ranking.pop(index)
+        c_teacher.pop(index)
+
+        return name
+    except ValueError:
+        return "-1"
+
+
+def updateStudentDetailsFromCourseDB(course_code, s_number2, s_name2, s_lastname2, t_teams2):
+    try:
+        index = s_number.index(s_number2)
+
+        s_names[index] = s_name2
+        s_lastname[index] = s_lastname2
+        s_number[index] = s_number2
+
+        return "OK"
+    except ValueError:
+        return "-1"
+
+
+def deleteStudentFromCourseDB(course_code, s_number2):
+    try:
+        index = s_number.index(s_number2)
+
+        name = s_names[index]
+
+        s_names.pop(index)
+        s_lastname.pop(index)
+        s_number.pop(index)
+
+        return name
     except ValueError:
         return "-1"
 
