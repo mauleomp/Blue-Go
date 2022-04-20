@@ -1,6 +1,6 @@
 # import psycopg2
 # import os
-# from Server.db_config import config
+from Server.db_config import config
 
 # Only for testing purposes, we have these fields
 # Later on we will store any information on a DataBase
@@ -215,31 +215,29 @@ def deleteStudentFromCourseDB(course_code, s_number2):
 # conn = psycopg2.connect("dbname=BlueApp user=pi password=BlueAndGo")
 
 
-def connect():
+def connect(sentence):
     """ Connect to the PostgreSQL database server """
-
     conn = None
+    db_version = None
     try:
         # read connection parameters
         #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         #print(BASE_DIR)
         #params = config(filename=BASE_DIR + '/Server/database.ini', section='postgresql')
-        # params = config()
+        params = config()
 
         # connect to the PostgreSQL server
         print('Connecting to the PostgreSQL database...')
-        #conn = psycopg2.connect(**params)
-
+        conn = psycopg2.connect(**params)
         # create a cursor
         cur = conn.cursor()
 
         # execute a statement
         print('PostgreSQL database version:')
-        cur.execute('SELECT version()')
+        cur.execute(sentence)
 
         # display the PostgreSQL database server version
         db_version = cur.fetchone()
-        print(db_version)
 
         # close the communication with the PostgreSQL
         cur.close()
@@ -249,6 +247,35 @@ def connect():
         if conn is not None:
             conn.close()
             print('Database connection closed.')
+
+    return db_version
+            
+            
+# This method will update the database
+def update(sentence):
+    conn = None
+    ans = False
+    try:
+        params = config()
+        conn = psycopg2.connect(**params)
+        # creating the cursor
+        cur = conn.cursor()
+        # execute a statement
+        cur.execute(sentence)
+        conn.commit()
+        num = cur.rowcount
+        if num == 1:
+            ans = True
+        # close the communication with the PostgreSQL
+        cur.close()
+    except Exception as err:
+        print(err)
+    finally:
+
+        if conn is not None:
+            conn.close()
+    return ans
+
 
 
 def newStudent(s_name, s_lastname, s_number, points):
@@ -413,17 +440,19 @@ def startGame():
 
 def changeState(state):
     # To be implemented MAU
-    return False
+    return update('UPDATE game SET state = \''+state +'\' WHERE n_game = \'1\';')
 
 
 def isQuestionDone():
-    # To be implemented MAU
-    return '{"iscorrect": true}'
+    ans = connect('SELECT correct, turn FROM game WHERE n_game = \'1\';')
+    if ans[0] == "correct":
+        return '{\"iscorrect\": true }'
+    elif ans[0] == "wrong":
+        return '{\"iscorrect\": false ,\"nextname\": \"' + ans[1] + '\" }'
 
 
 def getBuzzers():
-    # To be implemented MAU
-    return '{"buzzers": [{"buzzerID": "0", "teamConnected": "true", "teamName": "Team0"}] }'
+    connect('SELECT buzzers FROM game WHERE n_game = \'1\';')
 
 
 # TRUE or FALSE
