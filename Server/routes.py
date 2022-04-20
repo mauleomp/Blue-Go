@@ -236,7 +236,11 @@ def postStatus(usr=None):
     questionnumber += 1
 
     # Should call this function, so the server will know that a next round of questions has started
-    # changeStateS("WAITING")        # it will return a JSON with a confirmation, or error
+    # it will return a JSON with a confirmation, or error, for knowing if the SQL transaction was a success or not
+
+    # status: nextround     ==>   Server state WAITING;  the server will know that a next round of questions has started
+    # status: endgame       ==>   Server state ENDGAME;  the server will know that the game has ended via the interface
+    # changeStateS("WAITING")
 
     return 'OK'
 
