@@ -372,6 +372,10 @@ def startGame():
 def finishGame():
     update('UPDATE game SET has_finished = false, has_start = FALS False n_game = \'1\';')
 
+
+def changeState(state):
+    update('UPDATE game SET state = \''+state +'\', correct = \'no answer\' WHERE n_game = \'1\';')
+
 '''
 the posibilities are:
 "correct" -> to validate an asnwer
@@ -379,16 +383,22 @@ the posibilities are:
 "no answer" -> if you change of question(new question) set it to no answer
 
 '''
+
+
 def isCorrect(question):
     return update('UPDATE game SET correct = \''+question+'\' WHERE n_game = \'1\';')
 
 
 def fetchRank():
-    return update('SELECT ranking FROM game WHERE n_game = \'1\';')
+    return connect('SELECT ranking FROM game WHERE n_game = \'1\';')
 
 
 def fetchState():
-    return update('SELECT state, turn FROM game WHERE n_game = \'1\';')
+    return connect('SELECT state, turn FROM game WHERE n_game = \'1\';')
+
+
+def fetchBuzzers():
+    return connect('SELECT buzzers FROM game WHERE n_game = \'1\';')
 
 
 
