@@ -421,6 +421,11 @@ def isQuestionDone():
     return '{"iscorrect": true}'
 
 
+def getBuzzers():
+    # To be implemented MAU
+    return '{"buzzers": [{"buzzerID": "0", "teamConnected": "true", "teamName": "Team0"}] }'
+
+
 # TRUE or FALSE
 def finishGame():
     return update('UPDATE game SET has_finished = false, has_start = FALS False n_game = \'1\';')

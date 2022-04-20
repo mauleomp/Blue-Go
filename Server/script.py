@@ -2,7 +2,7 @@ import json
 from Server.db_handler import signup, checkLoginWithUser, checkLoginWithEmail, getCoursesNames \
     , getStudentsFromCourseCode, getStudentRanking, getTeamRanking, updateCourseNameDB, setToFavouriteDB \
     , unsetToFavouriteDB, deleteCourseDB, updateStudentDetailsFromCourseDB, deleteStudentFromCourseDB \
-    , createStudentToCourseDB, createGame, startGame, changeState, isQuestionDone, isQuestionDone
+    , createStudentToCourseDB, createGame, startGame, changeState, isQuestionDone, isQuestionDone,getBuzzers
 
 session_open = False
 images_set = ["https://images.unsplash.com/photo-1639815189096-f75717eaecfe?ixlib=rb-1.2.1&ixid"
@@ -232,7 +232,7 @@ def isQuestionDoneS():
 
 
 def getConnectedBuzzers():
-
+    '''
     temp = {'buzzers': []}
     y = {"buzzerID": "0",
          "teamConnected": "true",
@@ -241,3 +241,6 @@ def getConnectedBuzzers():
 
     json.dumps(temp, sort_keys=True, indent=4)
     return temp
+    '''
+    return getBuzzers()
+

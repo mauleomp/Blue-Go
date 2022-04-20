@@ -316,9 +316,11 @@ def buy2(usr=None):
 def help(usr=None):
     return render_template('Help&Contact.html')
 
+
 @app.route('/test')
 def test(usr=None):
     return render_template('Test.html')
+
 
 @app.route('/controller')
 def controller(usr=None):
