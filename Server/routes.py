@@ -120,10 +120,11 @@ def postCourseAndGameMode():
     course_code = request.form['course_code']
     print(course_code)
     game_mode = request.form['game_mode']
-    asyncio.run(initiateGame(game_mode))
     print(game_mode)
     game_settings = request.form['game_settings']
     print(game_settings)
+
+    createGame(game_mode, game_settings)
 
     # TODO: check the values, and return a response
 

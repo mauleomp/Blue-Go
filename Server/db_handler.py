@@ -362,6 +362,10 @@ def updateStart(start):
     return update('UPDATE game SET start = '+start+' WHERE n_game = \'1\';')
 
 
+def createGame(game_mode):
+    update('UPDATE game SET has_start = True , state = \'CONNECTING\', game_mode = \'FAST\', ranking = \"\", isanon = True, has_finished = False, correct = \"no answer\" ;')
+
+
 def updateState(state):
     return update('UPDATE game SET state = \''+state+'\' WHERE n_game = \'1\';')
 
