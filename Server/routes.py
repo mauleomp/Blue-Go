@@ -124,7 +124,7 @@ def postCourseAndGameMode():
     game_settings = request.form['game_settings']
     print(game_settings)
 
-    createGame(game_mode, game_settings)
+    createGame(game_mode, game_settings, course_code)
 
     # TODO: check the values, and return a response
 

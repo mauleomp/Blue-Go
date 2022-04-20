@@ -1,6 +1,6 @@
 # import psycopg2
 # import os
-# from Server.db_config import config
+from Server.db_config import config
 
 # Only for testing purposes, we have these fields
 # Later on we will store any information on a DataBase
@@ -198,10 +198,11 @@ def update(sentence):
         conn.commit()
         cur.rowcount
         # close the communication with the PostgreSQL
+        cur.close()
     except Exception as err:
         print(err)
     finally:
-        cur.close()
+
         if conn is not None:
             conn.close()
 
@@ -364,12 +365,12 @@ def createGame(game_mode, conf, course_code):
 
 
 def startGame():
-    return update('UPDATE game SET state = \'WAITING\', correct = \'no answer\' WHERE n_game = \'1\';')
+    update('UPDATE game SET state = \'WAITING\', correct = \'no answer\' WHERE n_game = \'1\';')
 
 
 # TRUE or FALSE
 def finishGame():
-    return update('UPDATE game SET has_finished = false, has_start = FALS False n_game = \'1\';')
+    update('UPDATE game SET has_finished = false, has_start = FALS False n_game = \'1\';')
 
 '''
 the posibilities are:
