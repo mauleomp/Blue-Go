@@ -1,16 +1,19 @@
 from Server import app
-from twisted.internet import reactor
-from twisted.web.proxy import ReverseProxyResource
-from twisted.web.resource import Resource
-from twisted.web.server import Site
-from twisted.web.wsgi import WSGIResource
+#from twisted.internet import reactor
+#from twisted.web.proxy import ReverseProxyResource
+#from twisted.web.resource import Resource
+#from twisted.web.server import Site
+#from twisted.web.wsgi import WSGIResource
 
 
 if __name__ == "__main__":
     #host="192.168.163.1", port=80,
-    #app.run(debug=True)
+    app.run(debug=True)
 
-    def run_twisted_wsgi():
+
+    # Install pip3 install twisted
+    """
+        def run_twisted_wsgi():
         from twisted.internet import reactor
         from twisted.web.server import Site
         from twisted.web.wsgi import WSGIResource
@@ -30,3 +33,4 @@ if __name__ == "__main__":
         run_twisted_wsgi = werkzeug.serving.run_with_reloader(run_twisted_wsgi)
 
     run_twisted_wsgi()
+    """
