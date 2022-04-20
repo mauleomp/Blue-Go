@@ -140,6 +140,7 @@ def connect():
     """ Connect to the PostgreSQL database server """
 
     conn = None
+    db_version = None
     try:
         # read connection parameters
         #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -170,15 +171,17 @@ def connect():
         if conn is not None:
             conn.close()
             print('Database connection closed.')
+    return db_version
          
 
 # This method will update the database            
 def update(sentence):
     conn = None
+    ans = False
     try:
         # read the connection parameters
         parser = ConfigParser()
-        parser.read('database.ini')
+        parser.read('/Server/database.ini')
         db = {}
         if parser.has_section('postgresql'):
             params = parser.items('postgresql')
@@ -196,7 +199,9 @@ def update(sentence):
         # execute a statement
         cur.execute(sentence)
         conn.commit()
-        cur.rowcount
+        num = cur.rowcount
+        if num == 1:
+            ans = True
         # close the communication with the PostgreSQL
         cur.close()
     except Exception as err:
@@ -205,6 +210,7 @@ def update(sentence):
 
         if conn is not None:
             conn.close()
+    return ans
 
 
 
@@ -360,21 +366,21 @@ def fetchScore(scid):
 
 
 def createGame(game_mode, conf, course_code):
-    update('UPDATE game SET has_start = True , state = \'WAITING\', game_mode = \'' +
+    return update('UPDATE game SET has_start = True , state = \'WAITING\', game_mode = \'' +
            game_mode + '\', conf = \'' + conf + '\', ranking = null, has_finished = False, correct = \'no answer\', course_code = \''+course_code+'\'WHERE n_game = \'1\';')
 
 
 def startGame():
-    update('UPDATE game SET state = \'WAITING\', correct = \'no answer\' WHERE n_game = \'1\';')
+    return update('UPDATE game SET state = \'WAITING\', correct = \'no answer\' WHERE n_game = \'1\';')
 
 
 # TRUE or FALSE
 def finishGame():
-    update('UPDATE game SET has_finished = false, has_start = FALS False n_game = \'1\';')
+    return update('UPDATE game SET has_finished = false, has_start = FALS False n_game = \'1\';')
 
 
 def changeState(state):
-    update('UPDATE game SET state = \''+state +'\', correct = \'no answer\' WHERE n_game = \'1\';')
+    return update('UPDATE game SET state = \''+state +'\' WHERE n_game = \'1\';')
 
 '''
 the posibilities are:
@@ -386,19 +392,30 @@ the posibilities are:
 
 
 def isCorrect(question):
-    return update('UPDATE game SET correct = \''+question+'\' WHERE n_game = \'1\';')
+    update('UPDATE game SET correct = \''+question+'\' WHERE n_game = \'1\';')
 
 
 def fetchRank():
-    return connect('SELECT ranking FROM game WHERE n_game = \'1\';')
+    connect('SELECT ranking FROM game WHERE n_game = \'1\';')
 
 
 def fetchState():
-    return connect('SELECT state, turn FROM game WHERE n_game = \'1\';')
+    connect('SELECT state, turn FROM game WHERE n_game = \'1\';')
 
 
 def fetchBuzzers():
-    return connect('SELECT buzzers FROM game WHERE n_game = \'1\';')
+    connect('SELECT buzzers FROM game WHERE n_game = \'1\';')
+
+
+def isQuestionDone():
+    ans = connect('SELECT correct, turn FROM game WHERE n_game = \'1\';')
+    if ans[0] == "correct":
+        return '{\"iscorrect\": true }'
+    elif ans[0] == "wrong":
+        return '{\"iscorrect\": false ,\"nextname\": \"' + ans[1] + '\" }'
+
+
+
 
 
 
