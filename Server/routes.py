@@ -211,7 +211,7 @@ def getIsAnswerCorrectL():
     # return '{"iscorrect": false, "nextname":"Bryan"}'
 
 
-@app.route('/leaderboard/getRanking', methods=['GET'])
+@app.route('/leaderboard/ranking', methods=['GET'])
 def getRankingLeaderBoard():
     return '{"totalpoints": 100, "ranking": [{"name": "Fatima", "points": 75, "pointsdifference": 10},{"name": "Bas", "points": 60, "pointsdifference": 5},{"name": "Judith", "points": 60, "pointsdifference": -10}]}';
 
