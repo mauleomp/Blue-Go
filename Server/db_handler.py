@@ -357,29 +357,29 @@ def fetchScore(scid):
 
 # ----------------------- METHODS FOR GAME IN DATABASE ------------------------
 
-
 # it is TRUE or FALSE
-def fetchStart(start):
+def updateStart(start):
     return update('UPDATE game SET start = '+start+' WHERE n_game = \'1\';')
 
 
-def fetchState(state):
+def updateState(state):
     return update('UPDATE game SET state = \''+state+'\' WHERE n_game = \'1\';')
 
 
 # conf es una string como antes('10;10;10;10')
-def fetchConf(game_mode, conf):
+def updateConf(game_mode, conf):
     return update('UPDATE game SET game_mode = \''+game_mode+'\', conf = \''+conf+'\' WHERE n_game = \'1\';')
 
 
 # TRUE or FALSE
-def fetchAnon(anon):
+def updateAnon(anon):
     return update('UPDATE game SET isanon = '+anon+' WHERE n_game = \'1\';')
 
 
 # TRUE or FALSE
-def fetchFinished(finish):
+def updateFinished(finish):
     return update('UPDATE game SET has_finished = '+finish+' WHERE n_game = \'1\';')
+
 
 '''
 the posibilities are:
@@ -387,8 +387,17 @@ the posibilities are:
 "wrong" -> to say that answer is wrong
 "no answer" -> if you change of question(new question) set it to no answer
 '''
-def fetchCorrect(question):
+def updateCorrect(question):
     return update('UPDATE game SET correct = \''+question+'\' WHERE n_game = \'1\';')
 
 
+def fetchRank():
+    return update('SELECT ranking FROM game WHERE n_game = \'1\';')
 
+
+def fetchState():
+    return update('SELECT state FROM game WHERE n_game = \'1\';')
+
+
+def fetchState():
+    return update('SELECT state FROM turn WHERE n_game = \'1\';')

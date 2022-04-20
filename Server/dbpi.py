@@ -105,3 +105,5 @@ def updateFinish(game, finish):
 
 def updateCorrect(game, correct):
     return connect('UPDATE game SET correct = ' + correct + ' WHERE n_game = ' + game + ';', False)
+
+def
