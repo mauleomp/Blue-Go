@@ -397,3 +397,38 @@ def fetchTeam(teamid):
 
 def fetchScore(scid):
     connect('SELECT * FROM scores WHERE score_id = ' + scid + ';')
+
+
+# ----------------------- METHODS FOR GAME IN DATABASE ------------------------
+
+
+def createGame(game_mode, conf, course_code):
+    update('UPDATE game SET has_start = True , state = \'WAITING\', game_mode = \'' +
+           game_mode + '\', conf = \'' + conf + '\', ranking = null, has_finished = False, correct = \'no answer\', course_code = \''+course_code+'\'WHERE n_game = \'1\';')
+
+
+def startGame():
+    return update('UPDATE game SET state = \'WAITING\', correct = \'no answer\' WHERE n_game = \'1\';')
+
+
+# TRUE or FALSE
+def finishGame():
+    return update('UPDATE game SET has_finished = false, has_start = FALS False n_game = \'1\';')
+
+'''
+the posibilities are:
+"correct" -> to validate an asnwer
+"wrong" -> to say that answer is wrong
+"no answer" -> if you change of question(new question) set it to no answer
+
+'''
+def isCorrect(question):
+    return update('UPDATE game SET correct = \''+question+'\' WHERE n_game = \'1\';')
+
+
+def fetchRank():
+    return update('SELECT ranking FROM game WHERE n_game = \'1\';')
+
+
+def fetchState():
+    return update('SELECT state, turn FROM game WHERE n_game = \'1\';')
