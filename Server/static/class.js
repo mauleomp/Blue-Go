@@ -163,6 +163,40 @@ function updateStudentData(form){
 
 }
 
+function addStudentToCourse(){
+    const s_number = document.forms["newStudentForm"].s_number.value;
+    const s_name = document.forms["newStudentForm"].s_name.value;
+    const s_lastname = document.forms["newStudentForm"]s_lastname.value;
+    const t_teams = document.forms["newStudentForm"].t_teams.value;
+
+    var server = window.location.href
+    var	http = new XMLHttpRequest();
+    var params = "s_number=" + s_number + "&s_name=" + s_name + "&s_lastname=" + s_lastname + "&t_teams=" + t_teams;
+    http.open("POST", server + "/createStudent", true);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            const response = JSON.parse(this.responseText);
+
+            if ('confirmation' in response){
+                  $('#ResponseModal').modal('show');
+                  document.getElementById("ResponseModalLabel").innerText = "Action made successfully";
+                  document.getElementById("serverMessage").innerText = response.confirmation[0].message;
+
+              } else {
+                  $('#ResponseModal').modal('show');
+                  document.getElementById("ResponseModalLabel").innerText = "Error in action";
+                  document.getElementById("serverMessage").innerText = response.error[0].message;
+
+                  document.getElementById("modalButtonClose").removeAttribute("href");
+                  return false;
+              }
+        }
+    }
+    http.send(params)
+
+}
+
 function deleteStudent(s_number){
 
     var server = window.location.href

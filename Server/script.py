@@ -1,7 +1,8 @@
 import json
 from Server.db_handler import signup, checkLoginWithUser, checkLoginWithEmail, getCoursesNames \
     , getStudentsFromCourseCode, getStudentRanking, getTeamRanking, updateCourseNameDB, setToFavouriteDB \
-    , unsetToFavouriteDB, deleteCourseDB, updateStudentDetailsFromCourseDB, deleteStudentFromCourseDB
+    , unsetToFavouriteDB, deleteCourseDB, updateStudentDetailsFromCourseDB, deleteStudentFromCourseDB \
+    , createStudentToCourseDB
 
 session_open = False
 images_set = ["https://images.unsplash.com/photo-1639815189096-f75717eaecfe?ixlib=rb-1.2.1&ixid"
@@ -129,6 +130,16 @@ def updateStudentDetailsFromCourseS(course_code, s_number, s_name, s_lastname, t
                                    + course_code + "\' was updated successfully.")
     else:
         return errorMessage("This student could not be updated.")
+
+
+def createStudentToCourseS(course_code, s_number, s_name, s_lastname, t_teams):
+    response = createStudentToCourseDB(course_code, s_number, s_name, s_lastname, t_teams)
+
+    if response != "-1":
+        return confirmationMessage("Student \'" + s_name + " " + s_lastname + "\' in course \'"
+                                   + course_code + "\' was created successfully.")
+    else:
+        return errorMessage("This student could not be created.")
 
 
 def deleteStudentFromCourseS(course_code, s_number):

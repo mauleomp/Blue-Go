@@ -185,6 +185,18 @@ def updateStudentDetailsFromCourseDB(course_code, s_number2, s_name2, s_lastname
         return "-1"
 
 
+def createStudentToCourseDB(course_code, s_number2, s_name2, s_lastname2, t_teams2):
+    try:
+
+        s_number.append(s_number2)
+        s_names.append(s_name2)
+        s_lastname.append(s_lastname2)
+
+        return "OK"
+    except ValueError:
+        return "-1"createStudentToCourseDB
+
+
 def deleteStudentFromCourseDB(course_code, s_number2):
     try:
         index = s_number.index(s_number2)

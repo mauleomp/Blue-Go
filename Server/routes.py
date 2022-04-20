@@ -3,6 +3,7 @@ from flask import render_template, request, url_for, redirect
 from Server.script import valid_login, matchPass, registerNewUser, errorMessage, connectDB, confirmationMessage \
     , getAllCourses, getStudentsC, getStudentsRank, getTeamsRank, getConnectedBuzzers, updateCourseNameS \
     , setToFavouriteS, unsetToFavouriteS, deleteCourseS, updateStudentDetailsFromCourseS, deleteStudentFromCourseS \
+    , createStudentToCourseS
 
 # from Server.BLEserver import initiateGame, startQuestion, finishGame
 
@@ -120,6 +121,17 @@ def updateStudentDetailsFromCourseR(course_code):
     t_teams = request.form['t_teams']
 
     return updateStudentDetailsFromCourseS(course_code, s_number, s_name, s_lastname, t_teams)
+
+
+@app.route('/courses/class/<course_code>/createStudent', methods=['POST'])
+def createStudentToCourseR(course_code):
+
+    s_number = request.form['s_number']
+    s_name = request.form['s_name']
+    s_lastname = request.form['s_lastname']
+    t_teams = request.form['t_teams']
+
+    return createStudentToCourseS(course_code, s_number, s_name, s_lastname, t_teams)
 
 
 @app.route('/courses/class/<course_code>/createRandomTeam', methods=['POST'])
