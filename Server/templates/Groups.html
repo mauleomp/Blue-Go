@@ -81,15 +81,16 @@
                             <br>
                             <form id="newCourseForm" name="newCourseForm">
                                 <div class="mb-3">
-                                    <label for="newCourse_group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> COURSE NAME </label>
-                                    <input id="newCourse_group_name" name="group_name" type="text" class="form-control" placeholder="Example group name">
+                                    <label for="group_name" class="form-label" style="color:darkgrey; font-size: x-small;"> COURSE NAME </label>
+                                    <input id="group_name" name="group_name" type="text" class="form-control" placeholder="Example group name">
                                 </div>
 
                                 <div class="form-check">
                                     <label class="form-check-label" style="color:darkgrey; font-size: x-small; margin-bottom: 1rem;" for="newCourse_flexRadioDefault1">
                                       ADD TO FAVOURITES
                                     </label>
-                                    <input class="form-check-input" type="checkbox" id="newCourse_flexRadioDefault1">
+                                    <input class="form-check-input" type="checkbox" id="newCourse_flexRadioDefault1"
+                                           name="newCourse_flexRadioDefault1">
                                 </div>
 
                                 <div class="mb-3">
@@ -100,7 +101,8 @@
                                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                                             </svg>
                                         </label>
-                                        <input type="file" class="form-control" id="newCourse_inputGroupFile1">
+                                        <input type="file" class="form-control" id="newCourse_inputGroupFile1"
+                                               name="newCourse_inputGroupFile1">
                                     </div>
                                 </div>
 
@@ -112,13 +114,14 @@
                                           <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                                         </svg>
                                     </label>
-                                    <input type="file" class="form-control" id="newCourse_inputGroupFile2">
+                                    <input type="file" class="form-control" id="newCourse_inputGroupFile2"
+                                           name="newCourse_inputGroupFile2">
                                   </div>
                               </div>
                             </form>
                         </div>
                         <div class="modal-footer justify-content-center">
-                            <a id="new_CourseSubmit_form" onclick="submitForm('newCourseForm')" type="button" class="btn rounded-pill" style="background-color: #5bc0de; color: white" href=" {{ url_for('courses') }}">Save changes</a>
+                            <a id="new_CourseSubmit_form" onclick="submitNewCourse()" type="button" class="btn rounded-pill" style="background-color: #5bc0de; color: white" href=" {{ url_for('courses') }}">Save changes</a>
                         </div>
                     </div>
                 </div>

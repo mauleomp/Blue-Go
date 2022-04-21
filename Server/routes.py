@@ -3,7 +3,8 @@ from flask import render_template, request, url_for, redirect
 from Server.script import valid_login, matchPass, registerNewUser, errorMessage, connectDB, confirmationMessage \
     , getAllCourses, getStudentsC, getStudentsRank, getTeamsRank, getConnectedBuzzers, updateCourseNameS \
     , setToFavouriteS, unsetToFavouriteS, deleteCourseS, updateStudentDetailsFromCourseS, deleteStudentFromCourseS \
-    , createStudentToCourseS
+    , createStudentToCourseS, createGameS, startGameS, isQuestionDoneS, signalCorrectAnswerS, signalIncorrectAnswerS \
+    , signalNextQuestionS, signalEndGameS, submitNewCourseS
 
 # from Server.BLEserver import initiateGame, startQuestion, finishGame
 
@@ -97,6 +98,16 @@ def deleteCourseR():
     return deleteCourseS(course_code)
 
 
+@app.route('/courses/submitNewCourse', methods=['POST'])
+def submitNewCourseR():
+    course_name = request.form['course_name']
+    favorite    = request.form['favorite']
+    photo       = request.form['photo']
+    cvs_file    = request.form['cvs_file']
+
+    return submitNewCourseS(course_name, favorite, photo, cvs_file)
+
+
 # Returns all the courses.
 @app.route('/courses/class/<course_code>/getStudents', methods=['GET'])
 def getStudentsFromCourse(course_code):
@@ -184,9 +195,10 @@ def postCourseAndGameMode():
     #asyncio.run(initiateGame(game_mode))
     print(game_mode)
     game_settings = request.form['game_settings']
-    print(game_settings)
+    print(">" + str(game_settings) + "<")
 
-    # TODO: check the values, and return a response
+    # bs12
+    response = createGameS(game_mode, conf, course_code)
 
     return confirmationMessage("Game settings updated")
 
@@ -200,6 +212,7 @@ def getConnectedBuzzersS():
 def postStartGame():
     # TODO: call function startGame(game_mode)
     return confirmationMessage("Game has started properly.")
+    #return startGameS()
 
 
 @app.route('/leaderboard/isCorrect', methods=['GET'])
@@ -303,3 +316,23 @@ def test(usr=None):
 @app.route('/controller')
 def controller(usr=None):
     return render_template('Controller.html')
+
+
+@app.route('/controller/signalCorrectAnswer', methods=['POST'])
+def signalCorrectAnswerR():
+    return signalCorrectAnswerS()
+
+
+@app.route('/controller/signalIncorrectAnswer', methods=['POST'])
+def signalIncorrectAnswerR():
+    return signalIncorrectAnswerS()
+
+
+@app.route('/controller/signalNextQuestion', methods=['POST'])
+def signalNextQuestionR():
+    return signalNextQuestionS()
+
+
+@app.route('/controller/signalEndGame', methods=['POST'])
+def signalEndGameR():
+    return signalEndGameS()

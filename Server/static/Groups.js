@@ -69,7 +69,43 @@ function updateCourseName(course_code, course_name){
             }
         }
     }
-    http.send(params)
+    http.send(params);
+}
+
+function submitNewCourse(){
+
+    var course_name = document.forms["newCourseForm"].group_name.value;
+    var favorite = document.forms["newCourseForm"].group_name.value;
+    var photo = document.forms["newCourseForm"].newCourse_inputGroupFile1.files[0];
+    var cvs_file = document.forms["newCourseForm"].newCourse_inputGroupFile2.files[0];
+
+    var server = window.location.href
+    var	http = new XMLHttpRequest();
+    var params = 'course_name=' + course_name + "&favorite=" + favorite
+        + "&photo=" + photo + "&cvs_file=" + cvs_file;
+    http.open("POST", server + "/submitNewCourse", true);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            const response = JSON.parse(this.responseText);
+            alert(response)
+            if ('confirmation' in response){
+                  $('#ResponseModal').modal('show');
+                  document.getElementById("ResponseModalLabel").innerText = "Action made successfully";
+                  document.getElementById("serverMessage").innerText = response.confirmation[0].message;
+
+            } else {
+                $('#ResponseModal').modal('show');
+                document.getElementById("ResponseModalLabel").innerText = "Error in action";
+                document.getElementById("serverMessage").innerText = response.error[0].message;
+
+                document.getElementById("modalButtonClose").removeAttribute("href");
+                return false;
+            }
+        }
+    }
+    http.send(params);
+
 }
 
 function submitRenameForm(form){

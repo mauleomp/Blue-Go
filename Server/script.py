@@ -1,8 +1,11 @@
 import json
+import csv
 from Server.db_handler import signup, checkLoginWithUser, checkLoginWithEmail, getCoursesNames \
     , getStudentsFromCourseCode, getStudentRanking, getTeamRanking, updateCourseNameDB, setToFavouriteDB \
     , unsetToFavouriteDB, deleteCourseDB, updateStudentDetailsFromCourseDB, deleteStudentFromCourseDB \
-    , createStudentToCourseDB
+    , createStudentToCourseDB, createGame, startGame, changeState, isQuestionDone, isQuestionDone,getBuzzers \
+    , signalCorrectAnswer, signalIncorrectAnswer, signalNextQuestion, signalEndGame, submitNewCourseDB
+
 
 session_open = False
 images_set = ["https://images.unsplash.com/photo-1639815189096-f75717eaecfe?ixlib=rb-1.2.1&ixid"
@@ -80,6 +83,43 @@ def getAllCourses():
 
     json.dumps(temp, sort_keys=True, indent=4)
     return temp
+
+
+def submitNewCourseS(course_name, favorite, photo, cvs_file):
+    s_names = []
+    s_lastname = []
+    s_number = []
+    s_points = []
+
+    print("Incoming CVS file. processing.")
+    with open(cvs_file) as csv_file:
+
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        line_count = 0
+        for row in csv_reader:
+            if line_count == 0:
+                print(f'Column names are {", ".join(row)}')
+                line_count += 1
+            else:
+                s_names.append(row[0])
+                s_lastname.append(row[0])
+                s_number.append(row[0])
+                s_points.append(row[0])
+
+                line_count += 1
+        print(f'Processed {line_count} lines.')
+
+    students = [s_names, s_lastname, s_number, s_points]
+
+    print(students[0])
+
+    response = submitNewCourseDB(course_name, favorite, photo, students)
+
+    if response != "-1":
+        return confirmationMessage("Course name \'" + course_name + "\' with course code \'"
+                                   + course_code + "\' was updated successfully.")
+    else:
+        return errorMessage("Course name could not be changed.")
 
 
 def updateCourseNameS(course_code, course_name):
@@ -203,16 +243,36 @@ def getTeamsRank(course_code):
 counter = 0
 
 
+def createGameS(game_mode, conf, course_code):
+
+    if createGame(game_mode, conf, course_code):
+        return confirmationMessage("SQL transaction was submitted successfully.")
+    else:
+        return errorMessage("There is an error in SQL syntax.")
+
+
+def startGameS():
+
+    if startGame():
+        return confirmationMessage("SQL transaction was submitted successfully.")
+    else:
+        return errorMessage("There is an error in SQL syntax.")
+
+
+def changeStateS(state):
+
+    if changeState(state):
+        return confirmationMessage("SQL transaction was submitted successfully.")
+    else:
+        return errorMessage("There is an error in SQL syntax.")
+
+
+def isQuestionDoneS():
+    return isQuestionDone()
+
+
 def getConnectedBuzzers():
-    temp1 = "{ buzzers: [ { \"buzzerID\": 0, \"teamConnected\": true, \"teamName\": \"Team0\"}, { \"buzzerID\": 1, \"teamConnected\": true, \"teamName\": \"Team1\"}, { \"buzzerID\": 2, \"teamConnected\": false, \"teamName\": undefined}]}"
-    temp2 = "{ buzzers: [ { \"buzzerID\": 0, \"teamConnected\": true, \"teamName\": \"Team0\"}, { \"buzzerID\": 1, \"teamConnected\": true, \"teamName\": \"Team1\"}, { \"buzzerID\": 2, \"teamConnected\": false, \"teamName\": undefined}]}"
-    temp3 = "{ buzzers: [ { \"buzzerID\": 0, \"teamConnected\": true, \"teamName\": \"Team0\"}, { \"buzzerID\": 1, \"teamConnected\": true, \"teamName\": \"Team1\"}, { \"buzzerID\": 2, \"teamConnected\": false, \"teamName\": undefined}]}"
-    temp4 = "{ buzzers: [ { \"buzzerID\": 0, \"teamConnected\": true, \"teamName\": \"Team0\"}, { \"buzzerID\": 1, \"teamConnected\": true, \"teamName\": \"Team1\"}, { \"buzzerID\": 2, \"teamConnected\": false, \"teamName\": undefined}]}"
-
-    buzzers = [temp1, temp2, temp3, temp4]
-
-    buzz = buzzers[counter]
-
+    '''
     temp = {'buzzers': []}
     y = {"buzzerID": "0",
          "teamConnected": "true",
@@ -221,3 +281,42 @@ def getConnectedBuzzers():
 
     json.dumps(temp, sort_keys=True, indent=4)
     return temp
+    '''
+    return getBuzzers()
+
+
+def signalCorrectAnswerS():
+
+    response = signalCorrectAnswer()
+
+    if changeState(state):
+        return confirmationMessage("SQL transaction was submitted successfully.")
+    else:
+        return errorMessage("There is an error in SQL syntax.")
+
+
+def signalIncorrectAnswerS():
+    response = signalIncorrectAnswer()
+
+    if changeState(state):
+        return confirmationMessage("SQL transaction was submitted successfully.")
+    else:
+        return errorMessage("There is an error in SQL syntax.")
+
+
+def signalNextQuestionS():
+    response = signalNextQuestion()
+
+    if changeState(state):
+        return confirmationMessage("SQL transaction was submitted successfully.")
+    else:
+        return errorMessage("There is an error in SQL syntax.")
+
+
+def signalEndGameS():
+    response = signalEndGame()
+
+    if changeState(state):
+        return confirmationMessage("SQL transaction was submitted successfully.")
+    else:
+        return errorMessage("There is an error in SQL syntax.")

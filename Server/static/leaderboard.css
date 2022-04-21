@@ -46,3 +46,19 @@ dt {
 dd {
   grid-column: 2;
 }
+
+#endgamebutton {
+  margin: 25px;
+  width: 30%;
+  font-size: 2vh;
+  color: #FFF;
+  background-color: #0675EA;
+}
+
+#nextroundbutton {
+  margin: 25px;
+  width: 30%;
+  font-size: 2vh;
+  color: #FFF;
+  background-color: #31C1D6;
+}
