@@ -220,9 +220,11 @@ def isCorrect(usr=None):
     # return '{"iscorrect": false, "nextname":"Bas"}'
     return '{"iscorrect": true}'
 
+
 @app.route('/leaderboard/ranking', methods=['GET'])
 def ranking(usr=None):
     return  '{"totalpoints": 100, "ranking": [{"name": "Fatima", "points": 75, "pointsdifference": 10},{"name": "Bas", "points": 60, "pointsdifference": 5},{"name": "Judith", "points": 60, "pointsdifference": -10}]}';
+
 
 questionnumber = 1
 @app.route('/leaderboard/status', methods=['GET'])
@@ -230,6 +232,7 @@ def getStatus(usr=None):
     global questionnumber
     return '{"questionnumber": ' + str(questionnumber) + ', "status": "nextround"}'
     # return '{"questionnumber": 1, "status": "endgame"}'
+
 
 # receives: "questionnumber": questionnumber, "status": "nextround"}
 # or: {"status": "endgame"}
