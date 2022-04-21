@@ -40,8 +40,8 @@
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item" href=" {{ url_for('profile') }}">Profile</a></li>
                     <li><a class="dropdown-item" href=" {{ url_for('profile') }}">Settings</a></li>
-                    <li><a class="dropdown-item" href=" {{ url_for('help') }}">Contact</a></li>
-                    <li><a class="dropdown-item" href=" {{ url_for('help') }}">Help</a></li>
+                    <li><a class="dropdown-item" href=" {{ url_for('profile') }}">Contact</a></li>
+                    <li><a class="dropdown-item" href=" {{ url_for('profile') }}">Help</a></li>
                     <div class="dropdown-divider"></div>
                     <li><a class="dropdown-item" href="/">Log out</a></li>
                   </ul>
@@ -238,6 +238,38 @@
                             <div class="tab-pane fade" id="v-pills-help" role="tabpanel" aria-labelledby="v-pills-settings-tab" style="margin-top: 30px;">
                                 <p style="font-size:x-large"> <b> Help </b></p>
                                 <br>
+                                    <div class="accordion" id="accordionFlushExample">
+                                      <div class="accordion-item">
+                                        <h2 class="accordion-header" id="flush-headingOne">
+                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                            How does Blue&GO! make learning more efficient?
+                                          </button>
+                                        </h2>
+                                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                          <div class="accordion-body">Because it make learning fun! Competition and enjoyment increase student participation and focus.</div>
+                                        </div>
+                                      </div>
+                                      <div class="accordion-item">
+                                        <h2 class="accordion-header" id="flush-headingTwo">
+                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                            How can I start/play a game?
+                                          </button>
+                                        </h2>
+                                        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                          <div class="accordion-body">Select "Play" in the navbar. After this you need to select which course you want to play with (or select to play anonymously) and select which game mode to play. After this, the game is initalized and a waiting screen is shown, waiting for all buttons and players to be connected. If this is done, the game can start!</div>
+                                        </div>
+                                      </div>
+                                      <div class="accordion-item">
+                                        <h2 class="accordion-header" id="flush-headingThree">
+                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                            How can I get into contact?
+                                          </button>
+                                        </h2>
+                                        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                          <div class="accordion-body">Please fill out the contact form below and describe your problem to us. We will get back to you on the problem as soon as possible.</div>
+                                        </div>
+                                      </div>
+                                    </div>
                                 <footer class="page-footer fixed-bottom font-small text-center justify-content-center align-items-center" style="background-color: #F6F7FB; border-top: 1px solid lightgrey;">
                                     <a class="btn btn-primary rounded-pill" style="margin-top: 1rem; margin-bottom: 1rem;"> Reset</a>
                                     <a class="btn btn-primary rounded-pill" style="margin: 1rem;margin-bottom: 1rem;"> Save</a>
