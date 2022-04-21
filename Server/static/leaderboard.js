@@ -158,6 +158,7 @@ function startcountdown(number) {
 
 //Can be used in classic gamemode.
 function waitforpress(questionnumber) {
+
   closerankings();
   document.getElementById("name").hidden = false;
   document.getElementById("nameinput").innerHTML = "Question " + questionnumber;
@@ -166,6 +167,7 @@ function waitforpress(questionnumber) {
 
 //Display a name
 function displayname(name) {
+    signalNotification(name + ", it is your turn!")
   closerankings();
   document.getElementById("name").hidden = false;
   document.getElementById("nameinput").innerHTML = name;
@@ -176,6 +178,7 @@ function displayname(name) {
 //Give name of next turn, then next name will automatically be displayed after the animation
 //Animation takes 3s
 function incorrectanswer(nextname) {
+    signalNotification("Incorrect answer")
   document.body.style.backgroundColor = 'red';
   document.getElementById("namefooter").innerHTML = "Incorrect!"
   setTimeout(function () {
@@ -188,6 +191,7 @@ function incorrectanswer(nextname) {
 //Animation takes 3s
 //Next move needs to be called by Python
 function correctanswer() {
+    signalNotification("Correct answer")
   document.body.style.backgroundColor = '#4cd137';
   document.getElementById("namefooter").innerHTML = "Correct!"
   setTimeout(function () {

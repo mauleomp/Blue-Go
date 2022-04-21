@@ -217,7 +217,7 @@ def postStartGame():
 
 @app.route('/leaderboard/isCorrect', methods=['GET'])
 def isCorrect(usr=None):
-    # return '{"iscorrect": false, "nextname":"Bas"}'
+    # return '{"iscorrect": false, "nextname":"Fatima"}'
     return '{"iscorrect": true}'
 
 
