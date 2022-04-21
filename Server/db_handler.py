@@ -457,7 +457,7 @@ def getBuzzers():
 
 # TRUE or FALSE
 def finishGame():
-    return update('UPDATE game SET has_finished = false, has_start = FALS False n_game = \'1\';')
+    return update('UPDATE game SET has_finished = True, has_start = False WHERE n_game = \'1\';')
 
 
 '''
@@ -470,31 +470,31 @@ the posibilities are:
 
 
 def isCorrect(question):
-    return update('UPDATE game SET correct = \'' + question + '\' WHERE n_game = \'1\';')
+    return connect('UPDATE game SET correct = \'' + question + '\' WHERE n_game = \'1\';')
 
 
 def fetchRank():
-    return update('SELECT ranking FROM game WHERE n_game = \'1\';')
+    return connect('SELECT ranking FROM game WHERE n_game = \'1\';')
 
 
 def fetchState():
-    return update('SELECT state, turn FROM game WHERE n_game = \'1\';')
+    return connect('SELECT state, turn FROM game WHERE n_game = \'1\';')
 
 
 #### Controller functions
 
 
 def signalCorrectAnswer():
-    return ""
+    return update('UPDATE game SET correct = \"correct\" WHERE n_game = \'1\';')
 
 
 def signalIncorrectAnswer():
-    return ""
+    return update('UPDATE game SET correct = \"wrong\" WHERE n_game = \'1\';')
 
 
 def signalNextQuestion():
-    return ""
+    return update('UPDATE game SET state = \'WAITING\', correct = \'no answer\' WHERE n_game = \'1\';')
 
 
 def signalEndGame():
-    return ""
+    return update('UPDATE game SET has_finished = true WHERE n_game = \'1\';')
