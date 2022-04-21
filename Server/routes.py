@@ -4,7 +4,7 @@ from Server.script import valid_login, matchPass, registerNewUser, errorMessage,
     , getAllCourses, getStudentsC, getStudentsRank, getTeamsRank, getConnectedBuzzers, updateCourseNameS \
     , setToFavouriteS, unsetToFavouriteS, deleteCourseS, updateStudentDetailsFromCourseS, deleteStudentFromCourseS \
     , createStudentToCourseS, createGameS, startGameS, isQuestionDoneS, signalCorrectAnswerS, signalIncorrectAnswerS \
-    , signalNextQuestionS, signalEndGameS
+    , signalNextQuestionS, signalEndGameS, submitNewCourseS
 
 # from Server.BLEserver import initiateGame, startQuestion, finishGame
 
@@ -96,6 +96,16 @@ def deleteCourseR():
     course_code = request.form['course_code']
 
     return deleteCourseS(course_code)
+
+
+@app.route('/courses/submitNewCourse', methods=['POST'])
+def submitNewCourseR():
+    course_name = request.form['course_name']
+    favorite    = request.form['favorite']
+    photo       = request.form['photo']
+    cvs_file    = request.form['cvs_file']
+
+    return submitNewCourseS(course_name, favorite, photo, cvs_file)
 
 
 # Returns all the courses.

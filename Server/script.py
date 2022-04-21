@@ -84,6 +84,35 @@ def getAllCourses():
     return temp
 
 
+def submitNewCourseS(course_name, favorite, photo, cvs_file):
+    s_names = []
+    s_lastname = []
+    s_number = []
+    s_points = []
+
+    with open(cvs_file) as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        line_count = 0
+        for row in csv_reader:
+            if line_count == 0:
+                print(f'Column names are {", ".join(row)}')
+                line_count += 1
+            else:
+                print(f'\t{row[0]} works in the {row[1]} department, and was born in {row[2]}.')
+                line_count += 1
+        print(f'Processed {line_count} lines.')
+
+    students = [s_names, s_lastname, s_number, s_points]
+
+    response = submitNewCourseDB(course_name, favorite, photo, students)
+
+    if response != "-1":
+        return confirmationMessage("Course name \'" + course_name + "\' with course code \'"
+                                   + course_code + "\' was updated successfully.")
+    else:
+        return errorMessage("Course name could not be changed.")
+
+
 def updateCourseNameS(course_code, course_name):
     response = updateCourseNameDB(course_code, course_name)
 
