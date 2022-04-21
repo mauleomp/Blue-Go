@@ -90,6 +90,8 @@ def submitNewCourseS(course_name, favorite, photo, cvs_file):
     s_number = []
     s_points = []
 
+    print("Incoming CVS file. processing.")
+    print(cvs_file)
     with open(cvs_file) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
@@ -98,7 +100,11 @@ def submitNewCourseS(course_name, favorite, photo, cvs_file):
                 print(f'Column names are {", ".join(row)}')
                 line_count += 1
             else:
-                print(f'\t{row[0]} works in the {row[1]} department, and was born in {row[2]}.')
+                s_names.append(row[0])
+                s_lastname.append(row[0])
+                s_number.append(row[0])
+                s_points.append(row[0])
+
                 line_count += 1
         print(f'Processed {line_count} lines.')
 
