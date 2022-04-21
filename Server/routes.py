@@ -211,8 +211,8 @@ def getConnectedBuzzersS():
 @app.route('/buzzers/start_game', methods=['POST'])
 def postStartGame():
     # TODO: call function startGame(game_mode)
-    return confirmationMessage("Game has started properly.")
-    #return startGameS()
+    # return confirmationMessage("Game has started properly.")
+    return startGameS()
 
 
 @app.route('/leaderboard/isCorrect', methods=['GET'])
