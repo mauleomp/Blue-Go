@@ -289,7 +289,7 @@ def signalCorrectAnswerS():
 
     response = signalCorrectAnswer()
 
-    if changeState(state):
+    if response:
         return confirmationMessage("SQL transaction was submitted successfully.")
     else:
         return errorMessage("There is an error in SQL syntax.")
@@ -298,7 +298,7 @@ def signalCorrectAnswerS():
 def signalIncorrectAnswerS():
     response = signalIncorrectAnswer()
 
-    if changeState(state):
+    if response:
         return confirmationMessage("SQL transaction was submitted successfully.")
     else:
         return errorMessage("There is an error in SQL syntax.")
@@ -307,7 +307,7 @@ def signalIncorrectAnswerS():
 def signalNextQuestionS():
     response = signalNextQuestion()
 
-    if changeState(state):
+    if response:
         return confirmationMessage("SQL transaction was submitted successfully.")
     else:
         return errorMessage("There is an error in SQL syntax.")
@@ -316,7 +316,7 @@ def signalNextQuestionS():
 def signalEndGameS():
     response = signalEndGame()
 
-    if changeState(state):
+    if response:
         return confirmationMessage("SQL transaction was submitted successfully.")
     else:
         return errorMessage("There is an error in SQL syntax.")
