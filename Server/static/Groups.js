@@ -88,7 +88,7 @@ function submitNewCourse(){
     http.onreadystatechange = function() {
         if(http.readyState == 4 && http.status == 200) {
             const response = JSON.parse(this.responseText);
-
+            alert(response)
             if ('confirmation' in response){
                   $('#ResponseModal').modal('show');
                   document.getElementById("ResponseModalLabel").innerText = "Action made successfully";

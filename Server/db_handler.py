@@ -21,6 +21,7 @@ s_points = ["5", "10", "4", "7"]
 # Courses Table
 c_course_code = ["c123456"]
 c_course_name = ["Academic Skills"]
+c_photo = [""]
 c_course_favorite = ["true"]
 c_students_set = ["[{\"s_name\": Mauricio}, {\"s_name\": Mark}, {\"s_name\": Jacob}, {\"s_name\": Maria}]"]
 c_ranking = ["1"]
@@ -165,6 +166,30 @@ def deleteCourseDB(course_code):
         c_teacher.pop(index)
 
         return name
+    except ValueError:
+        return "-1"
+
+
+def submitNewCourseDB(course_name, favorite, photo, students):
+    try:
+        index = 0
+
+        while index < len(course_name):
+            c_photo.append(photo[index])
+            c_course_name.apppen(course_name[index])
+            c_course_favorite.append(favorite[index])
+            c_students_set.append('')
+            c_ranking.append('')
+            c_teacher.append("Juan")
+
+            s_names.append(students[0][index])
+            s_lastname.append(students[1][index])
+            s_number.append(students[2][index])
+            s_points.append(students[3][index])
+
+            index += 1
+
+        return "OK"
     except ValueError:
         return "-1"
 

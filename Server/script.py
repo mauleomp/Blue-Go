@@ -1,9 +1,10 @@
 import json
+import csv
 from Server.db_handler import signup, checkLoginWithUser, checkLoginWithEmail, getCoursesNames \
     , getStudentsFromCourseCode, getStudentRanking, getTeamRanking, updateCourseNameDB, setToFavouriteDB \
     , unsetToFavouriteDB, deleteCourseDB, updateStudentDetailsFromCourseDB, deleteStudentFromCourseDB \
     , createStudentToCourseDB, createGame, startGame, changeState, isQuestionDone, isQuestionDone,getBuzzers \
-    , signalCorrectAnswer, signalIncorrectAnswer, signalNextQuestion, signalEndGame
+    , signalCorrectAnswer, signalIncorrectAnswer, signalNextQuestion, signalEndGame, submitNewCourseDB
 
 
 session_open = False
@@ -91,8 +92,8 @@ def submitNewCourseS(course_name, favorite, photo, cvs_file):
     s_points = []
 
     print("Incoming CVS file. processing.")
-    print(cvs_file)
     with open(cvs_file) as csv_file:
+
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
@@ -109,6 +110,8 @@ def submitNewCourseS(course_name, favorite, photo, cvs_file):
         print(f'Processed {line_count} lines.')
 
     students = [s_names, s_lastname, s_number, s_points]
+
+    print(students[0])
 
     response = submitNewCourseDB(course_name, favorite, photo, students)
 
