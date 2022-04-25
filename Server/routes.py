@@ -218,7 +218,8 @@ def postStartGame():
 @app.route('/leaderboard/isCorrect', methods=['GET'])
 def isCorrect(usr=None):
     # return '{"iscorrect": false, "nextname":"Fatima"}'
-    return '{"iscorrect": true}'
+    # return '{"iscorrect": true}'
+    return isQuestionDoneS()
 
 
 @app.route('/leaderboard/ranking', methods=['GET'])
